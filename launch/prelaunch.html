@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silent Cue — Coming</title>
+  <meta name="description" content="The game was never about the table. The table only reveals the player. Silent Cue is coming." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #080808;
+      --charcoal: #161616;
+      --gold: #C9A84C;
+      --gold-dim: #9A7A34;
+      --ivory: #E8E0D0;
+      --ash: #8A8A8A;
+      --smoke: #3A3A3A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: var(--black);
+      color: var(--ivory);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100svh;
+      padding: 48px 24px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 80%, rgba(13,43,31,0.35) 0%, transparent 70%),
+        var(--black);
+    }
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 256px;
+    }
+    .mark {
+      font-size: 0.6rem;
+      color: var(--gold);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: up 1s ease 0.2s forwards;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      margin-bottom: 80px;
+      opacity: 0;
+      animation: up 1s ease 0.3s forwards;
+    }
+    .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--ivory);
+      max-width: 680px;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: up 1.2s ease 0.5s forwards;
+    }
+    .sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ash);
+      margin-bottom: 64px;
+      opacity: 0;
+      animation: up 1s ease 0.8s forwards;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 400px;
+      opacity: 0;
+      animation: up 1s ease 1s forwards;
+    }
+    input[type=email] {
+      width: 100%;
+      background: var(--charcoal);
+      border: 1px solid var(--smoke);
+      color: var(--ivory);
+      padding: 14px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      text-align: center;
+    }
+    input[type=email]:focus { border-color: var(--gold-dim); }
+    input[type=email]::placeholder { color: var(--ash); }
+    button {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 14px 32px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    .note {
+      font-size: 0.7rem;
+      color: var(--smoke);
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+    .rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.3;
+      margin: 80px auto 0;
+    }
+    @keyframes up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="mark">&#9679;</div>
+  <div class="logo">Silent Cue</div>
+  <h1 class="quote">&ldquo;The game was never about the table. The table only reveals the player.&rdquo;</h1>
+  <p class="sub">An underground study of pool, psychology, and the discipline of pressure.</p>
+  <form id="waitlistForm">
+    <input type="email" placeholder="Your email. No noise. One dispatch." required aria-label="Email address" />
+    <button type="submit">Request Early Access</button>
+    <p class="note">The archive opens soon. You'll be among the first.</p>
+  </form>
+  <div class="rule"></div>
+  <script>
+    document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button');
+      const input = this.querySelector('input');
+      btn.textContent = 'You\'re in the archive.';
+      btn.disabled = true;
+      input.disabled = true;
+      input.value = '';
+      input.placeholder = 'Access confirmed.';
+    });
+  </script>
+</body>
+</html>
