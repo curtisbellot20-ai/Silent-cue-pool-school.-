@@ -17,10 +17,8 @@
 </head>
 <body>
 
-  <!-- Noise texture overlay -->
   <div class="noise"></div>
 
-  <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav__logo">
       <span class="nav__logo-mark">&#9679;</span>
@@ -37,25 +35,17 @@
     </button>
   </nav>
 
-  <!-- ===================== HERO ===================== -->
+  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero__bg">
       <div class="hero__vignette"></div>
       <div class="hero__gradient"></div>
       <div class="hero__particles" id="particles"></div>
     </div>
-
-    <!-- Narrator character — right side cinematic reveal -->
     <div class="hero__figure">
-      <img
-        src="images/narrator.jpg"
-        alt="The Silent Cue narrator — anonymous, composed, watching"
-        class="hero__figure-img"
-        loading="eager"
-      />
+      <img src="images/narrator.jpg" alt="The Silent Cue narrator — anonymous, composed, watching" class="hero__figure-img" loading="eager" />
       <div class="hero__figure-fade"></div>
     </div>
-
     <div class="hero__content">
       <div class="hero__eyebrow">An Underground Study of Pressure, Psychology &amp; Pool</div>
       <h1 class="hero__title">
@@ -75,7 +65,7 @@
     </div>
   </section>
 
-  <!-- Manifesto Strip -->
+  <!-- MANIFESTO STRIP -->
   <div class="manifesto-strip">
     <div class="manifesto-strip__inner">
       <span>Composure</span><span class="manifesto-strip__dot">&#9679;</span>
@@ -93,7 +83,7 @@
     </div>
   </div>
 
-  <!-- ===================== PHILOSOPHY ===================== -->
+  <!-- PHILOSOPHY -->
   <section class="philosophy" id="philosophy">
     <div class="philosophy__container">
       <div class="philosophy__label">I. The Philosophy</div>
@@ -106,7 +96,7 @@
         </div>
         <div class="philosophy__text-col">
           <p class="philosophy__p">Silent Cue was never meant to be found by everyone.</p>
-          <p class="philosophy__p">It exists in the space between the shot and the outcome. In the breath held before the break. In the way a man's hands reveal his fear before his mouth ever does.</p>
+          <p class="philosophy__p">It exists in the space between the shot and the outcome. In the breath held before the break. In the way a man’s hands reveal his fear before his mouth ever does.</p>
           <p class="philosophy__p">This is not a tutorial. This is not a sport school. This is a study of human nature — played out on a green felt table under a single dim light, where there is nowhere to hide and no one to blame.</p>
           <p class="philosophy__p">The principles here apply to every room you will ever walk into. Every negotiation. Every silence. Every moment where the outcome hangs on who blinks first.</p>
           <a href="#archive" class="philosophy__link">Read the full manifesto &rarr;</a>
@@ -115,7 +105,7 @@
     </div>
   </section>
 
-  <!-- ===================== CINEMATIC GALLERY ===================== -->
+  <!-- CINEMATIC GALLERY -->
   <section class="gallery">
     <div class="gallery__strip">
       <figure class="gallery__frame">
@@ -137,7 +127,7 @@
     </div>
   </section>
 
-  <!-- ===================== ARCHIVE ===================== -->
+  <!-- ARCHIVE -->
   <section class="archive" id="archive">
     <div class="archive__container">
       <div class="archive__header">
@@ -147,16 +137,26 @@
       </div>
       <div class="archive__grid">
 
+        <!-- FEATURED: new first lesson -->
         <article class="archive__card archive__card--featured">
           <div class="archive__card-img-wrap">
-            <img src="images/action-1.jpg" alt="" class="archive__card-img" loading="lazy" aria-hidden="true" />
+            <img src="images/action-4.jpg" alt="" class="archive__card-img" loading="lazy" aria-hidden="true" />
             <div class="archive__card-img-overlay"></div>
           </div>
           <div class="archive__card-body">
+            <div class="archive__card-tag">The Reading Game — Lesson 01</div>
+            <h3 class="archive__card-title">Before You Touch the Table</h3>
+            <p class="archive__card-excerpt">The first lesson begins before you ever shoot a ball. The moment you walk in, the game has already started. Most beginners rush. Smart players observe.</p>
+            <a href="content/before-you-touch-the-table.html" class="archive__card-link">Read the dispatch &rarr;</a>
+          </div>
+        </article>
+
+        <article class="archive__card">
+          <div class="archive__card-body">
             <div class="archive__card-tag">Psychology</div>
             <h3 class="archive__card-title">The Language of Stillness: What Your Posture Says Before You Shoot</h3>
-            <p class="archive__card-excerpt">Before you touch the cue, you have already told everyone in the room whether you believe in yourself. Learn to control the signal.</p>
-            <a href="content/the-language-of-stillness.html" class="archive__card-link">Read the dispatch &rarr;</a>
+            <p class="archive__card-excerpt">Before you touch the cue, you have already told everyone in the room whether you believe in yourself.</p>
+            <a href="content/the-language-of-stillness.html" class="archive__card-link">Read &rarr;</a>
           </div>
         </article>
 
@@ -187,15 +187,6 @@
           </div>
         </article>
 
-        <article class="archive__card">
-          <div class="archive__card-body">
-            <div class="archive__card-tag">Reading People</div>
-            <h3 class="archive__card-title">The Tell: Micro-signals Every Serious Player Studies</h3>
-            <p class="archive__card-excerpt">Eyes, hands, rhythm, breath. The table is a mirror. Most people never look up long enough to see it.</p>
-            <a href="content/the-tell.html" class="archive__card-link">Read &rarr;</a>
-          </div>
-        </article>
-
         <article class="archive__card archive__card--locked">
           <div class="archive__card-body">
             <div class="archive__card-tag archive__card-tag--locked">Members Only</div>
@@ -209,148 +200,119 @@
     </div>
   </section>
 
-  <!-- ===================== SCHOOL / DISCIPLINES ===================== -->
+  <!-- SCHOOL -->
   <section class="school" id="school">
     <div class="school__container">
       <div class="school__label">III. The School</div>
       <h2 class="school__title">Five Disciplines of the Silent Player</h2>
       <p class="school__sub">A structured study. Not a crash course. Not a weekend seminar. A slow, deliberate education in how the mind performs under pressure.</p>
       <div class="school__disciplines">
-
         <div class="school__discipline">
           <div class="school__discipline-num">01</div>
           <h3 class="school__discipline-title">The Composed Mind</h3>
           <p class="school__discipline-text">Nervous system regulation before, during, and after high-stakes moments. Breathing, ritual, and the architecture of calm.</p>
         </div>
-
         <div class="school__discipline">
           <div class="school__discipline-num">02</div>
           <h3 class="school__discipline-title">The Reading Game</h3>
           <p class="school__discipline-text">Opponent psychology, behavioral tells, table management, and how to use silence as a weapon.</p>
         </div>
-
         <div class="school__discipline">
           <div class="school__discipline-num">03</div>
           <h3 class="school__discipline-title">The Strategic Layer</h3>
           <p class="school__discipline-text">Pattern recognition, safety play, positional thinking, and the long game. Every shot is a sentence. Learn to write paragraphs.</p>
         </div>
-
         <div class="school__discipline">
           <div class="school__discipline-num">04</div>
           <h3 class="school__discipline-title">The Pressure Protocol</h3>
           <p class="school__discipline-text">The science and psychology of performing under observation. How champions practice failure so they never fear it.</p>
         </div>
-
         <div class="school__discipline">
           <div class="school__discipline-num">05</div>
           <h3 class="school__discipline-title">The Philosophy of the Table</h3>
           <p class="school__discipline-text">Pool as a lens for life. Stoicism, game theory, negotiation, and the quiet power of the disciplined mind.</p>
         </div>
-
       </div>
       <a href="#enter" class="btn btn--primary">Begin the Study</a>
     </div>
   </section>
 
-  <!-- ===================== STRATEGY DIAGRAMS ===================== -->
+  <!-- STRATEGY DIAGRAMS -->
   <section class="diagrams">
     <div class="diagrams__container">
       <div class="diagrams__label">From The Strategic Layer</div>
       <h2 class="diagrams__title">Table Intelligence</h2>
       <p class="diagrams__sub">The composed player sees the table in zones. Every position decision is made before the shot is taken.</p>
       <div class="diagrams__grid">
-
         <div class="diagrams__item">
           <div class="diagrams__img-wrap">
-            <img
-              src="images/diagram-golden-zone.jpg"
-              alt="The Golden Zone — optimal cue ball position area on a pool table"
-              loading="lazy"
-              class="diagrams__img"
-            />
+            <img src="images/diagram-golden-zone.jpg" alt="The Golden Zone — optimal cue ball position area" loading="lazy" class="diagrams__img" />
           </div>
           <div class="diagrams__caption">
             <span class="diagrams__caption-label">The Golden Zone</span>
             <p>The center-table region where the cue ball commands the most shot options. Strategic play routes the cue ball here by default.</p>
           </div>
         </div>
-
         <div class="diagrams__item">
           <div class="diagrams__img-wrap">
-            <img
-              src="images/diagram-dead-zone.jpg"
-              alt="The Dead Zone — cue ball positions that leave no good options"
-              loading="lazy"
-              class="diagrams__img"
-            />
+            <img src="images/diagram-dead-zone.jpg" alt="The Dead Zone — cue ball positions that collapse options" loading="lazy" class="diagrams__img" />
           </div>
           <div class="diagrams__caption">
             <span class="diagrams__caption-label">The Dead Zone</span>
             <p>Rail-trapped, angle-compromised positions that collapse your shot options. Recognizing and avoiding these is the first discipline of strategic thinking.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ===================== BALL CONTROL SECTION ===================== -->
+  <!-- BALL CONTROL / TECHNIQUE -->
   <section class="technique">
     <div class="technique__container">
       <div class="technique__content">
         <div class="technique__label">Ball Control: English</div>
         <h2 class="technique__title">The Spin System</h2>
         <p class="technique__p">Cue ball control is not about power. It is about contact point precision — a language spoken in millimeters. Top spin follows, bottom spin draws back, side spin curves the angle. Every run is written in this vocabulary.</p>
-        <p class="technique__p">The serious player doesn't think about spin during the shot. They've practiced each contact point until the selection is unconscious. What looks like instinct is architecture built through repetition.</p>
+        <p class="technique__p">The serious player doesn’t think about spin during the shot. They’ve practiced each contact point until the selection is unconscious. What looks like instinct is architecture built through repetition.</p>
         <a href="course/structure.html" class="technique__link">Explore Module 03: The Strategic Layer &rarr;</a>
       </div>
       <div class="technique__visual">
-        <img
-          src="images/diagram-english-guide.jpg"
-          alt="Ball control English guide — top spin, bottom spin, left and right side spin"
-          loading="lazy"
-          class="technique__img"
-        />
+        <img src="images/diagram-english-guide.jpg" alt="Ball control English guide — top spin, bottom spin, left and right side spin" loading="lazy" class="technique__img" />
       </div>
     </div>
   </section>
 
-  <!-- ===================== NARRATOR ===================== -->
+  <!-- NARRATOR -->
   <section class="narrator">
     <div class="narrator__container">
       <div class="narrator__visual">
         <div class="narrator__img-wrap">
-          <img
-            src="images/narrator.jpg"
-            alt="The Narrator — anonymous, present, composed"
-            loading="lazy"
-            class="narrator__img"
-          />
+          <img src="images/narrator.jpg" alt="The Narrator — anonymous, present, composed" loading="lazy" class="narrator__img" />
           <div class="narrator__img-overlay"></div>
         </div>
       </div>
       <div class="narrator__content">
         <div class="narrator__label">The Voice Behind It</div>
-        <h2 class="narrator__title">You don't need to know who I am.</h2>
-        <p class="narrator__p">I spent years in rooms most people don't know exist. Playing for money, yes. But studying something else entirely — the way a man holds himself when the stakes are real and no one is watching.</p>
+        <h2 class="narrator__title">You don’t need to know who I am.</h2>
+        <p class="narrator__p">I spent years in rooms most people don’t know exist. Playing for money, yes. But studying something else entirely — the way a man holds himself when the stakes are real and no one is watching.</p>
         <p class="narrator__p">What I learned at the table changed how I move through every room I enter. I built Silent Cue to pass that on. Not to everyone. To those who are ready to be quiet enough to learn.</p>
         <blockquote class="narrator__quote">&ldquo;The best players I ever met never talked about pool. They talked about patience, positioning, and reading people. The table was just where they practiced.&rdquo;</blockquote>
       </div>
     </div>
   </section>
 
-  <!-- ===================== ENTER / CTA ===================== -->
+  <!-- ENTER -->
   <section class="enter" id="enter">
     <div class="enter__container">
       <div class="enter__label">IV. The Inner Circle</div>
       <h2 class="enter__title">Access is earned, not purchased.</h2>
-      <p class="enter__sub">Join the Silent Cue Inner Circle. Monthly dispatches, members-only field notes, course access, and the kind of knowledge that doesn't circulate on the surface web.</p>
+      <p class="enter__sub">Join the Silent Cue Inner Circle. Monthly dispatches, members-only field notes, course access, and the kind of knowledge that doesn’t circulate on the surface web.</p>
       <form class="enter__form" id="enterForm">
         <div class="enter__form-group">
           <input type="email" class="enter__input" placeholder="Your email address" required aria-label="Email address" />
           <button type="submit" class="btn btn--primary">Request Access</button>
         </div>
-        <p class="enter__disclaimer">No noise. No spam. One dispatch, when it's ready.</p>
+        <p class="enter__disclaimer">No noise. No spam. One dispatch, when it’s ready.</p>
       </form>
       <div class="enter__tiers">
         <div class="enter__tier">
@@ -389,7 +351,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__logo">

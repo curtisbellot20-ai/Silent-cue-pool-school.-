@@ -1,9 +1,38 @@
 /* Silent Cue — Article Styles */
 
+/* ---- Hero Image ---- */
+.article__hero-img-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(240px, 45vw, 560px);
+  overflow: hidden;
+  margin-top: var(--nav-h);
+}
+.article__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(0.45) saturate(0.7) contrast(1.1);
+}
+.article__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, var(--black) 0%, transparent 40%),
+    linear-gradient(to bottom, var(--black) 0%, transparent 20%);
+}
+
+/* ---- Core Article Layout ---- */
 .article {
   max-width: 720px;
   margin: 0 auto;
-  padding: calc(var(--nav-h) + 80px) clamp(24px, 5vw, 48px) 80px;
+  padding: 64px clamp(24px, 5vw, 48px) 80px;
+}
+
+/* When there's no hero image, account for nav height */
+.article:first-of-type:not(:has(+ .article__hero-img-wrap)) {
+  padding-top: calc(var(--nav-h) + 80px);
 }
 
 .article__header {
@@ -15,6 +44,7 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 28px;
+  flex-wrap: wrap;
 }
 
 .article__tag {
@@ -32,7 +62,7 @@
 .article__read {
   font-size: 0.7rem;
   color: var(--ash);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
 .article__title {
@@ -59,6 +89,7 @@
   opacity: 0.5;
 }
 
+/* ---- Body ---- */
 .article__body { font-size: 1.05rem; }
 
 .article__lead {
@@ -101,6 +132,22 @@
   margin: 48px 0 20px;
 }
 
+/* Stand-out box for key takeaways */
+.article__standout {
+  background: var(--charcoal);
+  border-left: 3px solid var(--gold);
+  padding: 28px 32px;
+  margin: 48px 0;
+}
+.article__standout p {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: var(--ivory) !important;
+  line-height: 1.5;
+  margin-bottom: 0 !important;
+}
+
+/* Diagram embed */
 .article__diagram {
   margin: 48px 0;
   border: 1px solid rgba(255,255,255,0.06);
@@ -137,6 +184,37 @@
   font-style: italic;
 }
 
+/* ---- Next Article ---- */
+.article__next {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: var(--charcoal);
+}
+.article__next-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px clamp(24px, 5vw, 48px);
+  transition: background 0.2s;
+}
+.article__next-inner:hover { background: var(--charcoal-lt); }
+.article__next-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.article__next-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* ---- CTA Bar ---- */
 .article__cta-bar {
   background: var(--charcoal);
   border-top: 1px solid rgba(255,255,255,0.05);
