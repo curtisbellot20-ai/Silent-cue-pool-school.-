@@ -1,0 +1,142 @@
+/* Silent Cue — Article Styles */
+
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 80px) clamp(24px, 5vw, 48px) 80px;
+}
+
+.article__header {
+  margin-bottom: 56px;
+}
+
+.article__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.article__tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.article__dot {
+  color: var(--smoke);
+  font-size: 0.4rem;
+}
+
+.article__read {
+  font-size: 0.7rem;
+  color: var(--ash);
+  letter-spacing: 0.1em;
+}
+
+.article__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  color: var(--ivory);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.article__sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ash);
+  margin-bottom: 40px;
+}
+
+.article__rule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.article__body { font-size: 1.05rem; }
+
+.article__lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 300;
+  color: var(--ivory);
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+.article__body p {
+  color: var(--ivory-dim);
+  margin-bottom: 24px;
+  line-height: 1.85;
+}
+
+.article__body strong {
+  color: var(--ivory);
+  font-weight: 500;
+}
+
+.article__blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  color: var(--gold);
+  border-left: 2px solid var(--gold-dim);
+  padding: 8px 0 8px 32px;
+  margin: 48px 0;
+  line-height: 1.4;
+}
+
+.article__h2 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--ivory);
+  margin: 48px 0 20px;
+}
+
+.article__divider {
+  text-align: center;
+  color: var(--gold);
+  font-size: 0.5rem;
+  margin: 56px 0;
+  opacity: 0.6;
+}
+
+.article__footer-note {
+  font-size: 0.85rem;
+  color: var(--ash);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 24px;
+  font-style: italic;
+}
+
+.article__cta-bar {
+  background: var(--charcoal);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 40px clamp(24px, 5vw, 64px);
+}
+
+.article__cta-bar-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.article__cta-bar-inner p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ivory-dim);
+}
