@@ -5,50 +5,49 @@ The website HTML already references them by name.
 
 ---
 
-## Your AI-Generated Images (Required)
+## Character Images
 
-| Filename | Image to Save | Used In |
+| Filename | Image | Used In |
 |---|---|---|
-| `narrator.jpg` | The 8-ball character in pinstripe suit, finger to lips, at the table | Hero section (right side), Narrator section |
-| `action-1.jpg` | Close-up shot: the character bent over the table addressing the cue ball | Archive featured card, Gallery strip panel 1 |
-| `action-2.jpg` | Character leaning over table — jazz band visible in background | Gallery strip panel 2 |
-| `action-3.jpg` | Wide shot — character at table, full pool hall visible | Gallery strip panel 3 |
-| `action-4.jpg` | Character standing upright at table, crowd behind | Gallery strip panel 4 |
-| `diagram-golden-zone.jpg` | The "GOLDEN ZONE" table diagram | Strategy Diagrams section |
-| `diagram-dead-zone.jpg` | The "DEAD ZONE" table diagram | Strategy Diagrams section |
-| `diagram-english-guide.jpg` | The ball control / English spin guide | Ball Control / Technique section |
+| `narrator.jpg` | 8-ball character, finger to lips, seated at table | Hero section, Narrator section |
+| `action-1.jpg` | Close-up shot: character bent over, addressing cue ball | Archive featured card, Gallery panel 1 |
+| `action-2.jpg` | Character leaning over table — jazz band in background | Gallery panel 2 |
+| `action-3.jpg` | Wide shot — full pool hall visible | Gallery panel 3 |
+| `action-4.jpg` | Character standing upright at table, crowd behind | Gallery panel 4, Archive card hero |
 
 ---
 
-## File Format Notes
+## Diagrams
 
-- **Format**: JPG or WEBP preferred (smaller file size)
-- **Resolution**: Save at full resolution — the site will scale them down
-- **Naming**: Lowercase, hyphens only, no spaces. Exactly as shown above.
+| Filename | Image | Used In |
+|---|---|---|
+| `diagram-golden-zone.jpg` | "GOLDEN ZONE" table diagram | Strategy Diagrams section |
+| `diagram-dead-zone.jpg` | "DEAD ZONE" table diagram | Strategy Diagrams section |
+| `diagram-english-guide.jpg` | Full English spin guide (overhead view) | Ball Control / Technique section |
+| `diagram-cue-ball-contact.jpg` | Close-up cue ball showing Top Follow / Bottom Draw / Left / Right / Center | Article: The Contact Point |
+| `diagram-mindset.jpg` | Narrator at table — Pre-Shot Routine / Mindset / Psychological Dominance / Confidence & Stress map | Article: The Mindset Map |
+| `diagram-table-mapping.jpg` | Overhead table — Coordinate Grid / Target Pocket Mapping / Optimal Positioning Zone | Article: Table Mapping |
+| `diagram-stance.jpg` | Narrator with full stance breakdown — Power / Alignment / Balance / Consistency graphs | Article: The Foundation |
 
 ---
 
-## How to Add the Images to the Repo
+## Naming Rules
+- Lowercase, hyphens only, no spaces
+- JPG or WEBP preferred
+- Save at full resolution — the site scales them
 
-Once you've saved the files into this folder with the correct names, run:
+## 4-Panel Action Grid
+If you want each panel separately, crop the 2×2 grid:
+- Top-left → `action-1.jpg`
+- Top-right → `action-2.jpg`
+- Bottom-left → `action-3.jpg`
+- Bottom-right → `action-4.jpg`
 
+Or save the full grid as `action-1.jpg` and it fills the gallery slot.
+
+## Pushing Images to the Repo
 ```bash
-cd Silent-cue-pool-school.-
 git add images/
-git commit -m "feat: add brand imagery and character assets"
-git push origin claude/silent-cue-brand-Jblgj
+git commit -m "feat: add brand imagery"
+git push origin main
 ```
-
----
-
-## The 4 Action Shots — How to Crop Them
-
-You shared a single image with a 2×2 grid of 4 action shots. To use them individually:
-1. Open the grid image in any photo editor
-2. Crop each quadrant to its own file:
-   - **Top-left** → `action-1.jpg`
-   - **Top-right** → `action-2.jpg`
-   - **Bottom-left** → `action-3.jpg`
-   - **Bottom-right** → `action-4.jpg`
-
-Or save the full grid as a single image and use it in the gallery — just name it `action-1.jpg` and it will display full-width.
