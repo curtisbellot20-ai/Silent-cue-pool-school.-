@@ -8,6 +8,7 @@
   <meta name="keywords" content="pool psychology, billiards strategy, emotional control, mental game, pool philosophy, underground pool school" />
   <meta property="og:title" content="Silent Cue" />
   <meta property="og:description" content="The game was never about the table. The table only reveals the player." />
+  <meta property="og:image" content="images/narrator.jpg" />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,13 +37,25 @@
     </button>
   </nav>
 
-  <!-- Hero -->
+  <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero">
     <div class="hero__bg">
       <div class="hero__vignette"></div>
       <div class="hero__gradient"></div>
       <div class="hero__particles" id="particles"></div>
     </div>
+
+    <!-- Narrator character — right side cinematic reveal -->
+    <div class="hero__figure">
+      <img
+        src="images/narrator.jpg"
+        alt="The Silent Cue narrator — anonymous, composed, watching"
+        class="hero__figure-img"
+        loading="eager"
+      />
+      <div class="hero__figure-fade"></div>
+    </div>
+
     <div class="hero__content">
       <div class="hero__eyebrow">An Underground Study of Pressure, Psychology &amp; Pool</div>
       <h1 class="hero__title">
@@ -65,33 +78,22 @@
   <!-- Manifesto Strip -->
   <div class="manifesto-strip">
     <div class="manifesto-strip__inner">
-      <span>Composure</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Patience</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Precision</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Pressure</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Silence</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Strategy</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Control</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Composure</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Patience</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Precision</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Pressure</span>
-      <span class="manifesto-strip__dot">&#9679;</span>
-      <span>Silence</span>
+      <span>Composure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Patience</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Precision</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Pressure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Silence</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Strategy</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Control</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Composure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Patience</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Precision</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Pressure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Silence</span><span class="manifesto-strip__dot">&#9679;</span>
     </div>
   </div>
 
-  <!-- Philosophy Section -->
+  <!-- ===================== PHILOSOPHY ===================== -->
   <section class="philosophy" id="philosophy">
     <div class="philosophy__container">
       <div class="philosophy__label">I. The Philosophy</div>
@@ -113,7 +115,29 @@
     </div>
   </section>
 
-  <!-- Archive / Content Section -->
+  <!-- ===================== CINEMATIC GALLERY ===================== -->
+  <section class="gallery">
+    <div class="gallery__strip">
+      <figure class="gallery__frame">
+        <img src="images/action-1.jpg" alt="The narrator addresses the cue ball — total composure" loading="lazy" />
+        <figcaption>Composure at address</figcaption>
+      </figure>
+      <figure class="gallery__frame">
+        <img src="images/action-2.jpg" alt="Strategic alignment — the long game in motion" loading="lazy" />
+        <figcaption>The long game</figcaption>
+      </figure>
+      <figure class="gallery__frame">
+        <img src="images/action-3.jpg" alt="Reading the full table from center" loading="lazy" />
+        <figcaption>Reading the room</figcaption>
+      </figure>
+      <figure class="gallery__frame">
+        <img src="images/action-4.jpg" alt="The silent player — present, watching, waiting" loading="lazy" />
+        <figcaption>Presence</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== ARCHIVE ===================== -->
   <section class="archive" id="archive">
     <div class="archive__container">
       <div class="archive__header">
@@ -124,52 +148,68 @@
       <div class="archive__grid">
 
         <article class="archive__card archive__card--featured">
-          <div class="archive__card-tag">Psychology</div>
-          <h3 class="archive__card-title">The Language of Stillness: What Your Posture Says Before You Shoot</h3>
-          <p class="archive__card-excerpt">Before you touch the cue, you have already told everyone in the room whether you believe in yourself. Learn to control the signal.</p>
-          <a href="content/the-language-of-stillness.html" class="archive__card-link">Read the dispatch &rarr;</a>
+          <div class="archive__card-img-wrap">
+            <img src="images/action-1.jpg" alt="" class="archive__card-img" loading="lazy" aria-hidden="true" />
+            <div class="archive__card-img-overlay"></div>
+          </div>
+          <div class="archive__card-body">
+            <div class="archive__card-tag">Psychology</div>
+            <h3 class="archive__card-title">The Language of Stillness: What Your Posture Says Before You Shoot</h3>
+            <p class="archive__card-excerpt">Before you touch the cue, you have already told everyone in the room whether you believe in yourself. Learn to control the signal.</p>
+            <a href="content/the-language-of-stillness.html" class="archive__card-link">Read the dispatch &rarr;</a>
+          </div>
         </article>
 
         <article class="archive__card">
-          <div class="archive__card-tag">Strategy</div>
-          <h3 class="archive__card-title">Shark Patterns: How Opponents Manipulate Time and Silence</h3>
-          <p class="archive__card-excerpt">The hustle is never the shot. It begins the moment they walk through the door.</p>
-          <a href="content/shark-patterns.html" class="archive__card-link">Read &rarr;</a>
+          <div class="archive__card-body">
+            <div class="archive__card-tag">Strategy</div>
+            <h3 class="archive__card-title">Shark Patterns: How Opponents Manipulate Time and Silence</h3>
+            <p class="archive__card-excerpt">The hustle is never the shot. It begins the moment they walk through the door.</p>
+            <a href="content/shark-patterns.html" class="archive__card-link">Read &rarr;</a>
+          </div>
         </article>
 
         <article class="archive__card">
-          <div class="archive__card-tag">Philosophy</div>
-          <h3 class="archive__card-title">The Stoic at the Table: Marcus Aurelius Never Missed a Position Shot</h3>
-          <p class="archive__card-excerpt">Ancient philosophy encoded into modern pool strategy. Meditations on control, outcome-independence, and the next shot.</p>
-          <a href="content/stoic-at-the-table.html" class="archive__card-link">Read &rarr;</a>
+          <div class="archive__card-body">
+            <div class="archive__card-tag">Philosophy</div>
+            <h3 class="archive__card-title">The Stoic at the Table: Marcus Aurelius Never Missed a Position Shot</h3>
+            <p class="archive__card-excerpt">Ancient philosophy encoded into modern pool strategy. Meditations on control, outcome-independence, and the next shot.</p>
+            <a href="content/stoic-at-the-table.html" class="archive__card-link">Read &rarr;</a>
+          </div>
         </article>
 
         <article class="archive__card">
-          <div class="archive__card-tag">Pressure</div>
-          <h3 class="archive__card-title">The Last Ball: Anatomy of a Choke and How to Never Become It</h3>
-          <p class="archive__card-excerpt">Choking is not weakness. It is a predictable neurological response to perceived threat. Here is the override.</p>
-          <a href="content/the-last-ball.html" class="archive__card-link">Read &rarr;</a>
+          <div class="archive__card-body">
+            <div class="archive__card-tag">Pressure</div>
+            <h3 class="archive__card-title">The Last Ball: Anatomy of a Choke and How to Never Become It</h3>
+            <p class="archive__card-excerpt">Choking is not weakness. It is a predictable neurological response to perceived threat. Here is the override.</p>
+            <a href="content/the-last-ball.html" class="archive__card-link">Read &rarr;</a>
+          </div>
         </article>
 
         <article class="archive__card">
-          <div class="archive__card-tag">Reading People</div>
-          <h3 class="archive__card-title">The Tell: Micro-signals Every Serious Player Studies</h3>
-          <p class="archive__card-excerpt">Eyes, hands, rhythm, breath. The table is a mirror. Most people never look up long enough to see it.</p>
-          <a href="content/the-tell.html" class="archive__card-link">Read &rarr;</a>
+          <div class="archive__card-body">
+            <div class="archive__card-tag">Reading People</div>
+            <h3 class="archive__card-title">The Tell: Micro-signals Every Serious Player Studies</h3>
+            <p class="archive__card-excerpt">Eyes, hands, rhythm, breath. The table is a mirror. Most people never look up long enough to see it.</p>
+            <a href="content/the-tell.html" class="archive__card-link">Read &rarr;</a>
+          </div>
         </article>
 
         <article class="archive__card archive__card--locked">
-          <div class="archive__card-tag archive__card-tag--locked">Members Only</div>
-          <h3 class="archive__card-title">The Architect: How to Build a Rack That Controls an Entire Game Before It Starts</h3>
-          <p class="archive__card-excerpt">Restricted access. Available in the Inner Circle.</p>
-          <a href="#enter" class="archive__card-link">Join to unlock &rarr;</a>
+          <div class="archive__card-body">
+            <div class="archive__card-tag archive__card-tag--locked">Members Only</div>
+            <h3 class="archive__card-title">The Architect: How to Build a Rack That Controls an Entire Game Before It Starts</h3>
+            <p class="archive__card-excerpt">Restricted access. Available in the Inner Circle.</p>
+            <a href="#enter" class="archive__card-link">Join to unlock &rarr;</a>
+          </div>
         </article>
 
       </div>
     </div>
   </section>
 
-  <!-- School Section -->
+  <!-- ===================== SCHOOL / DISCIPLINES ===================== -->
   <section class="school" id="school">
     <div class="school__container">
       <div class="school__label">III. The School</div>
@@ -212,12 +252,82 @@
     </div>
   </section>
 
-  <!-- Narrator Section -->
+  <!-- ===================== STRATEGY DIAGRAMS ===================== -->
+  <section class="diagrams">
+    <div class="diagrams__container">
+      <div class="diagrams__label">From The Strategic Layer</div>
+      <h2 class="diagrams__title">Table Intelligence</h2>
+      <p class="diagrams__sub">The composed player sees the table in zones. Every position decision is made before the shot is taken.</p>
+      <div class="diagrams__grid">
+
+        <div class="diagrams__item">
+          <div class="diagrams__img-wrap">
+            <img
+              src="images/diagram-golden-zone.jpg"
+              alt="The Golden Zone — optimal cue ball position area on a pool table"
+              loading="lazy"
+              class="diagrams__img"
+            />
+          </div>
+          <div class="diagrams__caption">
+            <span class="diagrams__caption-label">The Golden Zone</span>
+            <p>The center-table region where the cue ball commands the most shot options. Strategic play routes the cue ball here by default.</p>
+          </div>
+        </div>
+
+        <div class="diagrams__item">
+          <div class="diagrams__img-wrap">
+            <img
+              src="images/diagram-dead-zone.jpg"
+              alt="The Dead Zone — cue ball positions that leave no good options"
+              loading="lazy"
+              class="diagrams__img"
+            />
+          </div>
+          <div class="diagrams__caption">
+            <span class="diagrams__caption-label">The Dead Zone</span>
+            <p>Rail-trapped, angle-compromised positions that collapse your shot options. Recognizing and avoiding these is the first discipline of strategic thinking.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BALL CONTROL SECTION ===================== -->
+  <section class="technique">
+    <div class="technique__container">
+      <div class="technique__content">
+        <div class="technique__label">Ball Control: English</div>
+        <h2 class="technique__title">The Spin System</h2>
+        <p class="technique__p">Cue ball control is not about power. It is about contact point precision — a language spoken in millimeters. Top spin follows, bottom spin draws back, side spin curves the angle. Every run is written in this vocabulary.</p>
+        <p class="technique__p">The serious player doesn't think about spin during the shot. They've practiced each contact point until the selection is unconscious. What looks like instinct is architecture built through repetition.</p>
+        <a href="course/structure.html" class="technique__link">Explore Module 03: The Strategic Layer &rarr;</a>
+      </div>
+      <div class="technique__visual">
+        <img
+          src="images/diagram-english-guide.jpg"
+          alt="Ball control English guide — top spin, bottom spin, left and right side spin"
+          loading="lazy"
+          class="technique__img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NARRATOR ===================== -->
   <section class="narrator">
     <div class="narrator__container">
       <div class="narrator__visual">
-        <div class="narrator__silhouette"></div>
-        <div class="narrator__glow"></div>
+        <div class="narrator__img-wrap">
+          <img
+            src="images/narrator.jpg"
+            alt="The Narrator — anonymous, present, composed"
+            loading="lazy"
+            class="narrator__img"
+          />
+          <div class="narrator__img-overlay"></div>
+        </div>
       </div>
       <div class="narrator__content">
         <div class="narrator__label">The Voice Behind It</div>
@@ -229,7 +339,7 @@
     </div>
   </section>
 
-  <!-- CTA / Enter Section -->
+  <!-- ===================== ENTER / CTA ===================== -->
   <section class="enter" id="enter">
     <div class="enter__container">
       <div class="enter__label">IV. The Inner Circle</div>
