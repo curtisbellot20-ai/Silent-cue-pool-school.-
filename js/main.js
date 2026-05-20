@@ -97,6 +97,57 @@ if (form) {
   });
 }
 
+// ---- Custom lesson audio players ----
+document.querySelectorAll('.audio-player[data-src]').forEach(player => {
+  const btn = player.querySelector('.audio-player__btn');
+  const icon = player.querySelector('.audio-player__icon');
+  const progress = player.querySelector('.audio-player__progress');
+  const bar = player.querySelector('.audio-player__bar');
+  const src = player.dataset.src;
+  let audio = null;
+  let playing = false;
+
+  const buildAudio = () => {
+    if (audio) return;
+    audio = new Audio(src);
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        progress.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      }
+    });
+    audio.addEventListener('ended', () => {
+      playing = false;
+      btn.classList.remove('playing');
+      icon.innerHTML = '&#9654;';
+      progress.style.width = '0%';
+    });
+  };
+
+  btn.addEventListener('click', () => {
+    buildAudio();
+    if (playing) {
+      audio.pause();
+      playing = false;
+      btn.classList.remove('playing');
+      icon.innerHTML = '&#9654;';
+    } else {
+      audio.play().then(() => {
+        playing = true;
+        btn.classList.add('playing');
+        icon.innerHTML = '&#9646;&#9646;';
+      }).catch(() => {});
+    }
+  });
+
+  bar?.addEventListener('click', (e) => {
+    buildAudio();
+    if (!audio.duration) return;
+    const rect = bar.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = ratio * audio.duration;
+  });
+});
+
 // ---- Ambient particle effect (chalk dust) ----
 const canvas = document.createElement('canvas');
 canvas.style.cssText = 'position:absolute;inset:0;pointer-events:none;opacity:0.38;';
