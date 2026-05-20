@@ -1,5 +1,27 @@
 // Silent Cue — Main JS
 
+// Ambient music player
+const audio = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicToggle');
+let musicPlaying = false;
+
+if (audio && musicBtn) {
+  musicBtn.addEventListener('click', () => {
+    if (musicPlaying) {
+      audio.pause();
+      musicPlaying = false;
+      musicBtn.classList.remove('playing');
+      musicBtn.setAttribute('aria-label', 'Play ambient music');
+    } else {
+      audio.play().then(() => {
+        musicPlaying = true;
+        musicBtn.classList.add('playing');
+        musicBtn.setAttribute('aria-label', 'Pause ambient music');
+      }).catch(() => {});
+    }
+  });
+}
+
 // Nav scroll state
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {

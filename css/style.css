@@ -996,3 +996,47 @@ img { display: block; max-width: 100%; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ---- Music Toggle ---- */
+.music-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 900;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--charcoal);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.music-btn:hover {
+  background: var(--charcoal-lt);
+  border-color: var(--gold);
+  box-shadow: 0 4px 24px rgba(201,168,76,0.15);
+}
+.music-btn .music-note {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+.music-btn.playing {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.2), 0 4px 24px rgba(201,168,76,0.15);
+}
+.music-btn.playing .music-note {
+  animation: music-pulse 1.8s ease-in-out infinite;
+}
+@keyframes music-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}
+@media (max-width: 480px) {
+  .music-btn { bottom: 20px; right: 20px; width: 42px; height: 42px; font-size: 1rem; }
+}
