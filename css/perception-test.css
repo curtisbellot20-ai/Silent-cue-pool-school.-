@@ -535,3 +535,89 @@
   border-color: var(--gold);
   color: var(--ivory);
 }
+
+/* ── Field Note Popup ── */
+.pt__popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: overlayIn 0.35s var(--ease-out) both;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.pt__popup-overlay[hidden] { display: none; }
+
+.pt__popup {
+  background: var(--charcoal);
+  border: 1px solid rgba(201,168,76,0.22);
+  max-width: 520px;
+  width: 100%;
+  padding: clamp(32px, 6vw, 56px);
+  text-align: center;
+  position: relative;
+  animation: popupIn 0.45s var(--ease-out) 0.1s both;
+}
+
+.pt__popup::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+@keyframes popupIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pt__popup-label {
+  font-size: 0.52rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.65;
+  margin-bottom: 24px;
+}
+
+.pt__popup-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  font-style: italic;
+  color: var(--ivory);
+  line-height: 1.65;
+  margin-bottom: 36px;
+}
+
+.pt__popup-close {
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.pt__popup-close:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: var(--gold);
+  color: var(--ivory);
+}
