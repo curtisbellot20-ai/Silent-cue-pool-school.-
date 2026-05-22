@@ -1,7 +1,7 @@
 // Silent Cue — Perception Test Quiz Logic
 
 (function () {
-  const TOTAL_QUESTIONS = 9; // 4 observation + 5 hustler
+  const TOTAL_QUESTIONS = 7; // 2 observation + 5 hustler
   let answered = 0;
   let correct = 0;
 
