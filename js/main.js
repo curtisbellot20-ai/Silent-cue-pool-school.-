@@ -1,6 +1,42 @@
-// Silent Cue — Main JS
+// Silent Cue — Main JS (Cinematic Edition)
 
-// Ambient music player
+// ---- Intro Overlay ----
+const intro = document.getElementById('intro');
+const introCta = document.getElementById('introCta');
+
+if (intro) {
+  if (!sessionStorage.getItem('sc_intro')) {
+    document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => {
+      setTimeout(() => intro.classList.add('active'), 80);
+    });
+
+    const dismissIntro = (scrollTo) => {
+      intro.classList.add('dismissed');
+      document.body.style.overflow = '';
+      sessionStorage.setItem('sc_intro', '1');
+      setTimeout(() => { intro.style.display = 'none'; }, 1700);
+      if (scrollTo) {
+        setTimeout(() => {
+          document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' });
+        }, 900);
+      }
+    };
+
+    introCta?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissIntro('archive');
+    });
+
+    // Auto-dismiss after 9s as fallback
+    setTimeout(() => dismissIntro(null), 9000);
+  } else {
+    intro.style.display = 'none';
+  }
+}
+
+// ---- Ambient music player ----
 const audio = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicToggle');
 let musicPlaying = false;
@@ -22,30 +58,31 @@ if (audio && musicBtn) {
   });
 }
 
-// Nav scroll state
+// ---- Nav scroll state ----
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-// Intersection Observer for reveal animations
-const revealEls = document.querySelectorAll(
-  '.philosophy__grid, .archive__card, .school__discipline, .narrator__container, .enter__tier'
+// ---- Intersection Observer for reveal animations ----
+const directRevealTargets = document.querySelectorAll(
+  '.philosophy__grid, .archive__card, .school__discipline, .narrator__container, .enter__tier, .diagrams__item, .technique__container'
 );
-revealEls.forEach(el => el.classList.add('reveal'));
+directRevealTargets.forEach(el => el.classList.add('reveal'));
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      setTimeout(() => entry.target.classList.add('visible'), i * 70);
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
 
-revealEls.forEach(el => observer.observe(el));
+// Observe both programmatically-added and HTML-class reveal elements
+document.querySelectorAll('.reveal, .cine-break').forEach(el => observer.observe(el));
 
-// Email form
+// ---- Email form ----
 const form = document.getElementById('enterForm');
 if (form) {
   form.addEventListener('submit', (e) => {
@@ -60,9 +97,60 @@ if (form) {
   });
 }
 
-// Ambient particle effect (chalk dust)
+// ---- Custom lesson audio players ----
+document.querySelectorAll('.audio-player[data-src]').forEach(player => {
+  const btn = player.querySelector('.audio-player__btn');
+  const icon = player.querySelector('.audio-player__icon');
+  const progress = player.querySelector('.audio-player__progress');
+  const bar = player.querySelector('.audio-player__bar');
+  const src = player.dataset.src;
+  let audio = null;
+  let playing = false;
+
+  const buildAudio = () => {
+    if (audio) return;
+    audio = new Audio(src);
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        progress.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      }
+    });
+    audio.addEventListener('ended', () => {
+      playing = false;
+      btn.classList.remove('playing');
+      icon.innerHTML = '&#9654;';
+      progress.style.width = '0%';
+    });
+  };
+
+  btn.addEventListener('click', () => {
+    buildAudio();
+    if (playing) {
+      audio.pause();
+      playing = false;
+      btn.classList.remove('playing');
+      icon.innerHTML = '&#9654;';
+    } else {
+      audio.play().then(() => {
+        playing = true;
+        btn.classList.add('playing');
+        icon.innerHTML = '&#9646;&#9646;';
+      }).catch(() => {});
+    }
+  });
+
+  bar?.addEventListener('click', (e) => {
+    buildAudio();
+    if (!audio.duration) return;
+    const rect = bar.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = ratio * audio.duration;
+  });
+});
+
+// ---- Ambient particle effect (chalk dust) ----
 const canvas = document.createElement('canvas');
-canvas.style.cssText = 'position:absolute;inset:0;pointer-events:none;opacity:0.4;';
+canvas.style.cssText = 'position:absolute;inset:0;pointer-events:none;opacity:0.38;';
 const particlesContainer = document.getElementById('particles');
 if (particlesContainer) {
   particlesContainer.appendChild(canvas);
@@ -78,10 +166,10 @@ if (particlesContainer) {
     return Array.from({ length: n }, () => ({
       x: Math.random() * W,
       y: Math.random() * H,
-      r: Math.random() * 1.5 + 0.3,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: -(Math.random() * 0.3 + 0.05),
-      alpha: Math.random() * 0.4 + 0.1,
+      r: Math.random() * 1.6 + 0.2,
+      vx: (Math.random() - 0.5) * 0.1,
+      vy: -(Math.random() * 0.22 + 0.04),
+      alpha: Math.random() * 0.3 + 0.06,
     }));
   }
 
@@ -95,12 +183,14 @@ if (particlesContainer) {
       p.x += p.vx;
       p.y += p.vy;
       if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
+      if (p.x < -5) p.x = W + 5;
+      if (p.x > W + 5) p.x = -5;
     });
     requestAnimationFrame(draw);
   }
 
   resize();
-  particles = createParticles(60);
+  particles = createParticles(75);
   draw();
-  window.addEventListener('resize', () => { resize(); particles = createParticles(60); });
+  window.addEventListener('resize', () => { resize(); particles = createParticles(75); });
 }

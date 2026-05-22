@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive Entry 03 | Perception Test — Silent Cue</title>
+  <meta name="description" content="A perceptual training exercise. Two players. One room. Read the signals before the game begins." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/perception-test.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <span class="nav__logo-mark">&#9679;</span>
+      <a href="../index.html" class="nav__logo-text">Silent Cue</a>
+    </div>
+    <ul class="nav__links">
+      <li><a href="../index.html#philosophy" class="nav__link">The Philosophy</a></li>
+      <li><a href="../index.html#archive" class="nav__link">The Archive</a></li>
+      <li><a href="../index.html#products" class="nav__link">The Files</a></li>
+      <li><a href="../index.html#enter" class="nav__link nav__link--cta">Enter</a></li>
+    </ul>
+  </nav>
+
+  <audio id="bgMusic" loop preload="none">
+    <source src="../audio/five-masks.mp3" type="audio/mpeg" />
+  </audio>
+  <button class="music-btn" id="musicToggle" aria-label="Play ambient music">
+    <span class="music-note">♪</span>
+  </button>
+
+  <!-- PAGE RADIAL GLOW -->
+  <div class="pt__glow" aria-hidden="true"></div>
+
+  <main class="pt__main">
+    <div class="pt__wrap">
+
+      <!-- ── HEADER ── -->
+      <header class="pt__header reveal">
+        <p class="pt__eyebrow">Silent Cue Archive</p>
+        <h1 class="pt__title">Archive Entry 03</h1>
+        <h2 class="pt__subtitle">Perception Test</h2>
+        <div class="pt__rule"></div>
+        <p class="pt__scene">Rain taps softly against the neon stained windows. Two players stand under the dim lights. One talks loudly while spinning his cue between every shot. The other barely speaks, sitting quietly near the rail, watching the room more than the table.</p>
+      </header>
+
+      <!-- ── AUDIO PLAYER — lesson preview ── -->
+      <div class="pt__audio-wrap reveal">
+        <div class="pt__audio-label">Entry 03 Soundtrack</div>
+        <div class="audio-player" id="lessonPlayer03" data-src="../audio/five-masks.mp3">
+          <button class="audio-player__btn" aria-label="Play lesson preview">
+            <span class="audio-player__icon">&#9654;</span>
+          </button>
+          <div class="audio-player__track">
+            <span class="audio-player__name">Perception Test — Ambient Study Track</span>
+            <div class="audio-player__bar">
+              <div class="audio-player__progress" id="lessonProgress03"></div>
+            </div>
+          </div>
+        </div>
+        <p class="pt__audio-note">Play while you study. The music reinforces the lesson.</p>
+      </div>
+
+      <!-- ── PLAYER PROFILES ── -->
+      <section class="pt__profiles">
+        <div class="pt__profiles-grid">
+
+          <!-- PLAYER A — replace the placeholder div with <img src="../images/player-a.jpg" ...> when ready -->
+          <div class="pt__profile reveal">
+            <div class="pt__profile-img-wrap">
+              <!-- IMAGE SLOT A: Upload player-a.jpg to /images/ and replace this block -->
+              <div class="pt__profile-img-placeholder">
+                <span class="pt__profile-img-label">Player A</span>
+                <p class="pt__profile-img-hint">Upload images/player-a.jpg</p>
+              </div>
+              <!-- END IMAGE SLOT A -->
+            </div>
+            <h3 class="pt__profile-name">Player A</h3>
+            <ul class="pt__profile-traits">
+              <li><span class="pt__trait-dot"></span>Fast talking</li>
+              <li><span class="pt__trait-dot"></span>Laughs after misses</li>
+              <li><span class="pt__trait-dot"></span>Shoots quickly</li>
+              <li><span class="pt__trait-dot"></span>Expensive cue on display</li>
+              <li><span class="pt__trait-dot"></span>Constant movement</li>
+            </ul>
+          </div>
+
+          <!-- PLAYER B — replace the placeholder div with <img src="../images/player-b.jpg" ...> when ready -->
+          <div class="pt__profile reveal">
+            <div class="pt__profile-img-wrap">
+              <!-- IMAGE SLOT B: Upload player-b.jpg to /images/ and replace this block -->
+              <div class="pt__profile-img-placeholder">
+                <span class="pt__profile-img-label">Player B</span>
+                <p class="pt__profile-img-hint">Upload images/player-b.jpg</p>
+              </div>
+              <!-- END IMAGE SLOT B -->
+            </div>
+            <h3 class="pt__profile-name">Player B</h3>
+            <ul class="pt__profile-traits">
+              <li><span class="pt__trait-dot"></span>Quiet</li>
+              <li><span class="pt__trait-dot"></span>Stable bridge hand</li>
+              <li><span class="pt__trait-dot"></span>Controlled stance</li>
+              <li><span class="pt__trait-dot"></span>Observes before shooting</li>
+              <li><span class="pt__trait-dot"></span>Minimal emotional reaction</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── OBSERVATION QUESTIONS ── -->
+      <section class="pt__questions">
+        <p class="pt__section-label">Field Observations</p>
+
+        <div class="pt__question-list" id="observationQuestions">
+
+          <div class="pt__q reveal" data-answer="Player B">
+            <p class="pt__q-num">Observation 01</p>
+            <h4 class="pt__q-text">Who appears to control the room?</h4>
+            <div class="pt__q-options">
+              <button class="pt__option" data-value="Player A">Player A</button>
+              <button class="pt__option" data-value="Player B">Player B</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Analysis</p>
+              <p class="pt__analysis-answer">Correct Observation: <strong>Player B</strong></p>
+              <p class="pt__analysis-text">Control often appears calm. Loudness and movement can hide emotional leakage.</p>
+            </div>
+          </div>
+
+          <div class="pt__q reveal" data-answer="Player A">
+            <p class="pt__q-num">Observation 02</p>
+            <h4 class="pt__q-text">Who is more likely masking nervousness?</h4>
+            <div class="pt__q-options">
+              <button class="pt__option" data-value="Player A">Player A</button>
+              <button class="pt__option" data-value="Player B">Player B</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Analysis</p>
+              <p class="pt__analysis-answer">Correct Observation: <strong>Player A</strong></p>
+              <p class="pt__analysis-text">Fast pacing, constant jokes, and unnecessary movement can signal discomfort under pressure.</p>
+            </div>
+          </div>
+
+          <div class="pt__q reveal" data-answer="Near the back rail observing the room">
+            <p class="pt__q-num">Observation 03</p>
+            <h4 class="pt__q-text">Where is the Cool Zone?</h4>
+            <div class="pt__q-options">
+              <button class="pt__option" data-value="Near the center table">Near the center table</button>
+              <button class="pt__option" data-value="Near the back rail observing the room">Near the back rail observing the room</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Analysis</p>
+              <p class="pt__analysis-answer">Correct Observation: <strong>Near the back rail observing the room</strong></p>
+              <p class="pt__analysis-text">The Cool Zone represents emotional neutrality, awareness, and strategic observation.</p>
+            </div>
+          </div>
+
+          <div class="pt__q reveal" data-answer="Crowded noisy side of the hall">
+            <p class="pt__q-num">Observation 04</p>
+            <h4 class="pt__q-text">Where is the Dead Zone?</h4>
+            <div class="pt__q-options">
+              <button class="pt__option" data-value="Crowded noisy side of the hall">Crowded noisy side of the hall</button>
+              <button class="pt__option" data-value="Quiet corner near the jukebox">Quiet corner near the jukebox</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Analysis</p>
+              <p class="pt__analysis-answer">Correct Observation: <strong>Crowded noisy side of the hall</strong></p>
+              <p class="pt__analysis-text">The Dead Zone is where pressure, distraction, ego, and emotional decision making increase.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── CINEMATIC BREAK ── -->
+      <div class="cine-break">
+        <blockquote class="cine-break__quote">&ldquo;People reveal themselves long before they reveal their game.&rdquo;</blockquote>
+        <cite class="cine-break__source">Field Note 03. The Perception Protocol.</cite>
+      </div>
+
+      <!-- ── HUSTLER IDENTIFICATION DRILL ── -->
+      <section class="pt__drill">
+        <p class="pt__section-label">Silent Cue Training System</p>
+        <h2 class="pt__drill-title">Perception Drill</h2>
+        <p class="pt__drill-sub">Identify The Hustler</p>
+
+        <div class="pt__question-list" id="hustlerQuestions">
+
+          <div class="pt__q reveal" data-answer="The Loud Hustler">
+            <p class="pt__q-num">Scenario 01</p>
+            <p class="pt__q-scenario">A player talks loudly after every shot, constantly jokes with strangers, and speeds through racks without much pause.</p>
+            <h4 class="pt__q-text">Which hustler type is most likely being described?</h4>
+            <div class="pt__q-options pt__q-options--four">
+              <button class="pt__option" data-value="The Ghost">The Ghost</button>
+              <button class="pt__option" data-value="The Loud Hustler">The Loud Hustler</button>
+              <button class="pt__option" data-value="The Drifter">The Drifter</button>
+              <button class="pt__option" data-value="The Friendly Shark">The Friendly Shark</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Breakdown</p>
+              <p class="pt__analysis-answer">Correct Identification: <strong>The Loud Hustler</strong></p>
+              <p class="pt__analysis-text">Excessive talking and emotional noise are often used to distract opponents and control the room's energy.</p>
+            </div>
+          </div>
+
+          <div class="pt__q reveal" data-answer="The Ghost">
+            <p class="pt__q-num">Scenario 02</p>
+            <p class="pt__q-scenario">A quiet player sits near the back rail for nearly thirty minutes before ever touching a cue.</p>
+            <h4 class="pt__q-text">Which hustler type is most likely being described?</h4>
+            <div class="pt__q-options pt__q-options--four">
+              <button class="pt__option" data-value="The Emotional Predator">The Emotional Predator</button>
+              <button class="pt__option" data-value="The Loud Hustler">The Loud Hustler</button>
+              <button class="pt__option" data-value="The Ghost">The Ghost</button>
+              <button class="pt__option" data-value="The Friendly Shark">The Friendly Shark</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Breakdown</p>
+              <p class="pt__analysis-answer">Correct Identification: <strong>The Ghost</strong></p>
+              <p class="pt__analysis-text">The Ghost values patience and observation over immediate action. Information comes before engagement.</p>
+            </div>
+          </div>
+
+          <div class="pt__q reveal" data-answer="The Friendly Shark">
+            <p class="pt__q-num">Scenario 03</p>
+            <p class="pt__q-scenario">A player smiles often, buys drinks, compliments your shots, and slowly studies your emotional reactions over time.</p>
+            <h4 class="pt__q-text">Which hustler type is most likely being described?</h4>
+            <div class="pt__q-options pt__q-options--four">
+              <button class="pt__option" data-value="The Friendly Shark">The Friendly Shark</button>
+              <button class="pt__option" data-value="The Ghost">The Ghost</button>
+              <button class="pt__option" data-value="The Drifter">The Drifter</button>
+              <button class="pt__option" data-value="The Emotional Predator">The Emotional Predator</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Breakdown</p>
+              <p class="pt__analysis-answer">Correct Identification: <strong>The Friendly Shark</strong></p>
+              <p class="pt__analysis-text">False comfort lowers awareness. Friendly energy can hide strategic intent.</p>
+            </div>
+          </div>
+
+          <div class="pt__q reveal" data-answer="The Drifter">
+            <p class="pt__q-num">Scenario 04</p>
+            <p class="pt__q-scenario">One player seems different in every room. Calm around veterans. Social around beginners. Invisible around strong players.</p>
+            <h4 class="pt__q-text">Which hustler type is most likely being described?</h4>
+            <div class="pt__q-options pt__q-options--four">
+              <button class="pt__option" data-value="The Loud Hustler">The Loud Hustler</button>
+              <button class="pt__option" data-value="The Drifter">The Drifter</button>
+              <button class="pt__option" data-value="The Ghost">The Ghost</button>
+              <button class="pt__option" data-value="The Emotional Predator">The Emotional Predator</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Breakdown</p>
+              <p class="pt__analysis-answer">Correct Identification: <strong>The Drifter</strong></p>
+              <p class="pt__analysis-text">The Drifter survives through adaptation. Their greatest weapon is environmental flexibility.</p>
+            </div>
+          </div>
+
+          <div class="pt__q reveal" data-answer="The Emotional Predator">
+            <p class="pt__q-num">Scenario 05</p>
+            <p class="pt__q-scenario">A player quietly pressures opponents with comments after misses and waits for emotional reactions before becoming aggressive.</p>
+            <h4 class="pt__q-text">Which hustler type is most likely being described?</h4>
+            <div class="pt__q-options pt__q-options--four">
+              <button class="pt__option" data-value="The Friendly Shark">The Friendly Shark</button>
+              <button class="pt__option" data-value="The Loud Hustler">The Loud Hustler</button>
+              <button class="pt__option" data-value="The Emotional Predator">The Emotional Predator</button>
+              <button class="pt__option" data-value="The Ghost">The Ghost</button>
+            </div>
+            <div class="pt__q-analysis" hidden>
+              <p class="pt__analysis-label">Archive Breakdown</p>
+              <p class="pt__analysis-answer">Correct Identification: <strong>The Emotional Predator</strong></p>
+              <p class="pt__analysis-text">The Emotional Predator hunts emotional instability. Frustration becomes their opening.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── HUSTLER FIELD NOTES ── -->
+      <section class="pt__fieldnotes">
+        <p class="pt__section-label">Silent Cue Field Notes</p>
+        <h2 class="pt__fieldnotes-title">The Different Types of Hustlers</h2>
+
+        <div class="pt__types-grid">
+
+          <div class="pt__type reveal">
+            <p class="pt__type-ref">Archive Profile 01</p>
+            <h3 class="pt__type-name">The Loud Hustler</h3>
+            <p class="pt__type-desc">Talks constantly, controls attention, jokes through pressure, and creates emotional noise to hide intention.</p>
+            <ul class="pt__type-identifiers">
+              <li>Overly social</li>
+              <li>Fast pacing</li>
+              <li>Constant storytelling</li>
+              <li>Uses distraction as control</li>
+            </ul>
+          </div>
+
+          <div class="pt__type reveal">
+            <p class="pt__type-ref">Archive Profile 02</p>
+            <h3 class="pt__type-name">The Ghost</h3>
+            <p class="pt__type-desc">Quiet, patient, observant. Rarely reacts emotionally and studies the room before engaging.</p>
+            <ul class="pt__type-identifiers">
+              <li>Minimal movement</li>
+              <li>Rarely explains shots</li>
+              <li>Stable emotional tone</li>
+              <li>Watches more than speaks</li>
+            </ul>
+          </div>
+
+          <div class="pt__type reveal">
+            <p class="pt__type-ref">Archive Profile 03</p>
+            <h3 class="pt__type-name">The Friendly Shark</h3>
+            <p class="pt__type-desc">Appears harmless and welcoming while slowly studying weaknesses and emotional habits.</p>
+            <ul class="pt__type-identifiers">
+              <li>Compliments opponents often</li>
+              <li>Keeps conversations relaxed</li>
+              <li>Builds false comfort</li>
+              <li>Rarely shows full ability early</li>
+            </ul>
+          </div>
+
+          <div class="pt__type reveal">
+            <p class="pt__type-ref">Archive Profile 04</p>
+            <h3 class="pt__type-name">The Drifter</h3>
+            <p class="pt__type-desc">Moves between rooms and personalities. Hard to read because the identity changes depending on the environment.</p>
+            <ul class="pt__type-identifiers">
+              <li>Blends into different groups</li>
+              <li>Adaptive behavior</li>
+              <li>Studies room energy quickly</li>
+              <li>Rarely stays emotionally exposed</li>
+            </ul>
+          </div>
+
+          <div class="pt__type reveal">
+            <p class="pt__type-ref">Archive Profile 05</p>
+            <h3 class="pt__type-name">The Emotional Predator</h3>
+            <p class="pt__type-desc">Searches for emotional reactions. Feeds off frustration, ego, and rushed decision making.</p>
+            <ul class="pt__type-identifiers">
+              <li>Pressure inducing comments</li>
+              <li>Tests emotional stability</li>
+              <li>Creates tension intentionally</li>
+              <li>Looks for impatience</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── SCORE SUMMARY ── -->
+      <section class="pt__score reveal" id="scoreSection" hidden>
+        <p class="pt__section-label">Training Complete</p>
+        <h2 class="pt__score-title" id="scoreTitle">Your Perception Score</h2>
+        <div class="pt__score-display">
+          <span class="pt__score-num" id="scoreNum">0</span>
+          <span class="pt__score-denom" id="scoreDenom">/ 9</span>
+        </div>
+        <p class="pt__score-read" id="scoreRead"></p>
+      </section>
+
+      <!-- ── FOOTER CTA ── -->
+      <div class="pt__cta reveal">
+        <p class="pt__cta-quote">&ldquo;Train the eye before you train the hand.&rdquo;</p>
+        <a href="../index.html#products" class="pt__cta-btn">Browse the Archive Files</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__logo">
+        <span class="nav__logo-mark">&#9679;</span>
+        <span>Silent Cue</span>
+      </div>
+      <p class="footer__tagline">The game was never about the table.</p>
+      <nav class="footer__nav">
+        <a href="../index.html#philosophy">Philosophy</a>
+        <a href="../index.html#archive">Archive</a>
+        <a href="../index.html#school">School</a>
+        <a href="../index.html#products">The Files</a>
+        <a href="../index.html#enter">Enter</a>
+      </nav>
+      <p class="footer__copy">&copy; 2025 Silent Cue. All knowledge reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/perception-test.js"></script>
+</body>
+</html>
