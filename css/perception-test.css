@@ -120,10 +120,10 @@
 .pt__profile:hover { border-color: rgba(201,168,76,0.2); }
 
 .pt__profile-img-wrap {
-  width: 100%;
+  width: 70%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin: 0 auto 24px;
   background: var(--charcoal);
 }
 
