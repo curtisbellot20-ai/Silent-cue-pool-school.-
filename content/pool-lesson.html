@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pool Lesson Simulator — Silent Cue</title>
+  <meta name="description" content="Interactive pool lesson simulator. Learn position play, the Golden Zone, Dead Zone, and the ghost ball aiming method." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080808;
+      --felt:      #0D2B1F;
+      --rail:      #1B4332;
+      --cushion:   #2D6A4F;
+      --gold:      #C9A84C;
+      --gold-dim:  rgba(201,168,76,0.15);
+      --gold-mid:  rgba(201,168,76,0.4);
+      --ivory:     #E8E0D0;
+      --smoke:     #5A5A5A;
+      --panel-bg:  #0F0F0F;
+      --panel-border: rgba(201,168,76,0.15);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ivory);
+      font-family: Inter, system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── Top Bar ─────────────────────────────────────────────────────── */
+    #topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      padding: 0 24px;
+      background: #0a0a0a;
+      border-bottom: 1px solid var(--panel-border);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    #topbar .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--ivory);
+    }
+    #topbar .logo-dot { color: var(--gold); font-size: 10px; }
+    #topbar .logo-text {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ivory);
+    }
+
+    #topbar .lesson-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+
+    #topbar .exit-link {
+      font-size: 12px;
+      color: var(--smoke);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    #topbar .exit-link:hover { color: var(--gold); }
+
+    /* ── Main Layout ──────────────────────────────────────────────────── */
+    #app {
+      display: flex;
+      height: calc(100vh - 52px);
+      overflow: hidden;
+    }
+
+    /* ── Left Panel ───────────────────────────────────────────────────── */
+    #panel {
+      width: 300px;
+      flex-shrink: 0;
+      background: var(--panel-bg);
+      border-right: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Lesson selector tabs */
+    #lesson-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .lesson-tab {
+      background: none;
+      border: none;
+      border-right: 1px solid var(--panel-border);
+      color: var(--smoke);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 12px 4px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      text-align: center;
+    }
+    .lesson-tab:last-child { border-right: none; }
+    .lesson-tab:hover { color: var(--ivory); background: rgba(255,255,255,0.03); }
+    .lesson-tab.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+
+    /* Lesson content */
+    #lesson-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    #lesson-content::-webkit-scrollbar { width: 4px; }
+    #lesson-content::-webkit-scrollbar-track { background: transparent; }
+    #lesson-content::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 2px; }
+
+    #lesson-number {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    #lesson-name {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: var(--ivory);
+      line-height: 1.3;
+      margin-top: 6px;
+    }
+    #lesson-desc {
+      font-size: 13px;
+      color: var(--smoke);
+      line-height: 1.7;
+      border-left: 2px solid var(--panel-border);
+      padding-left: 12px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--panel-border);
+    }
+
+    #step-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--smoke);
+    }
+    #step-counter {
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+    #step-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ivory);
+      margin-top: 10px;
+      min-height: 80px;
+    }
+
+    /* Power bar */
+    #power-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    #power-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      display: flex;
+      justify-content: space-between;
+    }
+    #power-track {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    #power-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold) 0%, #f0c060 100%);
+      border-radius: 2px;
+      transition: width 0.04s linear;
+    }
+
+    /* Controls */
+    #controls {
+      display: flex;
+      gap: 8px;
+      padding: 16px 20px;
+      border-top: 1px solid var(--panel-border);
+      flex-shrink: 0;
+    }
+    .btn {
+      flex: 1;
+      padding: 10px 8px;
+      border: 1px solid var(--panel-border);
+      background: none;
+      color: var(--ivory);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+    .btn:hover { border-color: var(--gold); color: var(--gold); }
+    .btn.btn--primary {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #080808;
+      font-weight: 500;
+    }
+    .btn.btn--primary:hover { background: #d4b060; }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn:disabled:hover { border-color: var(--panel-border); color: var(--ivory); }
+
+    /* ── Canvas Area ──────────────────────────────────────────────────── */
+    #canvas-area {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ambient vignette */
+    #canvas-area::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #pool-canvas {
+      display: block;
+      border-radius: 4px;
+      cursor: crosshair;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Feedback overlay (canvas-relative, absolutely positioned over canvas) */
+    #feedback-msg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--gold);
+      text-align: center;
+      background: rgba(8,8,8,0.82);
+      border: 1px solid var(--gold-mid);
+      padding: 16px 32px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 10;
+      white-space: nowrap;
+    }
+    #feedback-msg.show { opacity: 1; }
+
+    /* Hint bar at bottom of canvas area */
+    #hint-bar {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--smoke);
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="topbar">
+  <a href="../index.html" class="logo">
+    <span class="logo-dot">&#9679;</span>
+    <span class="logo-text">Silent Cue</span>
+  </a>
+  <span class="lesson-title" id="topbar-title">Pool Lesson Simulator</span>
+  <a href="../index.html#archive" class="exit-link">&#8592; Archive</a>
+</div>
+
+<!-- App -->
+<div id="app">
+
+  <!-- Left Panel -->
+  <div id="panel">
+    <div id="lesson-tabs">
+      <button class="lesson-tab active" data-lesson="0">L1</button>
+      <button class="lesson-tab" data-lesson="1">L2</button>
+      <button class="lesson-tab" data-lesson="2">L3</button>
+      <button class="lesson-tab" data-lesson="3">L4</button>
+    </div>
+
+    <div id="lesson-content">
+      <div>
+        <div id="lesson-number">Lesson 01</div>
+        <div id="lesson-name">The Golden Zone</div>
+      </div>
+      <div id="lesson-desc"></div>
+      <div class="divider"></div>
+      <div>
+        <div id="step-label">Current Instruction</div>
+        <div id="step-counter">Step 1 of 4</div>
+        <div id="step-text"></div>
+      </div>
+      <div class="divider"></div>
+      <div id="power-section">
+        <div id="power-label">
+          <span>Shot Power</span>
+          <span id="power-pct">0%</span>
+        </div>
+        <div id="power-track"><div id="power-fill"></div></div>
+      </div>
+    </div>
+
+    <div id="controls">
+      <button class="btn" id="btn-reset">Reset</button>
+      <button class="btn btn--primary" id="btn-next">Next Step</button>
+    </div>
+  </div>
+
+  <!-- Canvas Area -->
+  <div id="canvas-area">
+    <canvas id="pool-canvas"></canvas>
+    <div id="feedback-msg"></div>
+    <div id="hint-bar">Click and drag from the cue ball to aim — release to shoot</div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+//  Silent Cue — Pool Lesson Simulator
+// ============================================================
+
+(function () {
+'use strict';
+
+// ── Lesson Data ──────────────────────────────────────────────
+const LESSONS = [
+  {
+    number: 'Lesson 01',
+    name: 'The Golden Zone',
+    desc: 'The cue ball is trapped near the rail — the Dead Zone. Your task is to escape it and land in the center of the table after each shot.',
+    steps: [
+      'Study the table. The cue ball is trapped near the rail — this is the Dead Zone.',
+      'Click the cue ball and drag to aim at the yellow ball.',
+      'Notice the Golden Zone highlighted in the center of the table. That is your target area.',
+      'Shoot. After the shot, observe how far your cue ball drifted from the ideal position.'
+    ],
+    showGoldenZone: true,
+    showDeadZone: true,
+    showGhost: true,
+  },
+  {
+    number: 'Lesson 02',
+    name: 'The Dead Zone',
+    desc: 'Two paths are available. The obvious shot leaves you in the Dead Zone. The smart shot routes the cue ball to the Golden Zone. Choose wisely.',
+    steps: [
+      'Two paths are highlighted. The red path is the obvious shot — easy, but reckless.',
+      'The gold path requires more thought but leaves the cue ball in position.',
+      'Position play is chosen before the shot, not after. Decide now.',
+      'Click the gold path indicator to execute the smart shot automatically.'
+    ],
+    showGoldenZone: true,
+    showDeadZone: true,
+    showGhost: true,
+    showTwoPaths: true,
+  },
+  {
+    number: 'Lesson 03',
+    name: 'Reading the Table',
+    desc: 'A cluster of balls on one side, open table on the other. Click each ball to reveal its threat level and suggested run order.',
+    steps: [
+      'Before touching the cue, read the table.',
+      'Click any ball to analyze its position and threat level.',
+      'Notice which balls are blocking and which are in your favor.',
+      'Build your run sequence from easiest to hardest.'
+    ],
+    showGoldenZone: false,
+    showDeadZone: false,
+    showGhost: false,
+    readMode: true,
+  },
+  {
+    number: 'Lesson 04',
+    name: 'The Ghost Drill',
+    desc: 'The ghost ball method is the most reliable aiming system in pool. Click the target ball to reveal where the cue ball must go to sink the shot.',
+    steps: [
+      'Click the target ball to reveal the ghost ball position.',
+      'The ghost ball shows exactly where the cue ball must contact the target.',
+      'Aim the center of the cue ball at the ghost ball center.',
+      'This is the ghost ball method — the most reliable aiming system in pool.'
+    ],
+    showGoldenZone: false,
+    showDeadZone: false,
+    showGhost: true,
+    ghostDrill: true,
+  }
+];
+
+// ── Canvas Setup ──────────────────────────────────────────────
+const canvas = document.getElementById('pool-canvas');
+const ctx    = canvas.getContext('2d');
+
+// Table dimensions
+const TABLE_W  = 780;
+const TABLE_H  = 440;
+const RAIL_W   = 28;           // rail width
+const PLAY_X   = RAIL_W;       // play area starts
+const PLAY_Y   = RAIL_W;
+const PLAY_W   = TABLE_W - RAIL_W * 2;
+const PLAY_H   = TABLE_H - RAIL_W * 2;
+
+canvas.width  = TABLE_W;
+canvas.height = TABLE_H;
+
+// ── Physics Constants ─────────────────────────────────────────
+const BALL_R    = 12;
+const FRICTION  = 0.985;
+const MAX_DRAG  = 150;
+const MAX_VEL   = 18;
+const POCKET_R  = 18;
+
+// 6 pocket positions
+const POCKETS = [
+  { x: PLAY_X + 2,          y: PLAY_Y + 2 },          // TL
+  { x: PLAY_X + PLAY_W / 2, y: PLAY_Y - 2 },          // TM
+  { x: PLAY_X + PLAY_W - 2, y: PLAY_Y + 2 },          // TR
+  { x: PLAY_X + 2,          y: PLAY_Y + PLAY_H - 2 }, // BL
+  { x: PLAY_X + PLAY_W / 2, y: PLAY_Y + PLAY_H + 2 }, // BM
+  { x: PLAY_X + PLAY_W - 2, y: PLAY_Y + PLAY_H - 2 }, // BR
+];
+
+// ── State ─────────────────────────────────────────────────────
+let currentLesson = 0;
+let currentStep   = 0;
+let balls         = [];
+let cueBall       = null;
+
+// Interaction
+let aiming        = false;
+let aimStart      = null;  // {x,y} canvas coords where drag started
+let aimEnd        = null;
+let shooting      = false; // balls in motion
+let readTarget    = null;  // lesson 3: clicked ball
+
+// Ghost drill
+let ghostBallPos  = null;
+let ghostDrillTarget = null;
+
+// Two paths (lesson 2)
+let smartPathChosen = false;
+
+// Feedback
+let feedbackTimer = null;
+
+// Animation
+let rafId = null;
+
+// ── Ball colors per lesson ────────────────────────────────────
+function makeBall(x, y, color, number, isGhost) {
+  return {
+    x, y, vx: 0, vy: 0,
+    color, number,
+    radius: BALL_R,
+    sunk: false,
+    isGhost: isGhost || false,
+    threat: null,  // lesson 3
+  };
+}
+
+// ── Lesson Initializers ───────────────────────────────────────
+function initLesson(index) {
+  currentLesson  = index;
+  currentStep    = 0;
+  aiming         = false;
+  aimStart       = null;
+  aimEnd         = null;
+  shooting       = false;
+  readTarget     = null;
+  ghostBallPos   = null;
+  ghostDrillTarget = null;
+  smartPathChosen  = false;
+  setPower(0);
+
+  const cx = PLAY_X, cy = PLAY_Y, cw = PLAY_W, ch = PLAY_H;
+
+  if (index === 0) {
+    // Golden Zone — cue ball near rail (Dead Zone)
+    cueBall = makeBall(cx + 60, cy + ch / 2, '#FFFFFF', null);
+    balls = [
+      cueBall,
+      makeBall(cx + cw * 0.45, cy + ch * 0.38, '#C9A84C', 1),  // gold
+      makeBall(cx + cw * 0.62, cy + ch * 0.60, '#C0392B', 2),  // red
+      makeBall(cx + cw * 0.55, cy + ch * 0.25, '#2980B9', 3),  // blue
+    ];
+  }
+
+  if (index === 1) {
+    // Dead Zone — two paths scenario
+    cueBall = makeBall(cx + cw * 0.25, cy + ch * 0.75, '#FFFFFF', null);
+    balls = [
+      cueBall,
+      makeBall(cx + cw * 0.42, cy + ch * 0.72, '#C9A84C', 1),  // easy target
+      makeBall(cx + cw * 0.50, cy + ch * 0.45, '#C0392B', 2),
+      makeBall(cx + cw * 0.65, cy + ch * 0.60, '#2980B9', 3),
+    ];
+  }
+
+  if (index === 2) {
+    // Reading the table — cluster left, open right
+    cueBall = makeBall(cx + cw * 0.72, cy + ch * 0.50, '#FFFFFF', null);
+    balls = [
+      cueBall,
+      makeBall(cx + cw * 0.18, cy + ch * 0.30, '#C9A84C', 1, false),
+      makeBall(cx + cw * 0.22, cy + ch * 0.50, '#C0392B', 2, false),
+      makeBall(cx + cw * 0.18, cy + ch * 0.68, '#2980B9', 3, false),
+      makeBall(cx + cw * 0.30, cy + ch * 0.40, '#27AE60', 4, false),
+      makeBall(cx + cw * 0.28, cy + ch * 0.62, '#8E44AD', 5, false),
+      makeBall(cx + cw * 0.38, cy + ch * 0.52, '#E67E22', 6, false),
+    ];
+    // Assign threats
+    const threats = [
+      { label: 'Blocked', order: 5, color: '#C0392B' },
+      { label: 'Tight cluster', order: 4, color: '#E67E22' },
+      { label: 'Near rail', order: 3, color: '#E67E22' },
+      { label: 'Open shot', order: 1, color: '#27AE60' },
+      { label: 'Rail access', order: 2, color: '#C9A84C' },
+      { label: 'Break shot', order: 6, color: '#C0392B' },
+    ];
+    for (let i = 1; i < balls.length; i++) {
+      balls[i].threat = threats[i - 1];
+    }
+  }
+
+  if (index === 3) {
+    // Ghost Drill — cue ball, one target, one pocket lit
+    cueBall = makeBall(cx + cw * 0.35, cy + ch * 0.55, '#FFFFFF', null);
+    balls = [
+      cueBall,
+      makeBall(cx + cw * 0.55, cy + ch * 0.40, '#C9A84C', 1),
+    ];
+    ghostDrillTarget = balls[1];
+  }
+
+  updateUI();
+  render();
+}
+
+// ── UI Updates ────────────────────────────────────────────────
+function updateUI() {
+  const L = LESSONS[currentLesson];
+  document.getElementById('lesson-number').textContent = L.number;
+  document.getElementById('lesson-name').textContent   = L.name;
+  document.getElementById('lesson-desc').textContent   = L.desc;
+  document.getElementById('step-counter').textContent  = `Step ${currentStep + 1} of ${L.steps.length}`;
+  document.getElementById('step-text').textContent     = L.steps[currentStep];
+  document.getElementById('topbar-title').textContent  = L.name;
+
+  // Tab highlight
+  document.querySelectorAll('.lesson-tab').forEach((t, i) => {
+    t.classList.toggle('active', i === currentLesson);
+  });
+
+  // Next step button
+  const btnNext = document.getElementById('btn-next');
+  btnNext.disabled = currentStep >= L.steps.length - 1;
+}
+
+function setPower(pct) {
+  document.getElementById('power-fill').style.width = pct + '%';
+  document.getElementById('power-pct').textContent  = Math.round(pct) + '%';
+}
+
+// ── Feedback Overlay ──────────────────────────────────────────
+function showFeedback(msg) {
+  const el = document.getElementById('feedback-msg');
+  el.textContent = msg;
+  el.classList.add('show');
+  if (feedbackTimer) clearTimeout(feedbackTimer);
+  feedbackTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+function evalCueBallPosition() {
+  if (!cueBall || cueBall.sunk) return;
+  const cx = PLAY_X, cy = PLAY_Y, cw = PLAY_W, ch = PLAY_H;
+
+  // Golden Zone: center 40% of table
+  const gzX1 = cx + cw * 0.30, gzX2 = cx + cw * 0.70;
+  const gzY1 = cy + ch * 0.25, gzY2 = cy + ch * 0.75;
+  const deadMargin = 40; // px from rail = Dead Zone
+
+  const inGolden = cueBall.x > gzX1 && cueBall.x < gzX2 && cueBall.y > gzY1 && cueBall.y < gzY2;
+  const inDead   = (cueBall.x < cx + deadMargin || cueBall.x > cx + cw - deadMargin ||
+                    cueBall.y < cy + deadMargin || cueBall.y > cy + ch - deadMargin);
+
+  if (inGolden)      showFeedback('Good position. You found the Golden Zone.');
+  else if (inDead)   showFeedback('Dead Zone. Difficult position on your next shot.');
+  else               showFeedback('Neutral position. Work toward the center of the table.');
+}
+
+// ── Physics ───────────────────────────────────────────────────
+function dist(a, b) {
+  const dx = a.x - b.x, dy = a.y - b.y;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function resolveCollision(a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const d  = Math.sqrt(dx * dx + dy * dy);
+  if (d === 0) return;
+  const nx = dx / d, ny = dy / d;
+
+  // Separate overlapping balls
+  const overlap = (a.radius + b.radius) - d;
+  if (overlap > 0) {
+    a.x -= nx * overlap / 2;
+    a.y -= ny * overlap / 2;
+    b.x += nx * overlap / 2;
+    b.y += ny * overlap / 2;
+  }
+
+  // 1D elastic collision along normal
+  const dvx = a.vx - b.vx, dvy = a.vy - b.vy;
+  const dot  = dvx * nx + dvy * ny;
+  if (dot >= 0) return; // moving apart
+
+  a.vx -= dot * nx;
+  a.vy -= dot * ny;
+  b.vx += dot * nx;
+  b.vy += dot * ny;
+}
+
+function step() {
+  let anyMoving = false;
+  const cx = PLAY_X, cy = PLAY_Y, cw = PLAY_W, ch = PLAY_H;
+
+  for (const ball of balls) {
+    if (ball.sunk) continue;
+
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+
+    // Friction
+    ball.vx *= FRICTION;
+    ball.vy *= FRICTION;
+
+    // Stop tiny velocities
+    if (Math.abs(ball.vx) < 0.05) ball.vx = 0;
+    if (Math.abs(ball.vy) < 0.05) ball.vy = 0;
+
+    if (Math.abs(ball.vx) > 0 || Math.abs(ball.vy) > 0) anyMoving = true;
+
+    // Rail bounces
+    if (ball.x - ball.radius < cx) {
+      ball.x = cx + ball.radius;
+      ball.vx = Math.abs(ball.vx) * 0.82;
+    }
+    if (ball.x + ball.radius > cx + cw) {
+      ball.x = cx + cw - ball.radius;
+      ball.vx = -Math.abs(ball.vx) * 0.82;
+    }
+    if (ball.y - ball.radius < cy) {
+      ball.y = cy + ball.radius;
+      ball.vy = Math.abs(ball.vy) * 0.82;
+    }
+    if (ball.y + ball.radius > cy + ch) {
+      ball.y = cy + ch - ball.radius;
+      ball.vy = -Math.abs(ball.vy) * 0.82;
+    }
+
+    // Pocket detection
+    for (const p of POCKETS) {
+      if (dist(ball, p) < POCKET_R) {
+        ball.sunk = true;
+        ball.vx = 0;
+        ball.vy = 0;
+        break;
+      }
+    }
+  }
+
+  // Ball-ball collisions
+  for (let i = 0; i < balls.length; i++) {
+    for (let j = i + 1; j < balls.length; j++) {
+      if (balls[i].sunk || balls[j].sunk) continue;
+      if (dist(balls[i], balls[j]) < balls[i].radius + balls[j].radius) {
+        resolveCollision(balls[i], balls[j]);
+      }
+    }
+  }
+
+  return anyMoving;
+}
+
+// ── Rendering ─────────────────────────────────────────────────
+function drawTable() {
+  const W = TABLE_W, H = TABLE_H;
+
+  // Rail background
+  ctx.fillStyle = '#142a1e';
+  ctx.fillRect(0, 0, W, H);
+
+  // Rail border
+  ctx.fillStyle = '#1B4332';
+  ctx.fillRect(0, 0, W, H);
+
+  // Rail highlight (inner edge)
+  ctx.strokeStyle = '#2D6A4F';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(RAIL_W - 2, RAIL_W - 2, PLAY_W + 4, PLAY_H + 4);
+
+  // Felt
+  ctx.fillStyle = '#0D2B1F';
+  ctx.fillRect(PLAY_X, PLAY_Y, PLAY_W, PLAY_H);
+
+  // Subtle felt texture (light radial gradient)
+  const feltGrad = ctx.createRadialGradient(
+    PLAY_X + PLAY_W / 2, PLAY_Y + PLAY_H / 2, 20,
+    PLAY_X + PLAY_W / 2, PLAY_Y + PLAY_H / 2, Math.max(PLAY_W, PLAY_H) * 0.7
+  );
+  feltGrad.addColorStop(0, 'rgba(255,255,255,0.025)');
+  feltGrad.addColorStop(1, 'rgba(0,0,0,0.15)');
+  ctx.fillStyle = feltGrad;
+  ctx.fillRect(PLAY_X, PLAY_Y, PLAY_W, PLAY_H);
+
+  // Pockets
+  for (const p of POCKETS) {
+    // Dark pocket hole
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, POCKET_R, 0, Math.PI * 2);
+    ctx.fillStyle = '#050505';
+    ctx.fill();
+
+    // Gold rim
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, POCKET_R + 1, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(201,168,76,0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  // Rail dot markers (decorative)
+  const dotColor = 'rgba(201,168,76,0.6)';
+  const dotR = 4;
+  const railDots = [
+    { x: PLAY_X + PLAY_W * 0.25, y: RAIL_W / 2 },
+    { x: PLAY_X + PLAY_W * 0.75, y: RAIL_W / 2 },
+    { x: PLAY_X + PLAY_W * 0.25, y: TABLE_H - RAIL_W / 2 },
+    { x: PLAY_X + PLAY_W * 0.75, y: TABLE_H - RAIL_W / 2 },
+    { x: RAIL_W / 2, y: PLAY_Y + PLAY_H * 0.33 },
+    { x: RAIL_W / 2, y: PLAY_Y + PLAY_H * 0.67 },
+    { x: TABLE_W - RAIL_W / 2, y: PLAY_Y + PLAY_H * 0.33 },
+    { x: TABLE_W - RAIL_W / 2, y: PLAY_Y + PLAY_H * 0.67 },
+  ];
+  for (const d of railDots) {
+    ctx.beginPath();
+    ctx.arc(d.x, d.y, dotR, 0, Math.PI * 2);
+    ctx.fillStyle = dotColor;
+    ctx.fill();
+  }
+}
+
+function drawZones() {
+  const L = LESSONS[currentLesson];
+  const cx = PLAY_X, cy = PLAY_Y, cw = PLAY_W, ch = PLAY_H;
+
+  if (L.showDeadZone) {
+    // Dead Zone — 4 rectangles near rails
+    ctx.setLineDash([5, 5]);
+    ctx.lineWidth = 1.5;
+    const dz = 40;
+    const dzRegions = [
+      [cx, cy, cw, dz],              // top
+      [cx, cy + ch - dz, cw, dz],    // bottom
+      [cx, cy + dz, dz, ch - dz * 2], // left
+      [cx + cw - dz, cy + dz, dz, ch - dz * 2], // right
+    ];
+    for (const [rx, ry, rw, rh] of dzRegions) {
+      ctx.fillStyle = 'rgba(180,40,40,0.08)';
+      ctx.fillRect(rx, ry, rw, rh);
+      ctx.strokeStyle = 'rgba(180,40,40,0.3)';
+      ctx.strokeRect(rx, ry, rw, rh);
+    }
+
+    // Label
+    ctx.setLineDash([]);
+    ctx.font = '10px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(220,80,80,0.6)';
+    ctx.textAlign = 'center';
+    ctx.fillText('DEAD ZONE', cx + cw / 2, cy + 14);
+    ctx.fillText('DEAD ZONE', cx + cw / 2, cy + ch - 6);
+  }
+
+  if (L.showGoldenZone) {
+    const gx = cx + cw * 0.30, gy = cy + ch * 0.25;
+    const gw = cw * 0.40, gh = ch * 0.50;
+    const ex = gx + gw / 2, ey = gy + gh / 2;
+    const rx = gw / 2, ry = gh / 2;
+
+    ctx.save();
+    ctx.translate(ex, ey);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(201,168,76,0.10)';
+    ctx.fill();
+    ctx.setLineDash([6, 4]);
+    ctx.strokeStyle = 'rgba(201,168,76,0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.restore();
+    ctx.setLineDash([]);
+
+    ctx.font = '10px Inter, system-ui, sans-serif';
+    ctx.fillStyle = 'rgba(201,168,76,0.7)';
+    ctx.textAlign = 'center';
+    ctx.fillText('GOLDEN ZONE', ex, ey);
+  }
+}
+
+function drawTwoPaths() {
+  if (currentLesson !== 1) return;
+  const cb = cueBall;
+  if (!cb || cb.sunk) return;
+  // Find target ball (index 1)
+  const target = balls.find((b, i) => i === 1 && !b.sunk);
+  if (!target) return;
+
+  const cx = PLAY_X, cy = PLAY_Y, cw = PLAY_W, ch = PLAY_H;
+
+  // Red (bad) path — shoot directly, continue toward bottom rail
+  const dx1 = target.x - cb.x, dy1 = target.y - cb.y;
+  const len1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+  const nx1 = dx1 / len1, ny1 = dy1 / len1;
+
+  ctx.setLineDash([6, 5]);
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = 'rgba(200,60,60,0.65)';
+  ctx.beginPath();
+  ctx.moveTo(cb.x, cb.y);
+  ctx.lineTo(cb.x + nx1 * 160, cb.y + ny1 * 160);
+  ctx.stroke();
+
+  // Red path label
+  ctx.setLineDash([]);
+  ctx.font = '11px Inter, system-ui, sans-serif';
+  ctx.fillStyle = 'rgba(200,60,60,0.85)';
+  ctx.textAlign = 'left';
+  ctx.fillText('Obvious shot', cb.x + nx1 * 80 + 8, cb.y + ny1 * 80 - 4);
+
+  // Gold (smart) path — angled shot toward Golden Zone center
+  const goldAngle = Math.atan2(-(cy + ch * 0.5 - cb.y), (cx + cw * 0.55 - cb.x));
+  const nx2 = Math.cos(goldAngle), ny2 = Math.sin(goldAngle);
+
+  ctx.setLineDash([6, 5]);
+  ctx.strokeStyle = 'rgba(201,168,76,0.70)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cb.x, cb.y);
+  ctx.lineTo(cb.x + nx2 * 160, cb.y + ny2 * 160);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = 'rgba(201,168,76,0.9)';
+  ctx.textAlign = 'right';
+  ctx.fillText('Smart shot ▶', cb.x + nx2 * 90 - 8, cb.y + ny2 * 90 - 6);
+
+  // Click target for smart path
+  if (!smartPathChosen) {
+    ctx.beginPath();
+    ctx.arc(cb.x + nx2 * 120, cb.y + ny2 * 120, 10, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(201,168,76,0.25)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(201,168,76,0.8)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+}
+
+function drawGhostDrill() {
+  if (currentLesson !== 3) return;
+  if (!ghostBallPos) return;
+
+  // Ghost ball circle
+  ctx.beginPath();
+  ctx.arc(ghostBallPos.x, ghostBallPos.y, BALL_R, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.18)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Line from ghost ball center to target ball center
+  const t = ghostDrillTarget;
+  ctx.beginPath();
+  ctx.moveTo(ghostBallPos.x, ghostBallPos.y);
+  ctx.lineTo(t.x, t.y);
+  ctx.strokeStyle = 'rgba(201,168,76,0.5)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Label
+  ctx.font = '11px Inter, system-ui, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.textAlign = 'center';
+  ctx.fillText('Ghost Ball', ghostBallPos.x, ghostBallPos.y - BALL_R - 6);
+}
+
+function drawBall(ball) {
+  if (ball.sunk) return;
+
+  ctx.save();
+  ctx.translate(ball.x, ball.y);
+
+  // Ball shadow
+  const shadowGrad = ctx.createRadialGradient(2, 3, 0, 0, 0, ball.radius + 3);
+  shadowGrad.addColorStop(0, 'rgba(0,0,0,0.4)');
+  shadowGrad.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.beginPath();
+  ctx.arc(2, 3, ball.radius + 2, 0, Math.PI * 2);
+  ctx.fillStyle = shadowGrad;
+  ctx.fill();
+
+  // Ball body
+  const grad = ctx.createRadialGradient(-4, -4, 2, 0, 0, ball.radius);
+  grad.addColorStop(0, lighten(ball.color, 0.4));
+  grad.addColorStop(0.6, ball.color);
+  grad.addColorStop(1, darken(ball.color, 0.35));
+  ctx.beginPath();
+  ctx.arc(0, 0, ball.radius, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Highlight
+  const hiGrad = ctx.createRadialGradient(-4, -5, 0, -4, -5, ball.radius * 0.7);
+  hiGrad.addColorStop(0, 'rgba(255,255,255,0.45)');
+  hiGrad.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.beginPath();
+  ctx.arc(0, 0, ball.radius, 0, Math.PI * 2);
+  ctx.fillStyle = hiGrad;
+  ctx.fill();
+
+  // Number/dot
+  if (ball.number !== null && ball.color !== '#FFFFFF') {
+    // White number circle
+    ctx.beginPath();
+    ctx.arc(0, 0, ball.radius * 0.52, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    ctx.fill();
+    ctx.font = `bold ${ball.radius * 0.70}px Inter, system-ui, sans-serif`;
+    ctx.fillStyle = '#222';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(String(ball.number), 0, 0.5);
+    ctx.textBaseline = 'alphabetic';
+  } else if (ball.color === '#FFFFFF') {
+    // Cue ball dot
+    ctx.beginPath();
+    ctx.arc(0, 0, 3, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(100,100,100,0.4)';
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function drawReadModeOverlay(ball) {
+  if (ball.sunk || !ball.threat || currentLesson !== 2) return;
+  if (readTarget !== ball) return;
+
+  ctx.save();
+  // Panel above ball
+  const pw = 120, ph = 52;
+  const px = ball.x - pw / 2;
+  const py = ball.y - BALL_R - ph - 10;
+
+  ctx.fillStyle = 'rgba(8,8,8,0.9)';
+  ctx.strokeStyle = 'rgba(201,168,76,0.5)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  // Rounded rect (manual for browser compat)
+  const r3 = 3;
+  ctx.moveTo(px + r3, py);
+  ctx.lineTo(px + pw - r3, py);
+  ctx.arcTo(px + pw, py, px + pw, py + r3, r3);
+  ctx.lineTo(px + pw, py + ph - r3);
+  ctx.arcTo(px + pw, py + ph, px + pw - r3, py + ph, r3);
+  ctx.lineTo(px + r3, py + ph);
+  ctx.arcTo(px, py + ph, px, py + ph - r3, r3);
+  ctx.lineTo(px, py + r3);
+  ctx.arcTo(px, py, px + r3, py, r3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Order
+  ctx.font = '10px Inter, system-ui, sans-serif';
+  ctx.fillStyle = 'rgba(201,168,76,0.9)';
+  ctx.textAlign = 'center';
+  ctx.fillText(`Run order: #${ball.threat.order}`, ball.x, py + 16);
+
+  // Threat
+  ctx.fillStyle = ball.threat.color;
+  ctx.fillText(ball.threat.label, ball.x, py + 33);
+
+  // Arrow from panel to ball
+  ctx.beginPath();
+  ctx.moveTo(ball.x, py + ph);
+  ctx.lineTo(ball.x, ball.y - BALL_R);
+  ctx.strokeStyle = 'rgba(201,168,76,0.35)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.restore();
+}
+
+function drawAimLine() {
+  if (!aiming || !aimStart || !aimEnd || !cueBall || cueBall.sunk) return;
+
+  const cb = cueBall;
+  const dx = aimStart.x - aimEnd.x;
+  const dy = aimStart.y - aimEnd.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist < 4) return;
+
+  const nx = dx / dist, ny = dy / dist;
+
+  // Cue stick
+  const stickStart = { x: cb.x - nx * (BALL_R + 4), y: cb.y - ny * (BALL_R + 4) };
+  const stickEnd   = { x: cb.x - nx * (BALL_R + 4 + 120), y: cb.y - ny * (BALL_R + 4 + 120) };
+
+  const stickGrad = ctx.createLinearGradient(stickStart.x, stickStart.y, stickEnd.x, stickEnd.y);
+  stickGrad.addColorStop(0, 'rgba(205,170,100,0.9)');
+  stickGrad.addColorStop(0.15, 'rgba(180,140,80,0.85)');
+  stickGrad.addColorStop(1, 'rgba(120,90,50,0.3)');
+
+  ctx.beginPath();
+  ctx.moveTo(stickStart.x, stickStart.y);
+  ctx.lineTo(stickEnd.x, stickEnd.y);
+  ctx.strokeStyle = stickGrad;
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  ctx.setLineDash([]);
+  ctx.stroke();
+  ctx.lineCap = 'butt';
+
+  // Cue tip
+  ctx.beginPath();
+  ctx.arc(stickStart.x, stickStart.y, 2.5, 0, Math.PI * 2);
+  ctx.fillStyle = '#6ab5ff';
+  ctx.fill();
+
+  // Aim line (dotted gold, forward direction)
+  const lineEnd = { x: cb.x + nx * 200, y: cb.y + ny * 200 };
+  ctx.beginPath();
+  ctx.moveTo(cb.x + nx * (BALL_R + 2), cb.y + ny * (BALL_R + 2));
+  ctx.lineTo(lineEnd.x, lineEnd.y);
+  ctx.strokeStyle = 'rgba(201,168,76,0.5)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([5, 5]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Ghost ball along aim line for lessons with ghosting
+  const L = LESSONS[currentLesson];
+  if (L.showGhost && currentLesson !== 3) {
+    // Find first object ball in path
+    const ghost = findGhostContact(cb, nx, ny);
+    if (ghost) {
+      // Ghost ball at contact point
+      ctx.beginPath();
+      ctx.arc(ghost.gx, ghost.gy, BALL_R, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 3]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Post-contact cue ball path
+      const postDx = ghost.gx - ghost.target.x;
+      const postDy = ghost.gy - ghost.target.y;
+      const postD  = Math.sqrt(postDx * postDx + postDy * postDy);
+      if (postD > 0) {
+        const pnx = postDx / postD, pny = postDy / postD;
+        const postEnd = { x: ghost.gx + pnx * 100, y: ghost.gy + pny * 100 };
+        ctx.beginPath();
+        ctx.moveTo(ghost.gx, ghost.gy);
+        ctx.lineTo(postEnd.x, postEnd.y);
+        ctx.strokeStyle = 'rgba(201,168,76,0.35)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 5]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+  }
+}
+
+function findGhostContact(cb, nx, ny) {
+  let closest = null;
+  let closestT = Infinity;
+  for (const b of balls) {
+    if (b === cb || b.sunk) continue;
+    // Ray-circle intersection: find where ray from cb in dir (nx,ny) hits circle of radius 2*BALL_R around b
+    const ex = cb.x - b.x, ey = cb.y - b.y;
+    const a = 1; // nx^2+ny^2=1
+    const bv = 2 * (ex * nx + ey * ny);
+    const c = ex * ex + ey * ey - (BALL_R * 2) * (BALL_R * 2);
+    const disc = bv * bv - 4 * a * c;
+    if (disc < 0) continue;
+    const t = (-bv - Math.sqrt(disc)) / 2;
+    if (t > 0 && t < closestT) {
+      closestT = t;
+      closest = { gx: cb.x + nx * t, gy: cb.y + ny * t, target: b };
+    }
+  }
+  return closest;
+}
+
+function render() {
+  ctx.clearRect(0, 0, TABLE_W, TABLE_H);
+  drawTable();
+  drawZones();
+  if (currentLesson === 1 && !shooting) drawTwoPaths();
+  drawAimLine();
+  drawGhostDrill();
+  for (const ball of balls) {
+    drawBall(ball);
+    if (currentLesson === 2) drawReadModeOverlay(ball);
+  }
+}
+
+// ── Animation Loop ────────────────────────────────────────────
+function animate() {
+  const moving = step();
+  render();
+  if (moving) {
+    rafId = requestAnimationFrame(animate);
+  } else {
+    shooting = false;
+    rafId = null;
+    // Post-shot evaluation
+    const L = LESSONS[currentLesson];
+    if (L.showGoldenZone || L.showDeadZone) {
+      evalCueBallPosition();
+    }
+    // Auto-advance step if not at last
+    if (currentStep < L.steps.length - 1) {
+      currentStep++;
+      updateUI();
+    }
+  }
+}
+
+// ── Interaction ───────────────────────────────────────────────
+function canvasPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = TABLE_W / rect.width;
+  const scaleY = TABLE_H / rect.height;
+  const src = e.touches ? e.touches[0] : e;
+  return {
+    x: (src.clientX - rect.left) * scaleX,
+    y: (src.clientY - rect.top)  * scaleY,
+  };
+}
+
+function ballAt(pos) {
+  for (const ball of balls) {
+    if (ball.sunk) continue;
+    const dx = pos.x - ball.x, dy = pos.y - ball.y;
+    if (dx * dx + dy * dy < (ball.radius + 6) * (ball.radius + 6)) return ball;
+  }
+  return null;
+}
+
+function smartPathHit(pos) {
+  if (currentLesson !== 1) return false;
+  const cb = cueBall;
+  if (!cb || cb.sunk) return false;
+  const goldAngle = Math.atan2(-(PLAY_Y + PLAY_H * 0.5 - cb.y), (PLAY_X + PLAY_W * 0.55 - cb.x));
+  const nx = Math.cos(goldAngle), ny = Math.sin(goldAngle);
+  const hx = cb.x + nx * 120, hy = cb.y + ny * 120;
+  const dx = pos.x - hx, dy = pos.y - hy;
+  return dx * dx + dy * dy < 20 * 20;
+}
+
+canvas.addEventListener('mousedown', onDown);
+canvas.addEventListener('mousemove', onMove);
+canvas.addEventListener('mouseup',   onUp);
+canvas.addEventListener('touchstart', onDown, { passive: false });
+canvas.addEventListener('touchmove',  onMove, { passive: false });
+canvas.addEventListener('touchend',   onUp,   { passive: false });
+
+function onDown(e) {
+  e.preventDefault();
+  if (shooting) return;
+  const pos = canvasPos(e);
+
+  // Lesson 3 — read mode click
+  if (currentLesson === 2) {
+    const hit = ballAt(pos);
+    if (hit && hit !== cueBall) {
+      readTarget = (readTarget === hit) ? null : hit;
+      render();
+      if (readTarget && currentStep < LESSONS[2].steps.length - 1) {
+        currentStep = Math.min(currentStep + 1, LESSONS[2].steps.length - 1);
+        updateUI();
+      }
+      return;
+    }
+  }
+
+  // Lesson 2 — smart path click
+  if (currentLesson === 1 && smartPathHit(pos) && !smartPathChosen) {
+    smartPathChosen = true;
+    const cb = cueBall;
+    const goldAngle = Math.atan2(-(PLAY_Y + PLAY_H * 0.5 - cb.y), (PLAY_X + PLAY_W * 0.55 - cb.x));
+    const power = 0.65;
+    const speed = power * MAX_VEL;
+    cb.vx = Math.cos(goldAngle) * speed;
+    cb.vy = Math.sin(goldAngle) * speed;
+    shooting = true;
+    setPower(0);
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(animate);
+    return;
+  }
+
+  // Lesson 4 — ghost drill: click target ball to reveal ghost
+  if (currentLesson === 3) {
+    const hit = ballAt(pos);
+    if (hit && hit === ghostDrillTarget) {
+      // Calculate ghost ball position (where cue ball must be to pocket the target)
+      const pocket = POCKETS[2]; // TR pocket
+      const dxp = pocket.x - hit.x, dyp = pocket.y - hit.y;
+      const dp  = Math.sqrt(dxp * dxp + dyp * dyp);
+      const nxp = dxp / dp, nyp = dyp / dp;
+      ghostBallPos = {
+        x: hit.x - nxp * BALL_R * 2,
+        y: hit.y - nyp * BALL_R * 2,
+      };
+      if (currentStep < LESSONS[3].steps.length - 1) {
+        currentStep++;
+        updateUI();
+      }
+      render();
+      return;
+    }
+    // After ghost revealed, can aim cue ball normally
+    if (ghostBallPos) {
+      const hit2 = ballAt(pos);
+      if (hit2 === cueBall) {
+        aiming = true;
+        aimStart = { ...pos };
+        aimEnd   = { ...pos };
+      }
+    }
+    return;
+  }
+
+  // Normal cue ball aim
+  const hit = ballAt(pos);
+  if (hit === cueBall) {
+    aiming = true;
+    aimStart = { ...pos };
+    aimEnd   = { ...pos };
+  }
+}
+
+function onMove(e) {
+  e.preventDefault();
+  if (!aiming) return;
+  const pos = canvasPos(e);
+  aimEnd = pos;
+
+  const dx = aimStart.x - aimEnd.x;
+  const dy = aimStart.y - aimEnd.y;
+  const d  = Math.min(Math.sqrt(dx * dx + dy * dy), MAX_DRAG);
+  const pct = (d / MAX_DRAG) * 100;
+  setPower(pct);
+  render();
+}
+
+function onUp(e) {
+  e.preventDefault();
+  if (!aiming || !cueBall || cueBall.sunk) {
+    aiming = false;
+    return;
+  }
+  aiming = false;
+
+  const dx = aimStart.x - aimEnd.x;
+  const dy = aimStart.y - aimEnd.y;
+  const d  = Math.sqrt(dx * dx + dy * dy);
+
+  if (d < 6) { render(); return; } // too small, no shot
+
+  const power = Math.min(d, MAX_DRAG) / MAX_DRAG;
+  const speed = power * MAX_VEL;
+  const nx = dx / d, ny = dy / d;
+
+  cueBall.vx = nx * speed;
+  cueBall.vy = ny * speed;
+
+  shooting = true;
+  setPower(0);
+  aimStart = null;
+  aimEnd   = null;
+
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId = requestAnimationFrame(animate);
+}
+
+// ── Button Handlers ───────────────────────────────────────────
+document.getElementById('btn-next').addEventListener('click', () => {
+  const L = LESSONS[currentLesson];
+  if (currentStep < L.steps.length - 1) {
+    currentStep++;
+    updateUI();
+  }
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  initLesson(currentLesson);
+});
+
+document.querySelectorAll('.lesson-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const idx = parseInt(tab.dataset.lesson, 10);
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    initLesson(idx);
+  });
+});
+
+// ── Color Helpers ─────────────────────────────────────────────
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return [r, g, b];
+}
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function lighten(hex, amt) {
+  try {
+    const [r, g, b] = hexToRgb(hex);
+    return `rgb(${clamp(r + 255 * amt, 0, 255)|0},${clamp(g + 255 * amt, 0, 255)|0},${clamp(b + 255 * amt, 0, 255)|0})`;
+  } catch { return hex; }
+}
+function darken(hex, amt) {
+  try {
+    const [r, g, b] = hexToRgb(hex);
+    return `rgb(${clamp(r * (1 - amt), 0, 255)|0},${clamp(g * (1 - amt), 0, 255)|0},${clamp(b * (1 - amt), 0, 255)|0})`;
+  } catch { return hex; }
+}
+
+// ── Canvas Sizing ─────────────────────────────────────────────
+function resizeCanvas() {
+  const area = document.getElementById('canvas-area');
+  const aw = area.clientWidth  - 48;
+  const ah = area.clientHeight - 48;
+  const scale = Math.min(aw / TABLE_W, ah / TABLE_H, 1.0);
+  canvas.style.width  = Math.floor(TABLE_W * scale) + 'px';
+  canvas.style.height = Math.floor(TABLE_H * scale) + 'px';
+}
+
+window.addEventListener('resize', () => { resizeCanvas(); render(); });
+
+// ── Boot ──────────────────────────────────────────────────────
+resizeCanvas();
+initLesson(0);
+
+})();
+</script>
+
+<script src="../js/auth-gate.js"></script>
+<script>requireAccess();</script>
+</body>
+</html>
