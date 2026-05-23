@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    @page {
+        size: A4;
+        margin: 18mm 15mm;
+        background-color: #050508;
+        @bottom-right {
+            content: "SILENT CUE ACADEMY";
+            font-family: 'Georgia', serif;
+            font-size: 8pt;
+            color: #8a7355;
+            letter-spacing: 2px;
+        }
+        @bottom-left {
+            content: "FIVE MASKS: FIELD EDITION";
+            font-family: 'Georgia', serif;
+            font-size: 8pt;
+            color: #444655;
+        }
+    }
+    
+    @page:first {
+        margin: 0;
+        background-color: #020204;
+    }
+    
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Georgia', 'Times New Roman', serif;
+        color: #d1d1d6;
+        line-height: 1.65;
+        font-size: 11pt;
+        background-color: #050508;
+    }
+    
+    /* Cover Page */
+    .cover {
+        page-break-after: always;
+        height: 297mm;
+        width: 210mm;
+        position: relative;
+        padding: 40mm 25mm;
+        background: radial-gradient(circle at center, #0f101a 0%, #020204 100%);
+        border: 1px solid #1c1d26;
+        text-align: center;
+    }
+    
+    .brand-tag {
+        font-size: 10pt;
+        color: #d4af37;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin-bottom: 20mm;
+    }
+    
+    .cover-title {
+        font-size: 42pt;
+        font-weight: normal;
+        letter-spacing: 3px;
+        color: #ffffff;
+        text-transform: uppercase;
+        line-height: 1.2;
+    }
+    
+    .cover-subtitle {
+        font-size: 14pt;
+        font-style: italic;
+        color: #c5a880;
+        margin-top: 6mm;
+        letter-spacing: 1px;
+    }
+    
+    .cover-line {
+        width: 35mm;
+        height: 1px;
+        background-color: #d4af37;
+        margin: 15mm auto;
+    }
+    
+    .cover-transmission {
+        font-size: 9.5pt;
+        color: #5b5d72;
+        line-height: 1.6;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    /* Document Flow Formatting - No extra page breaks between profiles */
+    h1 {
+        font-size: 20pt;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-top: 10mm;
+        margin-bottom: 6mm;
+        padding-bottom: 3mm;
+        border-bottom: 1px solid #1c1d26;
+        page-break-after: avoid;
+    }
+    
+    .section-break {
+        page-break-before: always;
+    }
+    
+    h2 {
+        font-size: 14pt;
+        color: #d4af37;
+        margin-top: 8mm;
+        margin-bottom: 4mm;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        page-break-after: avoid;
+    }
+    
+    p {
+        margin-top: 0;
+        margin-bottom: 5mm;
+        text-align: justify;
+    }
+    
+    .intro-quote {
+        background-color: #0b0c13;
+        border-left: 2px solid #d4af37;
+        padding: 5mm 6mm;
+        margin-bottom: 6mm;
+        font-style: italic;
+        color: #c5a880;
+    }
+    
+    .profile-block {
+        background-color: #08090f;
+        border: 1px solid #141622;
+        padding: 5mm;
+        margin: 4mm 0;
+    }
+    
+    .profile-meta {
+        font-size: 9.5pt;
+        color: #8a7355;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 2mm;
+    }
+    
+    .story-block {
+        background-color: #04050a;
+        border-left: 2px dashed #8a7355;
+        padding: 4.5mm;
+        margin: 4mm 0;
+    }
+    
+    .story-header {
+        font-size: 9.5pt;
+        font-weight: bold;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 2mm;
+    }
+    
+    /* Quick Street-Smart Tips Box */
+    .pro-tip-box {
+        background-color: #0d0905;
+        border: 1px solid #8a7355;
+        padding: 4mm 5mm;
+        margin: 4mm 0 6mm 0;
+        font-size: 10.5pt;
+        page-break-inside: avoid;
+    }
+    
+    .pro-tip-title {
+        color: #d4af37;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 9.5pt;
+        letter-spacing: 1px;
+        margin-bottom: 1.5mm;
+    }
+    
+    .anchor-block {
+        background-color: #0b0d19;
+        border: 1px solid #d4af37;
+        padding: 5mm;
+        margin: 6mm 0;
+        page-break-inside: avoid;
+    }
+    
+    .anchor-title {
+        font-size: 11pt;
+        color: #d4af37;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 2mm;
+    }
+    
+    .illustration-frame {
+        background-color: #020204;
+        border: 1px solid #1c1d26;
+        padding: 4mm;
+        margin: 5mm 0;
+        text-align: center;
+        page-break-inside: avoid;
+    }
+    
+    .illustration-frame img {
+        max-width: 100%;
+        max-height: 85mm;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        object-fit: contain;
+    }
+    
+    .illustration-label {
+        font-size: 8.5pt;
+        color: #5b5d72;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 2.5mm;
+    }
+    
+    .quiz-container {
+        background-color: #0b0c15;
+        border: 1px solid #c5a880;
+        padding: 5mm;
+        margin: 6mm 0;
+        page-break-inside: avoid;
+    }
+    
+    .quiz-header {
+        font-weight: bold;
+        font-size: 9.5pt;
+        color: #d4af37;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 2mm;
+    }
+    
+    .quiz-title {
+        font-size: 11.5pt;
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 3mm;
+    }
+    
+    .quiz-option {
+        margin-bottom: 2mm;
+        font-size: 10.5pt;
+    }
+    
+    .option-tag {
+        color: #d4af37;
+        font-weight: bold;
+        margin-right: 2mm;
+    }
+    
+    .matrix-table {
+        display: table;
+        width: 100%;
+        margin: 8mm 0;
+        border-collapse: collapse;
+        page-break-inside: avoid;
+    }
+    
+    .matrix-row {
+        display: table-row;
+    }
+    
+    .matrix-row.head {
+        background-color: #0b0c13;
+        color: #d4af37;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 9pt;
+        letter-spacing: 1px;
+    }
+    
+    .matrix-cell {
+        display: table-cell;
+        padding: 3.5mm;
+        border-bottom: 1px solid #141622;
+        vertical-align: top;
+        font-size: 10.5pt;
+    }
+    
+    .cta-container {
+        background: linear-gradient(180deg, #090a10 0%, #030305 100%);
+        border: 1px solid #d4af37;
+        padding: 8mm;
+        margin-top: 12mm;
+        text-align: center;
+        page-break-inside: avoid;
+    }
+    
+    .cta-heading {
+        font-size: 14pt;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 3mm;
+    }
+    
+    .cta-link {
+        font-size: 14pt;
+        color: #d4af37;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin: 4mm 0;
+    }
+</style>
+</head>
+<body>
+
+<!-- Cover Page -->
+<div class="cover">
+    <div class="brand-tag">Silent Cue Academy</div>
+    <div class="cover-title">Five Masks</div>
+    <div class="cover-subtitle">Unmasking the Mind of the Poolroom Predator</div>
+    <div class="cover-line"></div>
+    
+    <div class="illustration-frame" style="border: none; background: transparent; margin: 5mm 0;">
+        <img src="http://googleusercontent.com/image_generation_content/18" alt="Five Masks Cover" style="max-height: 95mm; width: auto; border: 1px solid #d4af37;">
+        <div class="illustration-label">Official Portfolio Manual</div>
+    </div>
+    
+    <div class="cover-transmission">
+        Course Blueprint Handbook<br>
+        Billiards Psychological Strategy Masterclass
+    </div>
+</div>
+
+<!-- Introduction -->
+<h1>The Hidden Frequency of the Slate</h1>
+<div class="intro-quote">
+    "When you walk into a pool room, you are playing two games at the exact same time. You are playing the balls on the table, and you are playing the person holding the other stick."
+</div>
+
+<p>Most people only look at the balls. They calculate the geometric angles, steady their stance, and hope for a clean roll. But if you want to win consistently, you have to read the player. Competitors will actively try to trick you by wearing a mental "mask" explicitly designed to break your focus and throw you off your game.</p>
+<p>Below are the five types of players you will run into on the rail, the secrets behind how they try to trick you, and the street-smart common sense required to beat them every single time.</p>
+
+<h2>The Three Vectors of Control</h2>
+<p>First is the Slate Geometry: tracking clusters, pocket tolerances, speed thresholds, and landing zones. Second is the Opponent Metric: evaluating their pre-shot timing, grip tension, and breathing variations. Third is the Ego Omission: maintaining an unshakeable inner calm that hides your own intentions, completely starving your opponent of analytical feedback loops.</p>
+
+<!-- Profile 1 -->
+<h1>1. The Loud Hustler</h1>
+<div class="profile-block">
+    <div class="profile-meta">Mask Designation: The Distractor</div>
+    <p><strong>Characteristics:</strong> He never shuts up. He is constantly cracking jokes, telling long stories, and making himself the center of attention. He deliberately appears messy, erratic, and totally unfocused on the match variables.</p>
+    <p><strong>The Trick:</strong> He wants to flood your brain with noise. If your mind is busy listening to his comedy or tracking his movements, you run out of mental bandwidth to focus on precise cue lines. While acting like a clown, he is secretly mapping his next three runs.</p>
+    <p><strong>How to Beat Him:</strong> Slow down on purpose. Take a deep breath and step away from the table for a second. Break his fast rhythm and force the game to move strictly at your speed.</p>
+</div>
+
+<div class="story-block">
+    <div class="story-header">// Field Account // The Symphony of Noise</div>
+    <p>The cash was on the wire, the crowd was buzzing, and Marcus was performing a full stand-up comedy routine right in the middle of our high-stakes set. He was laughing like a maniac, leaning against the cue rack, and loudly telling the bartender a ridiculous story about a bad break from three weeks ago, looking so sloppy that the local guys were already snickering. My brain was completely frying under the noise, my focus splitting between his wild gestures and the difficult cut shot on the four-ball right in front of me. Just as I started to drop to the table out of pure irritation, I caught his gloved hand subtly adjusting his cue stick with the millimeter-perfect precision of a surgeon—the clown act was a calculated lie, a smokescreen designed to steal my analytical bandwidth while he quietly mapped out his final three moves. Don't let the noise derail your stroke; step into Challenge 1 at the back of this book to see if you can break his timing loop before he breaks you.</p>
+</div>
+
+<div class="pro-tip-box">
+    <div class="pro-tip-title">Street-Smart Tip: Rhythmic Anchor</div>
+    Chalk your cue stick slowly away from the table while looking at the floor. Forcing your eyes down filters out his wild movements, and the repetitive physical action of chalking anchors your brain back to its own baseline speed.
+</div>
+
+<div class="illustration-frame">
+    <img src="http://googleusercontent.com/image_generation_content/27" alt="The Loud Hustler">
+    <div class="illustration-label">Figure 1.1: Visual Analysis of Loud Hustler Distraction Matrix</div>
+</div>
+
+<!-- Profile 2 -->
+<h1>2. The Ghost</h1>
+<div class="profile-block">
+    <div class="profile-meta">Mask Designation: The Silent Statue</div>
+    <p><strong>Characteristics:</strong> The exact opposite of the loud guy. He sits completely away from the pool table in a corner booth and doesn't say a word. He won't make eye contact, he won't nod, and he barely moves a muscle until it's his turn to shoot.</p>
+    <p><strong>The Trick:</strong> He starves you of attention. Human beings naturally want feedback from their environment. When someone treats you like you don't even exist, your brain panics. You get stuck inside your own head, overthinking your stance, and inventing doubts that aren't there.</p>
+    <p><strong>How to Beat Him:</strong> Treat him like a piece of furniture. Pretend his booth is just an empty chair. Don't look over to see how he reacts to your safety play. Put one hundred percent of your focus purely into the physics of the layout.</p>
+</div>
+
+<div class="story-block">
+    <div class="story-header">// Field Account // The Vacuum of Feedback</div>
+    <p>I missed the pocket by a literal hair, the cue ball spun wildly out of control, and when I turned around expecting a sigh or a smirk, I froze because I was looking at a ghost. He was sitting completely away from the pool table in a dimly lit corner booth, wrapped in absolute, unnatural stillness under a single overhead spotlight. He didn't blink, he didn't nod, and he didn't offer a single shred of eye contact—he just stared right through me as if the entire room were entirely empty. The suffocating silence began to squeeze my chest, forcing my mind to turn inward, desperately overthinking my stance and hallucinating flaws in my own stroke that didn't even exist five minutes ago. I could feel my nerves starting to panic in the vacuum of data he was creating, realizing too late that his cold absence was an aggressive trap meant to make me destroy myself. Flip to Challenge 2 right now to discover how to turn his icy silence into his own absolute weakness.</p>
+</div>
+
+<div class="pro-tip-box">
+    <div class="pro-tip-title">Street-Smart Tip: The Inanimate Switch</div>
+    When playing a Ghost, mentally treat the match like a solo practice layout. If you catch yourself looking toward his chair for a reaction, immediately redirect your eyes to the physical leveling of the slate or the texture of the cushion rail.
+</div>
+
+<div class="illustration-frame">
+    <img src="http://googleusercontent.com/image_generation_content/29" alt="The Ghost Hustler">
+    <div class="illustration-label">Figure 1.2: The Ghost Observed Position and Silence Coefficient Parameters</div>
+</div>
+
+<!-- Profile 3 -->
+<h1>3. The Friendly Shark</h1>
+<div class="profile-block">
+    <div class="profile-meta">Mask Designation: The Nice Guy</div>
+    <p><strong>Characteristics:</strong> The friendliest person in the room. He enthusiastic taps his stick on the floor to praise your tough shots, smiles warmly, and immediately offers to put your drinks on his personal bar tab. He acts like your new best friend.</p>
+    <p><strong>The Trick:</strong> He wants you to feel totally safe. When you feel safe and comfortable, your competitive survival instinct naturally softens. You drop your guard, take lazy paths, and make careless mechanical mistakes because you think you're just playing a fun, casual game with a buddy.</p>
+    <p><strong>How to Beat Him:</strong> Remember that his niceness is an aggressive strategy. Be polite, say "no thank you" to the free drinks, and maintain an icy, disciplined professional distance until the final frame is closed.</p>
+</div>
+
+<div class="story-block">
+    <div class="story-header">// Field Account // The Velvet Trap</div>
+    <p>"Incredible table mapping, man, you really are a monster on the cloth!" he beamed, enthusiastically tapping his stick on the floor to praise my last defensive safety play. He flashed an honest, warm smile, flagged down the cocktail waitress, and insisted on putting a fresh round of premium drinks entirely on his personal bar tab while asking genuinely about my week. His deep hospitality felt so comforting that my heavy competitive tension began to instantly melt away, my shoulders dropping two inches as I relaxed into the casual, friendly rhythm of the night. But as he stepped up to take a shot, I noticed his eyes weren't casual at all—they were tracking my finger grip on the wrap with the sharp, cold analysis of a true predator waiting for my focus to go completely soft. His friendship was a beautifully crafted velvet cradle designed to make me drop my defensive guard until the table was left vulnerable. Head over to Challenge 3 to see if you can spot his poisoned compliments before your killer instinct completely dissolves.</p>
+</div>
+
+<div class="pro-tip-box">
+    <div class="pro-tip-title">Street-Smart Tip: Professional Omission</div>
+    Use short, polite two-word responses ("Thank you," "Nice shot") and immediately walk back to your baseline resting position. Never engage in conversational topics about your personal life, your work, or your mood during an active match.
+</div>
+
+<div class="illustration-frame">
+    <img src="http://googleusercontent.com/image_generation_content/30" alt="The Friendly Shark">
+    <div class="illustration-label">Figure 1.3: Weaponized Comfort Protocols and Fluid Disarmer Mechanics</div>
+</div>
+
+<!-- Profile 4 -->
+<h1 class="section-break">4. The Drifter</h1>
+<div class="profile-block">
+    <div class="profile-meta">Mask Designation: The Chameleon</div>
+    <p><strong>Characteristics:</strong> This guy shifts his entire persona based on the venue. In a rough bar dive, he slouches and uses a cheap house stick. In a luxury lounge, he acts corporate and fancy. He purposefully misses simple cut shots early in the evening to make himself look bad.</p>
+    <p><strong>The Trick:</strong> He hides his true skill tier. By blending perfectly into the background tapestry and pretending to be an uncoordinated casual traveling amateur, he keeps you from raising your guard or playing with a sharp competitive edge.</p>
+    <p><strong>How to Beat Him:</strong> Ignore the clothes, the warped stick, and the fake misses. Watch how his bridge hand locks to the cloth and how cleanly his stroke follows through. Real skill cannot hide its mechanical training under a slouch.</p>
+</div>
+
+<div class="story-block">
+    <div class="story-header">// Field Account // Shifting Lines</div>
+    <p>He shuffled into the local, gritty dive room wearing a heavily faded jacket, carrying a horribly warped house stick, and sporting a lazy slouch in his left shoulder that screamed 'clueless traveler.' During our first frame, he sloppily overcut a routine straight-in shot, shook his head in mock embarrassment, and laughed about having a bad night while the regulars completely ignored him. My guard dropped instantly, and I began taking reckless, lazy bank shots, totally confident that I was cruising toward an incredibly easy win against an uncoordinated amateur. Then, out of nowhere, he executed a complex safety, and even though he pretended it was an accidental fluke, I watched the absolute precision of his bridge hand lock down and his stroke follow through in a perfectly level line—the slouch and the cheap cue were an engineered lie. He had completely erased his identity to slip under my radar, waiting for the cash to hit the table before revealing his true elite skill. Navigate to Challenge 4 to learn how to read past a chameleon's act and spot real, hidden mechanics every single time.</p>
+</div>
+
+<div class="pro-tip-box">
+    <div class="pro-tip-title">Street-Smart Tip: Stroke Velocity Metric</div>
+    Do not categorize an opponent by whether the ball drops. Instead, track the consistency of their cue tip acceleration through the cue ball. Beginners fluctuate wildly; an elite Drifter in disguise will maintain a smooth, flat delivery line even when missing on purpose.
+</div>
+
+<!-- Profile 5 -->
+<h1>5. The Emotional Predator</h1>
+<div class="profile-block">
+    <div class="profile-meta">Mask Designation: The Mind Games Specialist</div>
+    <p><strong>Characteristics:</strong> He doesn't look at the pool table layout; he watches *you*. He hunts for the exact line where your logical alignment breaks under irritation. He will intentionally lock you behind safety positions, then drop soft, pitying remarks about how "unlucky" you are.</p>
+    <p><strong>The Trick:</strong> He wants to make you angry or impatient. Frustration elevates your heart rate and speeds up your internal clock, forcing you into rushed, aggressive, or desperate execution errors that leave the cloth completely wide open for his run-out.</p>
+    <p><strong>How to Beat Him:</strong> Give him absolute emotional silence. If he locks you down or sighs about your bad breaks, show zero physical or facial reaction. Take a slow, four-second breath, execute your exact pre-shot timing, and prioritize a safe roll.</p>
+</div>
+
+<div class="story-block">
+    <div class="story-header">// Field Account // Feeding on Flame</div>
+    <p>He didn't bother studying the layout of the balls on the cloth; his eyes were locked entirely on the side of my face, waiting for my jaw to tighten or my hands to sweat. After locking me deep behind a brutal cushion safety that left me with an impossible escape angle, he tilted his head, let out a soft sigh, and whispered with synthetic pity, "Man, what a terrible break, you've had nothing but miserable luck all night." The comment hit me like an electric shock; my face grew hot, my knuckles turned stark white on the wood, and an intense wave of pure frustration urged me to rush up and smash the ball out of sheer anger. Looking at him, I realized he was feeding directly on the flames of my impatience, intentionally driving my heart rate through the roof so my physical pre-shot routine would completely shatter. He was drawing a map using my own irritation, counting on me to hit a wild, desperate shot that would leave the table completely wide open for his victory. Turn to Challenge 5 to discover how to starve the predator of his fuel using absolute, unyielding emotional silence.</p>
+</div>
+
+<div class="pro-tip-box">
+    <div class="pro-tip-title">Street-Smart Tip: Four-Second Box Breathing</div>
+    If you feel your face get hot or your jaw tighten after a bad roll, do not approach your cue stick. Inhale for 4 seconds, hold for 4 seconds, exhale for 4 seconds, and hold for 4 seconds. This resets your biological baseline and starves him of the physical tells he is hunting for.
+</div>
+
+<!-- Auditory Anchor -->
+<h1>The Strategic Blueprint</h1>
+<div class="anchor-block">
+    <div class="anchor-title">The Auditory Anchor System</div>
+    <p><strong>Operational Master Note:</strong> The companion ambient soundtrack for this lesson is engineered specifically to be listened to through headphones while you are actively practicing or competing in the pool hall. It serves as a real-time mental anchor, tuning out the distracting frequencies of the room and keeping your mind locked into the precise indicators you need to look for. Use it to build an unshakeable psychological baseline while walking the rail.</p>
+</div>
+
+<!-- Back-to-Back Challenges -->
+<h1 class="section-break">Interactive Table Challenges</h1>
+<p>Analyze the game situations below and select your option path. <em>(Note: Verification metrics and answer paths are held strictly at the end of the manual.)</em></p>
+
+<div class="quiz-container">
+    <div class="quiz-header">Challenge 1 // The Loud Hustler Scenario</div>
+    <div class="quiz-title">You are evaluating a tough, multi-ball run-out trajectory. Your opponent is standing directly in your pocket line, loudly telling the bartender a joke, laughing, and moving around. What is the move?</div>
+    <div class="quiz-options">
+        <div class="quiz-option"><span class="option-tag">A)</span> Push down into your stance immediately and fire a hard shot to prove his noise isn't getting to you.</div>
+        <div class="quiz-option"><span class="option-tag">B)</span> Step backward away from the cue rail, take a slow breath, wait out his movement loop, and drop into your stance only when the table rhythm is yours.</div>
+        <div class="quiz-option"><span class="option-tag">C)</span> Loudly crack a joke back at him so the surrounding crowd shifts attention to your side.</div>
+    </div>
+</div>
+
+<div class="quiz-container">
+    <div class="quiz-header">Challenge 2 // The Ghost Scenario</div>
+    <div class="quiz-title">You just missed a close cut shot by a hair. Seeking baseline feedback, you look over at your opponent, but he sits completely away from the table like a stone statue—no eye contact, no blink. The heavy silence is testing your nerves. How do you respond?</div>
+    <div class="quiz-options">
+        <div class="quiz-option"><span class="option-tag">A)</span> Ask him a casual question about his cue stick wrap to break the awkward silence.</div>
+        <div class="quiz-option"><span class="option-tag">B)</span> Stare back at him intensely while he steps up to shoot to try and rattle his focus.</div>
+        <div class="quiz-option"><span class="option-tag">C)</span> Look away entirely, treat him like an empty piece of furniture, and focus 100% of your brain purely on ball lines and physics.</div>
+    </div>
+</div>
+
+<div class="quiz-container">
+    <div class="quiz-header">Challenge 3 // The Friendly Shark Scenario</div>
+    <div class="quiz-title">You trap your opponent behind a cluster with a perfect safety shot. He taps his stick down in admiration, smiles, and says, "Incredible table mapping! Let me buy you a fresh round from the bar while I look at this." What is your choice?</div>
+    <div class="quiz-options">
+        <div class="quiz-option"><span class="option-tag">A)</span> Accept the drink with a smile and relax your posture because he is being a great sport.</div>
+        <div class="quiz-option"><span class="option-tag">B)</span> Politely decline the fluid option, keep your verbal answers short, and keep an icy, disciplined professional barrier up.</div>
+        <div class="quiz-option"><span class="option-tag">C)</span> Snap back at him aggressively and tell him to keep his drinks to himself.</div>
+    </div>
+</div>
+
+<div class="quiz-container">
+    <div class="quiz-header">Challenge 4 // The Drifter Scenario</div>
+    <div class="quiz-title">You are paired with a competitor using a warped bar stick, a major slouch, and old clothes. He misses an easy cut shot early, but you notice his cue ball still draws back perfectly and cleanly stops exactly where it needs to for his next safe turn. How do you assess him?</div>
+    <div class="quiz-options">
+        <div class="quiz-option"><span class="option-tag">A)</span> Assume he is entirely lucky, drop your focus baseline, and begin attempting wild power bank shots.</div>
+        <div class="quiz-option"><span class="option-tag">B)</span> Ignore the act, the clothes, and the missed ball. Look strictly at his locking bridge hand, his straight follow-through, and realize he is hiding his skill tier.</div>
+        <div class="quiz-option"><span class="option-tag">C)</span> Offer him tips on how to align his feet better to see if he accepts the amateur feedback.</div>
+    </div>
+</div>
+
+<div class="quiz-container">
+    <div class="quiz-header">Challenge 5 // The Emotional Predator Scenario</div>
+    <div class="quiz-title">The opponent locks you deep behind the 8-ball. As you approach the rail to study the multi-cushion bank angle, he shakes his head and whispers, "Wow, what a terrible break. You've had nothing but bad luck tonight." You feel your jaw clench. What is the play?</div>
+    <div class="quiz-options">
+        <div class="quiz-option"><span class="option-tag">A)</span> Fire the cue ball into the cluster as hard as you can out of sheer anger to blast things open.</div>
+        <div class="quiz-option"><span class="option-tag">B)</span> Show absolutely zero physical or facial reaction. Take a slow, deep four-second breath, execute your standard pre-shot pacing routine, and prioritize a safe roll.</div>
+        <div class="quiz-option"><span class="option-tag">C)</span> Roll your eyes back at him and tell him that luck has nothing to do with high-level games.</div>
+    </div>
+</div>
+
+<!-- Solution Matrix -->
+<h1>The Solution Matrix</h1>
+<p>Compare your scenario paths with the verified operational training keys of the Silent Cue Academy below:</p>
+
+<div class="matrix-table">
+    <div class="matrix-row head">
+        <div class="matrix-cell" style="width: 25%;">Target Mask</div>
+        <div class="matrix-cell" style="width: 20%;">Winning Path</div>
+        <div class="matrix-cell">Tactical Common Sense Logic</div>
+    </div>
+    <div class="matrix-row">
+        <div class="matrix-cell"><strong>1. Loud Hustler</strong></div>
+        <div class="matrix-cell" style="color:#d4af37; font-weight:bold;">Option B</div>
+        <div class="matrix-cell">Introducing a physical delay breaks his speed timing loop. You take back control of the table's atmospheric rhythm.</div>
+    </div>
+    <div class="matrix-row">
+        <div class="matrix-cell"><strong>2. The Ghost</strong></div>
+        <div class="matrix-cell" style="color:#d4af37; font-weight:bold;">Option C</div>
+        <div class="matrix-cell">Silence is a weapon only if you expect an interaction. Treating him like an empty chair starves his mask of data collection power.</div>
+    </div>
+    <div class="matrix-row">
+        <div class="matrix-cell"><strong>3. Friendly Shark</strong></div>
+        <div class="matrix-cell" style="color:#d4af37; font-weight:bold;">Option B</div>
+        <div class="matrix-cell">Calculated warmth is an aggressive action intended to drop your killer instinct. Keeping a disciplined barrier up leaves you immune.</div>
+    </div>
+    <div class="matrix-row">
+        <div class="matrix-cell"><strong>4. The Drifter</strong></div>
+        <div class="matrix-cell" style="color:#d4af37; font-weight:bold;">Option B</div>
+        <div class="matrix-cell">An elite player can easily fake a missed pocket, but they cannot hide smooth, deeply trained muscle memory and physical mechanics.</div>
+    </div>
+    <div class="matrix-row">
+        <div class="matrix-cell"><strong>5. The Predator</strong></div>
+        <div class="matrix-cell" style="color:#d4af37; font-weight:bold;">Option B</div>
+        <div class="matrix-cell">Impatience and emotional haste are his ammunition. Responding with total physical silence and controlled breathing completely stops his momentum.</div>
+    </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-container">
+    <div class="cta-heading">Test Your Real-Time Skills Inside the Simulator</div>
+    <p>This master guide is just the first layer of tactical training. To practice these situational challenges inside our interactive video training engine, review ball trajectories, and unlock premium focus audio loops, connect directly to our academy platform:</p>
+    <div class="cta-link">WWW.SILENTCUEACADEMY.COM</div>
+</div>
+
+<!-- Cookie Crumbs Section -->
+<div class="crumb-section">
+    <p style="font-family:monospace; font-size:9pt; color:#8a7355; margin-bottom: 3mm;">// SILENT CUE ACADEMY RELEASES // CURRENT CATALOG matrix //</p>
+    <p><strong>The Golden Zone:</strong> A premium structural manual breaking down advanced cue spin formulas, micro-friction parameters, and leveling compensations for uneven slates.</p>
+</div>
+
+</body>
+<script src="../js/auth-gate.js"></script>
+<script>requireAccess();</script>
+</html>

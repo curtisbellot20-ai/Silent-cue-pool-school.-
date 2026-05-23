@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Masks — Course Access | Silent Cue</title>
+  <meta name="description" content="Access the Five Masks lesson files. Read online or download the PDF." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .access__main {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-h) + 40px) clamp(20px, 5vw, 60px) 80px;
+    }
+    .access__wrap {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .access__eyebrow {
+      font-size: 0.52rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+      margin-bottom: 20px;
+    }
+    .access__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300;
+      color: var(--ivory);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .access__subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.2vw, 1.5rem);
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .access__rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, rgba(201,168,76,0.2), transparent);
+      margin-bottom: 32px;
+    }
+    .access__desc {
+      font-size: 0.9rem;
+      color: var(--smoke-lt);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 56px;
+    }
+    .access__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 560px) {
+      .access__cards { grid-template-columns: 1fr; }
+    }
+    .access__card {
+      border: 1px solid rgba(201,168,76,0.1);
+      background: rgba(201,168,76,0.018);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .access__card:hover {
+      border-color: rgba(201,168,76,0.25);
+      background: rgba(201,168,76,0.035);
+    }
+    .access__card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      opacity: 0.4;
+    }
+    .access__card-type {
+      font-size: 0.5rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.55;
+    }
+    .access__card-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ivory);
+      line-height: 1.2;
+    }
+    .access__card-desc {
+      font-size: 0.8rem;
+      color: var(--smoke-lt);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .access__card-includes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .access__card-includes li {
+      font-size: 0.75rem;
+      color: var(--ivory-dim);
+      padding-left: 14px;
+      position: relative;
+    }
+    .access__card-includes li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: rgba(201,168,76,0.3);
+      font-size: 0.65rem;
+    }
+    .access__btn {
+      display: inline-block;
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+      cursor: pointer;
+    }
+    .access__btn:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: var(--gold);
+      color: var(--ivory);
+    }
+    .access__btn--download {
+      background: rgba(201,168,76,0.06);
+    }
+    .access__back {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--smoke-lt);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .access__back:hover { color: var(--gold); }
+    .access__includes-note {
+      font-size: 0.72rem;
+      color: var(--smoke-lt);
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <span class="nav__logo-mark">&#9679;</span>
+      <a href="../index.html" class="nav__logo-text">Silent Cue</a>
+    </div>
+    <ul class="nav__links">
+      <li><a href="../index.html#archive" class="nav__link">Archive</a></li>
+      <li><a href="../index.html#products" class="nav__link">The Files</a></li>
+      <li><a href="../index.html#enter" class="nav__link nav__link--cta">Enter</a></li>
+    </ul>
+  </nav>
+
+  <main class="access__main">
+    <div class="access__wrap">
+
+      <p class="access__eyebrow">Archive Entry 01 &nbsp;&#9679;&nbsp; Course Access</p>
+      <h1 class="access__title">Five Masks</h1>
+      <p class="access__subtitle">Unmasking the Mind of the Poolroom Predator</p>
+      <div class="access__rule"></div>
+      <p class="access__desc">Five psychological profiles. Five counter-strategies. An auditory anchor soundtrack and interactive scenario challenges built into every section. Choose how you want to study.</p>
+
+      <div class="access__cards">
+
+        <div class="access__card">
+          <p class="access__card-type">Read Online</p>
+          <h2 class="access__card-title">Interactive Textbook</h2>
+          <p class="access__card-desc">Full course formatted for screen reading. Profiles, field accounts, street-smart tips, and the complete solution matrix.</p>
+          <ul class="access__card-includes">
+            <li>5 Mask Profiles</li>
+            <li>5 Field Accounts</li>
+            <li>Street-Smart Tips</li>
+            <li>Interactive Challenges</li>
+            <li>Solution Matrix</li>
+          </ul>
+          <a href="five-masks-textbook.html" class="access__btn">Read the Course &rarr;</a>
+        </div>
+
+        <div class="access__card">
+          <p class="access__card-type">Download</p>
+          <h2 class="access__card-title">PDF Edition</h2>
+          <p class="access__card-desc">Downloadable PDF for offline study, printing, or saving to your device. Same complete content, formatted for A4.</p>
+          <ul class="access__card-includes">
+            <li>Full Course PDF</li>
+            <li>Print Ready</li>
+            <li>Offline Access</li>
+            <li>A4 Format</li>
+            <li>Permanent Copy</li>
+          </ul>
+          <a href="../downloads/five-masks.pdf" download="Five-Masks-Silent-Cue.pdf" class="access__btn access__btn--download">Download PDF &rarr;</a>
+        </div>
+
+      </div>
+
+      <a href="../index.html#products" class="access__back">&larr; Back to the Archive</a>
+
+    </div>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/auth-gate.js"></script>
+  <script>requireAccess();</script>
+</body>
+</html>
