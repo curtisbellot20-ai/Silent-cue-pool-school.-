@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pool Lesson Simulator — Silent Cue</title>
-  <meta name="description" content="Interactive pool lesson simulator. Learn position play, the Golden Zone, Dead Zone, and the ghost ball aiming method." />
+  <meta name="description" content="Interactive pool lesson simulator. Learn position play, the Golden Zone (maximum shot options), the Dead Zone, and the ghost ball aiming method." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -382,12 +382,12 @@ const LESSONS = [
   {
     number: 'Lesson 01',
     name: 'The Golden Zone',
-    desc: 'The cue ball is trapped near the rail — the Dead Zone. Your task is to escape it and land in the center of the table after each shot.',
+    desc: 'The Golden Zone is the area that gives you the most possible shots. From here, you can reach any ball on the table. The Dead Zone — near the rails — cuts your angles and traps you.',
     steps: [
-      'Study the table. The cue ball is trapped near the rail — this is the Dead Zone.',
+      'Study the table. The cue ball is near the rail — the Dead Zone. From here, your angles are cut and your options are few.',
       'Click the cue ball and drag to aim at the yellow ball.',
-      'Notice the Golden Zone highlighted in the center of the table. That is your target area.',
-      'Shoot. After the shot, observe how far your cue ball drifted from the ideal position.'
+      'The Golden Zone is highlighted. It is not just the center — it is the area where you have the most possible next shots. More angles. More options.',
+      'Shoot. After the shot, see where your cue ball lands. Did you give yourself options, or did you trade this shot for the next one?'
     ],
     showGoldenZone: true,
     showDeadZone: true,
@@ -396,7 +396,7 @@ const LESSONS = [
   {
     number: 'Lesson 02',
     name: 'The Dead Zone',
-    desc: 'Two paths are available. The obvious shot leaves you in the Dead Zone. The smart shot routes the cue ball to the Golden Zone. Choose wisely.',
+    desc: 'Two paths are available. The obvious shot sinks the ball but leaves you near the rail — fewer angles, fewer options. The smart shot also sinks the ball and lands the cue in the Golden Zone, where the most possible shots are waiting.',
     steps: [
       'Two paths are highlighted. The red path is the obvious shot — easy, but reckless.',
       'The gold path requires more thought but leaves the cue ball in position.',
@@ -636,9 +636,9 @@ function evalCueBallPosition() {
   const inDead   = (cueBall.x < cx + deadMargin || cueBall.x > cx + cw - deadMargin ||
                     cueBall.y < cy + deadMargin || cueBall.y > cy + ch - deadMargin);
 
-  if (inGolden)      showFeedback('Good position. You found the Golden Zone.');
-  else if (inDead)   showFeedback('Dead Zone. Difficult position on your next shot.');
-  else               showFeedback('Neutral position. Work toward the center of the table.');
+  if (inGolden)      showFeedback('Golden Zone. Maximum options on your next shot.');
+  else if (inDead)   showFeedback('Dead Zone. Your angles are cut. Fewer shots available.');
+  else               showFeedback('Workable. Push toward the Golden Zone for more options.');
 }
 
 // ── Physics ───────────────────────────────────────────────────
