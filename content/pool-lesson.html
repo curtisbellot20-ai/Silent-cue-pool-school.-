@@ -523,6 +523,7 @@ function initLesson(index) {
   pullDist       = 0;
   aimAngle       = Math.PI;
   shooting       = false;
+  contactPairs.clear();
   readTarget     = null;
   ghostBallPos   = null;
   ghostDrillTarget = null;
@@ -651,31 +652,31 @@ function dist(a, b) {
   return Math.sqrt(dx * dx + dy * dy);
 }
 
-function resolveCollision(a, b) {
+function separateOverlap(a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const d  = Math.sqrt(dx * dx + dy * dy);
+  if (d === 0 || d >= a.radius + b.radius) return;
+  const nx = dx / d, ny = dy / d;
+  const push = (a.radius + b.radius - d) * 0.5;
+  a.x -= nx * push;  a.y -= ny * push;
+  b.x += nx * push;  b.y += ny * push;
+}
+
+function exchangeVelocity(a, b) {
   const dx = b.x - a.x, dy = b.y - a.y;
   const d  = Math.sqrt(dx * dx + dy * dy);
   if (d === 0) return;
   const nx = dx / d, ny = dy / d;
-
-  // Separate overlapping balls
-  const overlap = (a.radius + b.radius) - d;
-  if (overlap > 0) {
-    a.x -= nx * overlap / 2;
-    a.y -= ny * overlap / 2;
-    b.x += nx * overlap / 2;
-    b.y += ny * overlap / 2;
-  }
-
-  // 1D elastic collision along normal
   const dvx = a.vx - b.vx, dvy = a.vy - b.vy;
-  const dot  = dvx * nx + dvy * ny;
-  if (dot >= 0) return; // moving apart
-
-  a.vx -= dot * nx;
-  a.vy -= dot * ny;
-  b.vx += dot * nx;
-  b.vy += dot * ny;
+  const dot = dvx * nx + dvy * ny;
+  if (dot >= 0) return; // already separating
+  // Equal-mass elastic: full momentum transfer along the normal
+  a.vx -= dot * nx;  a.vy -= dot * ny;
+  b.vx += dot * nx;  b.vy += dot * ny;
 }
+
+// Track which pairs are currently in contact so velocity exchange fires exactly once
+const contactPairs = new Set();
 
 function substep() {
   const cx = PLAY_X, cy = PLAY_Y, cw = PLAY_W, ch = PLAY_H;
@@ -687,56 +688,48 @@ function substep() {
     ball.x += ball.vx * dt;
     ball.y += ball.vy * dt;
 
-    // Speed-based friction (same result each full frame regardless of substeps)
-    const speed = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);
-    if (speed > 0) {
-      const newSpeed = speed * Math.pow(FRICTION, dt);
-      const ratio = newSpeed / speed;
+    // Speed-based friction — consistent regardless of substep count
+    const spd = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);
+    if (spd > 0) {
+      const ratio = Math.pow(FRICTION, dt);
       ball.vx *= ratio;
       ball.vy *= ratio;
     }
 
-    // Hard stop — avoids long slow creep
+    // Hard stop — eliminates long slow creep
     if (Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy) < 0.18) {
-      ball.vx = 0;
-      ball.vy = 0;
+      ball.vx = 0;  ball.vy = 0;
     }
 
-    // Rail bounces — 0.78 restitution, realistic cushion feel
-    if (ball.x - ball.radius < cx) {
-      ball.x = cx + ball.radius;
-      ball.vx = Math.abs(ball.vx) * 0.78;
-    }
-    if (ball.x + ball.radius > cx + cw) {
-      ball.x = cx + cw - ball.radius;
-      ball.vx = -Math.abs(ball.vx) * 0.78;
-    }
-    if (ball.y - ball.radius < cy) {
-      ball.y = cy + ball.radius;
-      ball.vy = Math.abs(ball.vy) * 0.78;
-    }
-    if (ball.y + ball.radius > cy + ch) {
-      ball.y = cy + ch - ball.radius;
-      ball.vy = -Math.abs(ball.vy) * 0.78;
-    }
+    // Rail bounces
+    if (ball.x - ball.radius < cx) { ball.x = cx + ball.radius; ball.vx =  Math.abs(ball.vx) * 0.78; }
+    if (ball.x + ball.radius > cx + cw) { ball.x = cx + cw - ball.radius; ball.vx = -Math.abs(ball.vx) * 0.78; }
+    if (ball.y - ball.radius < cy) { ball.y = cy + ball.radius; ball.vy =  Math.abs(ball.vy) * 0.78; }
+    if (ball.y + ball.radius > cy + ch) { ball.y = cy + ch - ball.radius; ball.vy = -Math.abs(ball.vy) * 0.78; }
 
     // Pocket detection
     for (const p of POCKETS) {
       if (dist(ball, p) < POCKET_R) {
-        ball.sunk = true;
-        ball.vx = 0;
-        ball.vy = 0;
+        ball.sunk = true;  ball.vx = 0;  ball.vy = 0;
         break;
       }
     }
   }
 
-  // Ball-ball collisions
+  // Ball-ball: position correction every substep, velocity only on first contact
   for (let i = 0; i < balls.length; i++) {
     for (let j = i + 1; j < balls.length; j++) {
       if (balls[i].sunk || balls[j].sunk) continue;
-      if (dist(balls[i], balls[j]) < balls[i].radius + balls[j].radius) {
-        resolveCollision(balls[i], balls[j]);
+      const key = `${i}:${j}`;
+      const touching = dist(balls[i], balls[j]) < balls[i].radius + balls[j].radius;
+      if (touching) {
+        separateOverlap(balls[i], balls[j]);
+        if (!contactPairs.has(key)) {
+          exchangeVelocity(balls[i], balls[j]);
+          contactPairs.add(key);
+        }
+      } else {
+        contactPairs.delete(key); // reset when balls fully separate
       }
     }
   }
