@@ -458,10 +458,12 @@ canvas.height = TABLE_H;
 
 // ── Physics Constants ─────────────────────────────────────────
 const BALL_R    = 12;
-const FRICTION  = 0.985;
-const MAX_DRAG  = 150;
-const MAX_VEL   = 18;
+const FRICTION  = 0.983;
+const MAX_PULL  = 100;   // px of cue pull-back for max power
+const MAX_VEL   = 16;
 const POCKET_R  = 18;
+const CUE_GAP   = BALL_R + 8;  // gap between cue tip and ball at rest
+const SUBSTEPS  = 3;
 
 // 6 pocket positions
 const POCKETS = [
@@ -480,10 +482,12 @@ let balls         = [];
 let cueBall       = null;
 
 // Interaction
-let aiming        = false;
-let aimStart      = null;  // {x,y} canvas coords where drag started
-let aimEnd        = null;
-let shooting      = false; // balls in motion
+let aimAngle      = Math.PI;  // radians: angle from cue ball TO shot target
+let isPulling     = false;
+let pullOriginX   = 0;
+let pullOriginY   = 0;
+let pullDist      = 0;       // 0..MAX_PULL
+let shooting      = false;   // balls in motion
 let readTarget    = null;  // lesson 3: clicked ball
 
 // Ghost drill
@@ -515,9 +519,9 @@ function makeBall(x, y, color, number, isGhost) {
 function initLesson(index) {
   currentLesson  = index;
   currentStep    = 0;
-  aiming         = false;
-  aimStart       = null;
-  aimEnd         = null;
+  isPulling      = false;
+  pullDist       = 0;
+  aimAngle       = Math.PI;
   shooting       = false;
   readTarget     = null;
   ghostBallPos   = null;
@@ -673,42 +677,47 @@ function resolveCollision(a, b) {
   b.vy += dot * ny;
 }
 
-function step() {
-  let anyMoving = false;
+function substep() {
   const cx = PLAY_X, cy = PLAY_Y, cw = PLAY_W, ch = PLAY_H;
+  const dt = 1 / SUBSTEPS;
 
   for (const ball of balls) {
     if (ball.sunk) continue;
 
-    ball.x += ball.vx;
-    ball.y += ball.vy;
+    ball.x += ball.vx * dt;
+    ball.y += ball.vy * dt;
 
-    // Friction
-    ball.vx *= FRICTION;
-    ball.vy *= FRICTION;
+    // Speed-based friction (same result each full frame regardless of substeps)
+    const speed = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy);
+    if (speed > 0) {
+      const newSpeed = speed * Math.pow(FRICTION, dt);
+      const ratio = newSpeed / speed;
+      ball.vx *= ratio;
+      ball.vy *= ratio;
+    }
 
-    // Stop tiny velocities
-    if (Math.abs(ball.vx) < 0.05) ball.vx = 0;
-    if (Math.abs(ball.vy) < 0.05) ball.vy = 0;
+    // Hard stop — avoids long slow creep
+    if (Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy) < 0.18) {
+      ball.vx = 0;
+      ball.vy = 0;
+    }
 
-    if (Math.abs(ball.vx) > 0 || Math.abs(ball.vy) > 0) anyMoving = true;
-
-    // Rail bounces
+    // Rail bounces — 0.78 restitution, realistic cushion feel
     if (ball.x - ball.radius < cx) {
       ball.x = cx + ball.radius;
-      ball.vx = Math.abs(ball.vx) * 0.82;
+      ball.vx = Math.abs(ball.vx) * 0.78;
     }
     if (ball.x + ball.radius > cx + cw) {
       ball.x = cx + cw - ball.radius;
-      ball.vx = -Math.abs(ball.vx) * 0.82;
+      ball.vx = -Math.abs(ball.vx) * 0.78;
     }
     if (ball.y - ball.radius < cy) {
       ball.y = cy + ball.radius;
-      ball.vy = Math.abs(ball.vy) * 0.82;
+      ball.vy = Math.abs(ball.vy) * 0.78;
     }
     if (ball.y + ball.radius > cy + ch) {
       ball.y = cy + ch - ball.radius;
-      ball.vy = -Math.abs(ball.vy) * 0.82;
+      ball.vy = -Math.abs(ball.vy) * 0.78;
     }
 
     // Pocket detection
@@ -731,7 +740,15 @@ function step() {
       }
     }
   }
+}
 
+function step() {
+  for (let s = 0; s < SUBSTEPS; s++) substep();
+
+  let anyMoving = false;
+  for (const ball of balls) {
+    if (!ball.sunk && (ball.vx !== 0 || ball.vy !== 0)) anyMoving = true;
+  }
   return anyMoving;
 }
 
@@ -1063,80 +1080,77 @@ function drawReadModeOverlay(ball) {
 }
 
 function drawAimLine() {
-  if (!aiming || !aimStart || !aimEnd || !cueBall || cueBall.sunk) return;
+  if (shooting || !cueBall || cueBall.sunk) return;
 
-  const cb = cueBall;
-  const dx = aimStart.x - aimEnd.x;
-  const dy = aimStart.y - aimEnd.y;
-  const dist = Math.sqrt(dx * dx + dy * dy);
-  if (dist < 4) return;
+  const cb  = cueBall;
+  const cosA = Math.cos(aimAngle);
+  const sinA = Math.sin(aimAngle);
 
-  const nx = dx / dist, ny = dy / dist;
+  // Cue stick — pulls back by pullDist when user is dragging
+  const tipDist = CUE_GAP + pullDist;
+  const tipX  = cb.x - cosA * tipDist;
+  const tipY  = cb.y - sinA * tipDist;
+  const buttX = tipX - cosA * 140;
+  const buttY = tipY - sinA * 140;
 
-  // Cue stick
-  const stickStart = { x: cb.x - nx * (BALL_R + 4), y: cb.y - ny * (BALL_R + 4) };
-  const stickEnd   = { x: cb.x - nx * (BALL_R + 4 + 120), y: cb.y - ny * (BALL_R + 4 + 120) };
-
-  const stickGrad = ctx.createLinearGradient(stickStart.x, stickStart.y, stickEnd.x, stickEnd.y);
-  stickGrad.addColorStop(0, 'rgba(205,170,100,0.9)');
-  stickGrad.addColorStop(0.15, 'rgba(180,140,80,0.85)');
-  stickGrad.addColorStop(1, 'rgba(120,90,50,0.3)');
+  const stickGrad = ctx.createLinearGradient(tipX, tipY, buttX, buttY);
+  stickGrad.addColorStop(0,    'rgba(220,185,110,0.95)');
+  stickGrad.addColorStop(0.25, 'rgba(175,135,70,0.88)');
+  stickGrad.addColorStop(1,    'rgba(100,70,35,0.18)');
 
   ctx.beginPath();
-  ctx.moveTo(stickStart.x, stickStart.y);
-  ctx.lineTo(stickEnd.x, stickEnd.y);
+  ctx.moveTo(tipX, tipY);
+  ctx.lineTo(buttX, buttY);
   ctx.strokeStyle = stickGrad;
-  ctx.lineWidth = 4;
+  ctx.lineWidth = isPulling ? 5 : 4;
   ctx.lineCap = 'round';
   ctx.setLineDash([]);
   ctx.stroke();
   ctx.lineCap = 'butt';
 
-  // Cue tip
+  // Cue tip chalk dot
   ctx.beginPath();
-  ctx.arc(stickStart.x, stickStart.y, 2.5, 0, Math.PI * 2);
-  ctx.fillStyle = '#6ab5ff';
+  ctx.arc(tipX, tipY, 2.5, 0, Math.PI * 2);
+  ctx.fillStyle = '#7acfff';
   ctx.fill();
 
-  // Aim line (dotted gold, forward direction)
-  const lineEnd = { x: cb.x + nx * 200, y: cb.y + ny * 200 };
+  // Aim guide line (forward, gold dotted) — brighter when pulled
+  const alpha = isPulling ? 0.25 + (pullDist / MAX_PULL) * 0.5 : 0.3;
   ctx.beginPath();
-  ctx.moveTo(cb.x + nx * (BALL_R + 2), cb.y + ny * (BALL_R + 2));
-  ctx.lineTo(lineEnd.x, lineEnd.y);
-  ctx.strokeStyle = 'rgba(201,168,76,0.5)';
-  ctx.lineWidth = 1.5;
-  ctx.setLineDash([5, 5]);
+  ctx.moveTo(cb.x + cosA * (BALL_R + 2), cb.y + sinA * (BALL_R + 2));
+  ctx.lineTo(cb.x + cosA * 240, cb.y + sinA * 240);
+  ctx.strokeStyle = `rgba(201,168,76,${alpha})`;
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 6]);
   ctx.stroke();
   ctx.setLineDash([]);
 
-  // Ghost ball along aim line for lessons with ghosting
+  // Ghost ball contact for lessons that use it
   const L = LESSONS[currentLesson];
   if (L.showGhost && currentLesson !== 3) {
-    // Find first object ball in path
-    const ghost = findGhostContact(cb, nx, ny);
+    const ghost = findGhostContact(cb, cosA, sinA);
     if (ghost) {
-      // Ghost ball at contact point
       ctx.beginPath();
       ctx.arc(ghost.gx, ghost.gy, BALL_R, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
       ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.strokeStyle = 'rgba(255,255,255,0.42)';
       ctx.lineWidth = 1.5;
       ctx.setLineDash([3, 3]);
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Post-contact cue ball path
+      // Post-contact cue ball deflection path
       const postDx = ghost.gx - ghost.target.x;
       const postDy = ghost.gy - ghost.target.y;
       const postD  = Math.sqrt(postDx * postDx + postDy * postDy);
       if (postD > 0) {
         const pnx = postDx / postD, pny = postDy / postD;
-        const postEnd = { x: ghost.gx + pnx * 100, y: ghost.gy + pny * 100 };
+        const postEnd = { x: ghost.gx + pnx * 110, y: ghost.gy + pny * 110 };
         ctx.beginPath();
         ctx.moveTo(ghost.gx, ghost.gy);
         ctx.lineTo(postEnd.x, postEnd.y);
-        ctx.strokeStyle = 'rgba(201,168,76,0.35)';
+        ctx.strokeStyle = 'rgba(201,168,76,0.32)';
         ctx.lineWidth = 1;
         ctx.setLineDash([4, 5]);
         ctx.stroke();
@@ -1237,9 +1251,21 @@ function smartPathHit(pos) {
 canvas.addEventListener('mousedown', onDown);
 canvas.addEventListener('mousemove', onMove);
 canvas.addEventListener('mouseup',   onUp);
+canvas.addEventListener('mouseleave', onUp);
 canvas.addEventListener('touchstart', onDown, { passive: false });
 canvas.addEventListener('touchmove',  onMove, { passive: false });
 canvas.addEventListener('touchend',   onUp,   { passive: false });
+
+// Always track mouse to orbit the cue around the cue ball
+canvas.addEventListener('mousemove', (e) => {
+  if (shooting || isPulling || !cueBall || cueBall.sunk) return;
+  const pos = canvasPos(e);
+  const dx = pos.x - cueBall.x, dy = pos.y - cueBall.y;
+  if (dx * dx + dy * dy > 4) {
+    aimAngle = Math.atan2(dy, dx);
+    render();
+  }
+}, { passive: true });
 
 function onDown(e) {
   e.preventDefault();
@@ -1265,8 +1291,7 @@ function onDown(e) {
     smartPathChosen = true;
     const cb = cueBall;
     const goldAngle = Math.atan2(-(PLAY_Y + PLAY_H * 0.5 - cb.y), (PLAY_X + PLAY_W * 0.55 - cb.x));
-    const power = 0.65;
-    const speed = power * MAX_VEL;
+    const speed = 0.65 * MAX_VEL;
     cb.vx = Math.cos(goldAngle) * speed;
     cb.vy = Math.sin(goldAngle) * speed;
     shooting = true;
@@ -1296,66 +1321,53 @@ function onDown(e) {
       render();
       return;
     }
-    // After ghost revealed, can aim cue ball normally
-    if (ghostBallPos) {
-      const hit2 = ballAt(pos);
-      if (hit2 === cueBall) {
-        aiming = true;
-        aimStart = { ...pos };
-        aimEnd   = { ...pos };
-      }
-    }
-    return;
+    // After ghost revealed, pulling starts normally below
   }
 
-  // Normal cue ball aim
-  const hit = ballAt(pos);
-  if (hit === cueBall) {
-    aiming = true;
-    aimStart = { ...pos };
-    aimEnd   = { ...pos };
-  }
+  // Start pull — click anywhere on canvas begins a pull-back
+  if (!cueBall || cueBall.sunk) return;
+  isPulling = true;
+  pullOriginX = pos.x;
+  pullOriginY = pos.y;
+  pullDist = 0;
+  setPower(0);
 }
 
 function onMove(e) {
   e.preventDefault();
-  if (!aiming) return;
+  if (shooting || !isPulling) return;
   const pos = canvasPos(e);
-  aimEnd = pos;
 
-  const dx = aimStart.x - aimEnd.x;
-  const dy = aimStart.y - aimEnd.y;
-  const d  = Math.min(Math.sqrt(dx * dx + dy * dy), MAX_DRAG);
-  const pct = (d / MAX_DRAG) * 100;
-  setPower(pct);
+  // Pull distance = how far user has moved in the direction OPPOSITE to aimAngle
+  const backX = -Math.cos(aimAngle);
+  const backY = -Math.sin(aimAngle);
+  const dragX = pos.x - pullOriginX;
+  const dragY = pos.y - pullOriginY;
+  const raw = dragX * backX + dragY * backY;  // dot product: positive = pulling back
+  pullDist = Math.max(0, Math.min(raw, MAX_PULL));
+  setPower((pullDist / MAX_PULL) * 100);
   render();
 }
 
 function onUp(e) {
   e.preventDefault();
-  if (!aiming || !cueBall || cueBall.sunk) {
-    aiming = false;
+  if (!isPulling) return;
+  isPulling = false;
+
+  if (pullDist < 5 || !cueBall || cueBall.sunk) {
+    pullDist = 0;
+    setPower(0);
+    render();
     return;
   }
-  aiming = false;
 
-  const dx = aimStart.x - aimEnd.x;
-  const dy = aimStart.y - aimEnd.y;
-  const d  = Math.sqrt(dx * dx + dy * dy);
+  const power = pullDist / MAX_PULL;
+  cueBall.vx = Math.cos(aimAngle) * power * MAX_VEL;
+  cueBall.vy = Math.sin(aimAngle) * power * MAX_VEL;
 
-  if (d < 6) { render(); return; } // too small, no shot
-
-  const power = Math.min(d, MAX_DRAG) / MAX_DRAG;
-  const speed = power * MAX_VEL;
-  const nx = dx / d, ny = dy / d;
-
-  cueBall.vx = nx * speed;
-  cueBall.vy = ny * speed;
-
-  shooting = true;
+  pullDist = 0;
   setPower(0);
-  aimStart = null;
-  aimEnd   = null;
+  shooting = true;
 
   if (rafId) cancelAnimationFrame(rafId);
   rafId = requestAnimationFrame(animate);
