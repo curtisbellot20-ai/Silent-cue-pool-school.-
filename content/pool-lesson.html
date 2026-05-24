@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pool Lesson Simulator — Silent Cue</title>
-  <meta name="description" content="Interactive pool lesson simulator. Learn position play, the Golden Zone (maximum shot options), the Dead Zone, and the ghost ball aiming method." />
+  <meta name="description" content="Interactive pool lesson simulator. The Golden Zone gives you 3+ easy shots. The Dead Zone leaves you with banks, kicks, and hard cuts. Learn to plan every shot to land in the Golden Zone." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -382,12 +382,12 @@ const LESSONS = [
   {
     number: 'Lesson 01',
     name: 'The Golden Zone',
-    desc: 'The Golden Zone is the area that gives you the most possible shots. From here, you can reach any ball on the table. The Dead Zone — near the rails — cuts your angles and traps you.',
+    desc: 'The Golden Zone is an area on the table where, when the white ball lands there, you will have three or more semi-easy or very easy shots available. That is your target after every single shot.',
     steps: [
-      'Study the table. The cue ball is near the rail — the Dead Zone. From here, your angles are cut and your options are few.',
+      'Study the table. The cue ball is near the rail — the Dead Zone. In the Dead Zone you may have zero shots, one shot, or only brutal options: banks, kicks, jump shots, hard cuts, masse shots. Nothing straight in.',
       'Click the cue ball and drag to aim at the yellow ball.',
-      'The Golden Zone is highlighted. It is not just the center — it is the area where you have the most possible next shots. More angles. More options.',
-      'Shoot. After the shot, see where your cue ball lands. Did you give yourself options, or did you trade this shot for the next one?'
+      'The Golden Zone is highlighted. When you land here, three or more easy or semi-easy shots will be available to you. That is the goal — not just sinking this ball, but earning your next three.',
+      'Shoot. After the shot, count your options. Three or more easy shots means you found the Golden Zone. Always plan your next shot to land there.'
     ],
     showGoldenZone: true,
     showDeadZone: true,
@@ -396,12 +396,12 @@ const LESSONS = [
   {
     number: 'Lesson 02',
     name: 'The Dead Zone',
-    desc: 'Two paths are available. The obvious shot sinks the ball but leaves you near the rail — fewer angles, fewer options. The smart shot also sinks the ball and lands the cue in the Golden Zone, where the most possible shots are waiting.',
+    desc: 'The Dead Zone gives you one shot, no shots, or only extremely hard options — banks, kicks, jump shots, hard cuts, masse shots, nothing straight in. Avoid it at all costs. Every shot you take should be planned to keep the white ball out of these areas.',
     steps: [
-      'Two paths are highlighted. The red path is the obvious shot — easy, but reckless.',
-      'The gold path requires more thought but leaves the cue ball in position.',
-      'Position play is chosen before the shot, not after. Decide now.',
-      'Click the gold path indicator to execute the smart shot automatically.'
+      'Two paths are highlighted. The red path sinks the ball — but drops the white near the rail. From there: one option, maybe none, or a brutal bank. That is the Dead Zone.',
+      'The gold path also sinks the ball, but routes the white to the Golden Zone. From there: three or more easy shots are waiting.',
+      'The Dead Zone is not just near the rails. Any spot that leaves you with banks, kicks, jump shots, hard cuts, or masse shots is a Dead Zone. Straight-in shots disappear. You are fighting the table.',
+      'Position play is decided before the shot. Click the gold path to execute the smart shot — the one that earns you the next three.'
     ],
     showGoldenZone: true,
     showDeadZone: true,
@@ -411,12 +411,12 @@ const LESSONS = [
   {
     number: 'Lesson 03',
     name: 'Reading the Table',
-    desc: 'A cluster of balls on one side, open table on the other. Click each ball to reveal its threat level and suggested run order.',
+    desc: 'Before you touch the cue, read the table. Find the Golden Zones — areas that give you three or more easy shots. Find the Dead Zones — areas that trap you. Then plan your run so the white ball moves from Golden Zone to Golden Zone.',
     steps: [
-      'Before touching the cue, read the table.',
-      'Click any ball to analyze its position and threat level.',
-      'Notice which balls are blocking and which are in your favor.',
-      'Build your run sequence from easiest to hardest.'
+      'Before touching the cue, read the table. Do not look at the easiest shot first — look for your path through the entire rack.',
+      'Click any ball to analyze its position. Is sinking it likely to land the white in a Golden Zone (3+ easy shots) or a Dead Zone (banks, kicks, hard cuts, nothing straight)?',
+      'Notice which balls are in open areas and which are clustered near rails or other balls. Clustered near rails usually means Dead Zone risk.',
+      'Build your run sequence so the white ball travels from Golden Zone to Golden Zone. Each shot earns you the next three — that is control.'
     ],
     showGoldenZone: false,
     showDeadZone: false,
@@ -426,12 +426,12 @@ const LESSONS = [
   {
     number: 'Lesson 04',
     name: 'The Ghost Drill',
-    desc: 'The ghost ball method is the most reliable aiming system in pool. Click the target ball to reveal where the cue ball must go to sink the shot.',
+    desc: 'Aiming is only half the shot. The other half is where the white ball goes after contact. Use the ghost ball method to aim the shot — then ask yourself: where does the white land? Golden Zone or Dead Zone?',
     steps: [
-      'Click the target ball to reveal the ghost ball position.',
-      'The ghost ball shows exactly where the cue ball must contact the target.',
-      'Aim the center of the cue ball at the ghost ball center.',
-      'This is the ghost ball method — the most reliable aiming system in pool.'
+      'Click the target ball to reveal the ghost ball position. The ghost ball is an imaginary cue ball sitting exactly where contact must happen to sink the shot.',
+      'Aim the center of your cue ball at the center of the ghost ball. That is the ghost ball method — the most reliable aiming system in pool.',
+      'Now look at the cue ball\'s path after contact. Where will the white ball travel? Is that a Golden Zone — three or more easy shots — or a Dead Zone?',
+      'Shoot. After the shot, evaluate: did you sink the ball AND land in position? Both matter. One without the other is incomplete pool.'
     ],
     showGoldenZone: false,
     showDeadZone: false,
@@ -636,9 +636,9 @@ function evalCueBallPosition() {
   const inDead   = (cueBall.x < cx + deadMargin || cueBall.x > cx + cw - deadMargin ||
                     cueBall.y < cy + deadMargin || cueBall.y > cy + ch - deadMargin);
 
-  if (inGolden)      showFeedback('Golden Zone. Maximum options on your next shot.');
-  else if (inDead)   showFeedback('Dead Zone. Your angles are cut. Fewer shots available.');
-  else               showFeedback('Workable. Push toward the Golden Zone for more options.');
+  if (inGolden)      showFeedback('Golden Zone. Three or more easy shots from here.');
+  else if (inDead)   showFeedback('Dead Zone. Banks, kicks, hard cuts — no easy shots. Avoid this.');
+  else               showFeedback('Neutral. Work toward the Golden Zone. You want three easy shots waiting.');
 }
 
 // ── Physics ───────────────────────────────────────────────────
