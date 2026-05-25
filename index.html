@@ -239,19 +239,60 @@
       </div>
       <div class="soundtrack__grid">
         <div class="soundtrack__feature">
-          <div class="soundtrack__entry-ref">Archive Entry 01</div>
-          <h3 class="soundtrack__entry-title">Before The First Shot</h3>
-          <p class="soundtrack__entry-text">The lesson begins before you touch the table. The song begins the same way. Observation. Patience. The room before the rack.</p>
-          <div class="audio-player" id="lessonPlayer" data-src="audio/Background.mp3">
-            <button class="audio-player__btn" aria-label="Play lesson preview">
-              <span class="audio-player__icon">&#9654;</span>
-            </button>
-            <div class="audio-player__track">
-              <span class="audio-player__name">Lesson 01 Preview</span>
-              <div class="audio-player__bar">
-                <div class="audio-player__progress" id="lessonProgress"></div>
+          <div class="playlist" id="scPlaylist">
+
+            <div class="playlist__now-playing" id="playlistNowPlaying">
+              <div class="playlist__np-label">Now Playing</div>
+              <div class="playlist__np-title" id="playlistNpTitle">Select a track</div>
+              <div class="playlist__np-bar">
+                <div class="playlist__np-progress" id="playlistProgress"></div>
               </div>
+              <div class="playlist__np-time"><span id="playlistCurrent">0:00</span> / <span id="playlistDuration">--:--</span></div>
             </div>
+
+            <ul class="playlist__tracks" id="playlistTracks">
+              <li class="playlist__track" data-src="audio/Background.mp3">
+                <span class="playlist__track-num">01</span>
+                <span class="playlist__track-name">Before The First Shot</span>
+                <button class="playlist__track-btn" aria-label="Play Before The First Shot">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Five%20Masks.mp3">
+                <span class="playlist__track-num">02</span>
+                <span class="playlist__track-name">Five Masks</span>
+                <button class="playlist__track-btn" aria-label="Play Five Masks">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Rain%20Outside.mp3">
+                <span class="playlist__track-num">03</span>
+                <span class="playlist__track-name">Rain Outside</span>
+                <button class="playlist__track-btn" aria-label="Play Rain Outside">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Chalk%20Doorway.mp3">
+                <span class="playlist__track-num">04</span>
+                <span class="playlist__track-name">Chalk Doorway</span>
+                <button class="playlist__track-btn" aria-label="Play Chalk Doorway">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Emotional%20Predator.mp3">
+                <span class="playlist__track-num">05</span>
+                <span class="playlist__track-name">Emotional Predator</span>
+                <button class="playlist__track-btn" aria-label="Play Emotional Predator">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Friendly%20Shark.mp3">
+                <span class="playlist__track-num">06</span>
+                <span class="playlist__track-name">Friendly Shark</span>
+                <button class="playlist__track-btn" aria-label="Play Friendly Shark">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Cue%20Rack%20Drunk.mp3">
+                <span class="playlist__track-num">07</span>
+                <span class="playlist__track-name">Cue Rack Drunk</span>
+                <button class="playlist__track-btn" aria-label="Play Cue Rack Drunk">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Faded%20Coat%20Queue%20(1).mp3">
+                <span class="playlist__track-num">08</span>
+                <span class="playlist__track-name">Faded Coat Queue</span>
+                <button class="playlist__track-btn" aria-label="Play Faded Coat Queue">&#9654;</button>
+              </li>
+            </ul>
+
           </div>
         </div>
         <div class="soundtrack__includes">
