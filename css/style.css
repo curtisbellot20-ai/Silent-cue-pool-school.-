@@ -964,6 +964,13 @@ img { display: block; max-width: 100%; }
   transition: color 0.2s;
 }
 .footer__nav a:hover { color: var(--ivory); }
+.footer__nav--legal {
+  gap: 20px;
+  margin-top: -16px;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+.footer__nav--legal a { font-size: 0.62rem; }
 .footer__copy { font-size: 0.7rem; color: var(--smoke); letter-spacing: 0.08em; }
 
 /* ============================================
