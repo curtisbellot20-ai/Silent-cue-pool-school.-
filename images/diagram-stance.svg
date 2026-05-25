@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560">
+  <defs>
+    <linearGradient id="cueStick" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9A84C"/>
+      <stop offset="40%" stop-color="#a07828"/>
+      <stop offset="100%" stop-color="#4a2c08" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="figBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e1e1e"/>
+      <stop offset="100%" stop-color="#2a2a2a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="560" fill="#0a0a0a"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.04" stroke="#C9A84C" stroke-width="1">
+    <line x1="0" y1="140" x2="900" y2="140"/>
+    <line x1="0" y1="280" x2="900" y2="280"/>
+    <line x1="0" y1="420" x2="900" y2="420"/>
+    <line x1="180" y1="0" x2="180" y2="560"/>
+    <line x1="360" y1="0" x2="360" y2="560"/>
+    <line x1="540" y1="0" x2="540" y2="560"/>
+    <line x1="720" y1="0" x2="720" y2="560"/>
+  </g>
+
+  <!-- Floor line -->
+  <line x1="60" y1="500" x2="840" y2="500" stroke="#1B4332" stroke-width="2" opacity="0.5"/>
+
+  <!-- Table edge (side view) -->
+  <rect x="120" y="280" width="420" height="18" rx="4" fill="#1B4332"/>
+  <rect x="120" y="280" width="420" height="4" rx="2" fill="#2D6A4F"/>
+
+  <!-- ─────────────────── PLAYER SILHOUETTE (side view) ─────────────────── -->
+
+  <!-- Back foot -->
+  <ellipse cx="242" cy="498" rx="36" ry="12" fill="#181818"/>
+  <!-- Front foot -->
+  <ellipse cx="330" cy="498" rx="32" ry="11" fill="#181818"/>
+
+  <!-- Back leg -->
+  <path d="M 250 420 Q 248 458 242 498" stroke="#1e1e1e" stroke-width="36" fill="none" stroke-linecap="round"/>
+  <!-- Front leg — slightly bent forward -->
+  <path d="M 310 420 Q 322 456 330 498" stroke="#1e1e1e" stroke-width="34" fill="none" stroke-linecap="round"/>
+
+  <!-- Torso leaning forward over table -->
+  <path d="M 235 220 Q 230 290 240 360 L 248 420 L 310 420 L 320 360 Q 335 310 360 270 Q 380 245 400 235 L 420 228 Q 390 210 340 205 Q 280 200 235 220 Z" fill="url(#figBody)"/>
+
+  <!-- Back arm hanging -->
+  <path d="M 238 250 Q 218 310 215 380 Q 213 410 218 430" stroke="#1a1a1a" stroke-width="26" fill="none" stroke-linecap="round"/>
+
+  <!-- Bridge arm — extended forward on table -->
+  <path d="M 355 258 Q 410 265 455 272 Q 490 278 510 282" stroke="#1e1e1e" stroke-width="24" fill="none" stroke-linecap="round"/>
+  <!-- Bridge hand on table -->
+  <ellipse cx="516" cy="283" rx="18" ry="10" fill="#181818"/>
+
+  <!-- Back hand gripping cue (shooting hand) -->
+  <ellipse cx="238" cy="296" rx="16" ry="12" fill="#181818"/>
+
+  <!-- Neck -->
+  <rect x="312" y="180" width="26" height="32" rx="8" fill="#1a1a1a"/>
+
+  <!-- Head -->
+  <ellipse cx="328" cy="158" rx="34" ry="36" fill="#181818"/>
+
+  <!-- Eye line looking down cue -->
+  <circle cx="344" cy="152" r="4" fill="#2a2a2a"/>
+  <circle cx="344" cy="152" r="2" fill="#C9A84C" opacity="0.25"/>
+
+  <!-- Pool cue — angled, extending from back hand through bridge hand forward -->
+  <line x1="120" y1="315" x2="516" y2="282" stroke="url(#cueStick)" stroke-width="5" stroke-linecap="round"/>
+  <!-- Cue tip -->
+  <circle cx="516" cy="282" r="4" fill="#7acfff" opacity="0.7"/>
+  <!-- Cue butt end (behind player) -->
+  <circle cx="120" cy="315" r="3" fill="#4a2c08"/>
+
+  <!-- ─────────────────── ANNOTATION LINES ─────────────────── -->
+
+  <!-- 1. Feet shoulder-width apart -->
+  <line x1="242" y1="514" x2="330" y2="514" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+  <line x1="242" y1="508" x2="242" y2="520" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+  <line x1="330" y1="508" x2="330" y2="520" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+  <line x1="286" y1="514" x2="286" y2="544" stroke="#C9A84C" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="286" y="556" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="middle" opacity="0.85" letter-spacing="0.08em">FEET SHOULDER-WIDTH</text>
+
+  <!-- 2. Cue level — horizontal arrow along cue axis -->
+  <line x1="120" y1="340" x2="510" y2="340" stroke="#C9A84C" stroke-width="1" stroke-dasharray="5 4" opacity="0.3"/>
+  <line x1="116" y1="315" x2="116" y2="282" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  <line x1="110" y1="315" x2="122" y2="315" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  <line x1="110" y1="282" x2="122" y2="282" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  <line x1="80" y1="298" x2="114" y2="298" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>
+  <text x="72" y="294" font-family="Inter, sans-serif" font-size="10.5" fill="#C9A84C" text-anchor="end" opacity="0.85" letter-spacing="0.06em">CUE LEVEL</text>
+  <text x="72" y="308" font-family="Inter, sans-serif" font-size="10.5" fill="#C9A84C" text-anchor="end" opacity="0.85" letter-spacing="0.06em">WITH TABLE</text>
+
+  <!-- 3. Bridge hand flat label -->
+  <line x1="516" y1="283" x2="580" y2="250" stroke="#C9A84C" stroke-width="1" opacity="0.55"/>
+  <circle cx="516" cy="283" r="4" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  <text x="585" y="246" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">BRIDGE HAND</text>
+  <text x="585" y="260" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">FLAT &amp; STABLE</text>
+
+  <!-- 4. Elbow above cue -->
+  <line x1="238" y1="272" x2="170" y2="220" stroke="#C9A84C" stroke-width="1" opacity="0.55"/>
+  <circle cx="238" cy="272" r="4" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  <text x="162" y="216" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="end" opacity="0.85" letter-spacing="0.08em">ELBOW DIRECTLY</text>
+  <text x="162" y="230" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="end" opacity="0.85" letter-spacing="0.08em">ABOVE CUE</text>
+
+  <!-- 5. Eyes on the cue ball line -->
+  <line x1="344" y1="152" x2="344" y2="285" stroke="#C9A84C" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+  <line x1="344" y1="148" x2="620" y2="120" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+  <circle cx="344" cy="148" r="4" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  <text x="625" y="116" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">EYES DOWN</text>
+  <text x="625" y="130" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">THE CUE LINE</text>
+
+  <!-- 6. Weight forward label -->
+  <line x1="310" y1="390" x2="640" y2="370" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+  <circle cx="310" cy="390" r="4" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.55"/>
+  <text x="645" y="366" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">WEIGHT FORWARD</text>
+  <text x="645" y="380" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">ON FRONT FOOT</text>
+
+  <!-- 7. Grip label -->
+  <line x1="225" y1="300" x2="170" y2="360" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+  <circle cx="225" cy="300" r="4" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.55"/>
+  <text x="78" y="366" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">LIGHT, CONSISTENT</text>
+  <text x="78" y="380" font-family="Inter, sans-serif" font-size="11" fill="#C9A84C" text-anchor="start" opacity="0.85" letter-spacing="0.08em">GRIP PRESSURE</text>
+
+  <!-- Title -->
+  <text x="720" y="480" font-family="Georgia, serif" font-size="13" fill="#C9A84C" text-anchor="start" opacity="0.5" letter-spacing="0.14em">STANCE ANALYSIS</text>
+  <text x="720" y="498" font-family="Georgia, serif" font-size="11" fill="#5A5A5A" text-anchor="start" opacity="0.7" letter-spacing="0.1em">Silent Cue — The Foundation</text>
+
+  <!-- Vignette -->
+  <radialGradient id="vigD" cx="50%" cy="50%" r="65%">
+    <stop offset="45%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.5"/>
+  </radialGradient>
+  <rect width="900" height="560" fill="url(#vigD)"/>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <radialGradient id="tableFelt" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#1a4030"/>
+      <stop offset="100%" stop-color="#0a1a12"/>
+    </radialGradient>
+    <radialGradient id="overheadLight" cx="50%" cy="44%" r="40%">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background — dark room, elevated view -->
+  <rect width="600" height="800" fill="#050707"/>
+  <rect width="600" height="800" fill="url(#overheadLight)"/>
+
+  <!-- Table rail (outer) — slightly angled for perspective feel -->
+  <rect x="48" y="120" width="504" height="520" rx="12" fill="#1B4332"/>
+  <!-- Table felt -->
+  <rect x="72" y="144" width="456" height="472" rx="6" fill="url(#tableFelt)"/>
+
+  <!-- Rail inner highlight -->
+  <rect x="72" y="144" width="456" height="6" rx="3" fill="#2D6A4F" opacity="0.6"/>
+  <rect x="72" y="144" width="6" height="472" rx="3" fill="#2D6A4F" opacity="0.4"/>
+  <rect x="522" y="144" width="6" height="472" rx="3" fill="#2D6A4F" opacity="0.4"/>
+  <rect x="72" y="610" width="456" height="6" rx="3" fill="#2D6A4F" opacity="0.4"/>
+
+  <!-- Pockets -->
+  <circle cx="72"  cy="144" r="14" fill="#030505"/>
+  <circle cx="528" cy="144" r="14" fill="#030505"/>
+  <circle cx="300" cy="140" r="11" fill="#030505"/>
+  <circle cx="72"  cy="616" r="14" fill="#030505"/>
+  <circle cx="528" cy="616" r="14" fill="#030505"/>
+  <circle cx="300" cy="620" r="11" fill="#030505"/>
+
+  <!-- Pocket gold rims -->
+  <circle cx="72"  cy="144" r="15" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+  <circle cx="528" cy="144" r="15" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+  <circle cx="300" cy="140" r="12" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+  <circle cx="72"  cy="616" r="15" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+  <circle cx="528" cy="616" r="15" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+  <circle cx="300" cy="620" r="12" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+
+  <!-- Rail dot markers -->
+  <circle cx="186" cy="136" r="4" fill="#C9A84C" opacity="0.55"/>
+  <circle cx="414" cy="136" r="4" fill="#C9A84C" opacity="0.55"/>
+  <circle cx="186" cy="624" r="4" fill="#C9A84C" opacity="0.55"/>
+  <circle cx="414" cy="624" r="4" fill="#C9A84C" opacity="0.55"/>
+  <circle cx="60"  cy="310" r="4" fill="#C9A84C" opacity="0.5"/>
+  <circle cx="60"  cy="450" r="4" fill="#C9A84C" opacity="0.5"/>
+  <circle cx="540" cy="310" r="4" fill="#C9A84C" opacity="0.5"/>
+  <circle cx="540" cy="450" r="4" fill="#C9A84C" opacity="0.5"/>
+
+  <!-- Shot analysis lines (faint gold geometry) -->
+  <line x1="230" y1="390" x2="72" y2="144"  stroke="#C9A84C" stroke-width="1" opacity="0.12" stroke-dasharray="6 6"/>
+  <line x1="230" y1="390" x2="528" y2="616" stroke="#C9A84C" stroke-width="1" opacity="0.10" stroke-dasharray="6 6"/>
+  <line x1="340" y1="330" x2="528" y2="144" stroke="#C9A84C" stroke-width="1" opacity="0.10" stroke-dasharray="6 6"/>
+
+  <!-- Cue ball -->
+  <circle cx="230" cy="390" r="13" fill="#e8e8e8"/>
+  <circle cx="224" cy="384" r="4" fill="white" opacity="0.5"/>
+
+  <!-- Object balls — scattered mid-game -->
+  <circle cx="340" cy="330" r="12" fill="#C9A84C"/>
+  <circle cx="356" cy="328" r="3.5" fill="white" opacity="0.4"/>
+
+  <circle cx="390" cy="280" r="12" fill="#C62828"/>
+  <circle cx="385" cy="275" r="3.5" fill="white" opacity="0.4"/>
+
+  <circle cx="420" cy="350" r="12" fill="#1565C0"/>
+  <circle cx="415" cy="345" r="3.5" fill="white" opacity="0.4"/>
+
+  <circle cx="310" cy="240" r="12" fill="#2E7D32"/>
+  <circle cx="305" cy="235" r="3.5" fill="white" opacity="0.4"/>
+
+  <circle cx="180" cy="280" r="12" fill="#6A1B9A"/>
+  <circle cx="175" cy="275" r="3.5" fill="white" opacity="0.4"/>
+
+  <circle cx="460" cy="420" r="12" fill="#E65100"/>
+  <circle cx="455" cy="415" r="3.5" fill="white" opacity="0.4"/>
+
+  <circle cx="270" cy="470" r="12" fill="#5D4037"/>
+  <circle cx="265" cy="465" r="3.5" fill="white" opacity="0.4"/>
+
+  <circle cx="155" cy="490" r="12" fill="#1a1a1a"/>
+  <circle cx="150" cy="485" r="3.5" fill="white" opacity="0.3"/>
+
+  <!-- Cue stick coming in from bottom, held by player below frame -->
+  <line x1="230" y1="390" x2="230" y2="800" stroke="#C9A84C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="230" y1="390" x2="230" y2="800" stroke="#5a3a10" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Player hands barely visible at bottom of frame -->
+  <ellipse cx="210" cy="790" rx="28" ry="14" fill="#111" opacity="0.9"/>
+  <ellipse cx="252" cy="795" rx="24" ry="12" fill="#0d0d0d" opacity="0.9"/>
+
+  <!-- Vignette -->
+  <radialGradient id="vig3" cx="50%" cy="50%" r="62%">
+    <stop offset="35%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.7"/>
+  </radialGradient>
+  <rect width="600" height="800" fill="url(#vig3)"/>
+</svg>
