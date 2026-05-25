@@ -597,10 +597,11 @@ img { display: block; max-width: 100%; }
 }
 @media (max-width: 768px) {
   .gallery__strip { grid-template-columns: repeat(2, 1fr); }
+  .gallery__frame { aspect-ratio: 4/3; }
 }
 .gallery__frame {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 16/9;
   overflow: hidden;
   cursor: pointer;
 }
