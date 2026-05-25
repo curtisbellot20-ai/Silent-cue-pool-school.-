@@ -2128,6 +2128,17 @@ img { display: block; max-width: 100%; }
   color: var(--ash);
   letter-spacing: 0.04em;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.playlist__track-archive {
+  font-size: 0.65rem;
+  color: var(--gold);
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 .playlist__track-btn {
   background: transparent;
