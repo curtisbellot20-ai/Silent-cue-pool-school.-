@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Share Your Result — Silent Cue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080808; --gold: #C9A84C; --ivory: #E8E0D0;
+      --smoke: #5A5A5A; --panel: #0d0d0d;
+      --border: rgba(201,168,76,0.15);
+    }
+    html, body { min-height: 100%; background: var(--bg); color: var(--ivory); font-family: Inter, system-ui, sans-serif; }
+
+    /* Nav */
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 56px; border-bottom: 1px solid var(--border); }
+    .nav__logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ivory); }
+    .nav__logo-mark { color: var(--gold); font-size: 10px; }
+    .nav__logo-text { font-family: Georgia, serif; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav__back { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--smoke); text-decoration: none; transition: color 0.2s; }
+    .nav__back:hover { color: var(--gold); }
+
+    /* Page */
+    .page { max-width: 640px; margin: 0 auto; padding: 72px 24px 96px; }
+    .page__label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .page__title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.25; color: var(--ivory); margin-bottom: 20px; }
+    .page__sub { font-size: 0.88rem; line-height: 1.8; color: var(--smoke); margin-bottom: 56px; max-width: 520px; }
+
+    /* Form */
+    .form { display: flex; flex-direction: column; gap: 32px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field__label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .field__hint { font-size: 0.75rem; color: var(--smoke); line-height: 1.5; margin-top: -4px; }
+    .field__input,
+    .field__textarea,
+    .field__select {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--ivory);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 0.88rem;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      border-radius: 0;
+      appearance: none;
+    }
+    .field__input:focus,
+    .field__textarea:focus,
+    .field__select:focus { border-color: rgba(201,168,76,0.5); }
+    .field__textarea { resize: vertical; min-height: 140px; line-height: 1.65; }
+    .field__input::placeholder,
+    .field__textarea::placeholder { color: var(--smoke); }
+
+    .field__checkbox-wrap { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+    .field__checkbox { width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--gold); margin-top: 2px; cursor: pointer; }
+    .field__checkbox-label { font-size: 0.8rem; color: var(--smoke); line-height: 1.6; }
+
+    .form__submit {
+      background: var(--gold);
+      border: none;
+      color: #080808;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 18px 40px;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .form__submit:hover { background: #d4b060; }
+    .form__submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form__note { font-size: 0.72rem; color: var(--smoke); line-height: 1.6; margin-top: -12px; }
+
+    /* Success state */
+    .success { display: none; text-align: center; padding: 64px 24px; }
+    .success__mark { font-size: 2rem; color: var(--gold); margin-bottom: 24px; }
+    .success__title { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.8rem; font-weight: 300; color: var(--ivory); margin-bottom: 16px; }
+    .success__sub { font-size: 0.85rem; color: var(--smoke); line-height: 1.7; }
+    .success__back { display: inline-block; margin-top: 32px; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3); padding-bottom: 2px; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav__logo">
+    <span class="nav__logo-mark">&#9679;</span>
+    <span class="nav__logo-text">Silent Cue</span>
+  </a>
+  <a href="../index.html#testimonials" class="nav__back">&#8592; Back</a>
+</nav>
+
+<div class="page">
+
+  <div id="formWrap">
+    <div class="page__label">Share Your Result</div>
+    <h1 class="page__title">What changed at the table?</h1>
+    <p class="page__sub">If the material shifted something for you — the way you see position, the way you handle pressure, the way you read a room before you shoot — share it here. No fluff. Just what actually happened.</p>
+
+    <!-- Replace YOUR_FORM_ID with your Formspree form ID after creating a free account at formspree.io -->
+    <form class="form" id="testimonialForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+      <div class="field">
+        <label class="field__label" for="field-name">Your name or initials</label>
+        <p class="field__hint">You can use initials if you prefer. This is how you'll appear on the site.</p>
+        <input class="field__input" type="text" id="field-name" name="name" placeholder="e.g. Marcus T. or M.T." required />
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="field-years">How long have you been playing pool?</label>
+        <select class="field__select" id="field-years" name="years_playing" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="Less than 1 year">Less than 1 year</option>
+          <option value="1–2 years">1–2 years</option>
+          <option value="3–5 years">3–5 years</option>
+          <option value="6–10 years">6–10 years</option>
+          <option value="10+ years">10+ years</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="field-level">How would you describe your level?</label>
+        <select class="field__select" id="field-level" name="level" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="Casual / bar player">Casual / bar player</option>
+          <option value="Recreational league">Recreational league</option>
+          <option value="Competitive amateur">Competitive amateur</option>
+          <option value="Semi-professional">Semi-professional</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="field-testimonial">What changed for you?</label>
+        <p class="field__hint">Be specific. The best testimonials describe a real shift — a concept that clicked, a situation where you played differently, a result you didn't expect.</p>
+        <textarea class="field__textarea" id="field-testimonial" name="testimonial" placeholder="Describe what shifted for you after going through the material..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="field-which">Which part of the material are you referencing?</label>
+        <select class="field__select" id="field-which" name="material_used">
+          <option value="" disabled selected>Select one</option>
+          <option value="The Playlist (audio series)">The Playlist (audio series)</option>
+          <option value="The Ebook">The Ebook</option>
+          <option value="Both">Both</option>
+          <option value="The Archive (free content)">The Archive (free content)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field__checkbox-wrap">
+          <input class="field__checkbox" type="checkbox" name="permission" id="field-permission" required />
+          <span class="field__checkbox-label">I give Silent Cue permission to publish my testimonial (with my name or initials) on the website and in marketing materials.</span>
+        </label>
+      </div>
+
+      <p class="form__note">Your email is not required and will not be collected. This form goes directly to the Silent Cue team for review. Not all submissions will be published — only those that are specific and genuine.</p>
+
+      <button class="form__submit" type="submit" id="submitBtn">Send It In</button>
+
+    </form>
+  </div>
+
+  <div class="success" id="successMsg">
+    <div class="success__mark">&#9679;</div>
+    <p class="success__title">Received. Thank you.</p>
+    <p class="success__sub">Your result has been sent in for review. If it's selected, it'll appear on the site without further contact from us.</p>
+    <a href="../index.html" class="success__back">&#8592; Return to Silent Cue</a>
+  </div>
+
+</div>
+
+<script>
+  const form = document.getElementById('testimonialForm');
+  const wrap = document.getElementById('formWrap');
+  const success = document.getElementById('successMsg');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        wrap.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Send It In';
+        alert('Something went wrong. Please try again.');
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Send It In';
+      alert('Connection error. Please try again.');
+    }
+  });
+</script>
+
+</body>
+</html>

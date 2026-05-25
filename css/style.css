@@ -1815,3 +1815,202 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.1em;
   margin-top: 14px;
 }
+
+/* ── Testimonials ────────────────────────────────────────────── */
+.testimonials {
+  padding: 96px 24px;
+  background: #060606;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.testimonials__container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.testimonials__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.testimonials__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  color: var(--ivory);
+  margin-bottom: 56px;
+}
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.testimonial {
+  border-left: 2px solid rgba(201,168,76,0.25);
+  padding: 24px 28px;
+  margin: 0;
+  background: rgba(255,255,255,0.02);
+}
+.testimonial__text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ivory);
+  margin-bottom: 20px;
+}
+.testimonial__footer {}
+.testimonial__name {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--smoke);
+  text-transform: uppercase;
+}
+.testimonials__submit {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(201,168,76,0.08);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.testimonials__submit-text {
+  font-size: 0.8rem;
+  color: var(--smoke);
+  letter-spacing: 0.06em;
+}
+.testimonials__submit-link {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.testimonials__submit-link:hover { border-color: var(--gold); }
+
+/* ── Offer ───────────────────────────────────────────────────── */
+.offer {
+  padding: 96px 24px;
+  background: var(--bg);
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.offer__container {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.offer__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.offer__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--ivory);
+  line-height: 1.25;
+  margin-bottom: 28px;
+}
+.offer__body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(232,224,208,0.7);
+  max-width: 620px;
+  margin-bottom: 16px;
+}
+
+.offer__card {
+  background: #0d0d0d;
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 48px;
+  position: relative;
+}
+.offer__card-badge {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.offer__card-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--ivory);
+  margin-bottom: 8px;
+}
+.offer__card-price {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 40px;
+}
+.offer__card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  padding-top: 32px;
+}
+.offer__card-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 16px;
+  border-left: 2px solid rgba(201,168,76,0.3);
+}
+.offer__card-item-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ivory);
+  text-transform: uppercase;
+}
+.offer__card-item-desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--smoke);
+}
+.offer__card-btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 18px 32px;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+}
+.offer__card-guarantee {
+  margin-top: 16px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--smoke);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.offer__email {
+  padding-top: 48px;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+.offer__email-label {
+  font-size: 0.8rem;
+  color: var(--smoke);
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+}
