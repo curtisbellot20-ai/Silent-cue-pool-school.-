@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <radialGradient id="light2" cx="50%" cy="28%" r="42%">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tableGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a4030" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0a1f16" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="cue2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#5a3a10" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="blur2">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="800" fill="#060808"/>
+
+  <!-- Room atmosphere -->
+  <rect width="600" height="800" fill="url(#light2)"/>
+
+  <!-- Floor shadow -->
+  <ellipse cx="300" cy="760" rx="220" ry="28" fill="#000" opacity="0.6"/>
+
+  <!-- Pool table body -->
+  <rect x="60" y="300" width="480" height="260" rx="8" fill="#1B4332"/>
+  <!-- Table felt surface -->
+  <rect x="80" y="318" width="440" height="224" rx="4" fill="url(#tableGlow)"/>
+
+  <!-- Table rail highlight -->
+  <rect x="60" y="300" width="480" height="8" rx="4" fill="#2D6A4F" opacity="0.7"/>
+  <rect x="60" y="300" width="8" height="260" rx="4" fill="#2D6A4F" opacity="0.5"/>
+  <rect x="532" y="300" width="8" height="260" rx="4" fill="#2D6A4F" opacity="0.5"/>
+
+  <!-- Pockets -->
+  <circle cx="80" cy="318" r="12" fill="#040606"/>
+  <circle cx="540" cy="318" r="12" fill="#040606"/>
+  <circle cx="300" cy="314" r="10" fill="#040606"/>
+  <circle cx="80" cy="542" r="12" fill="#040606"/>
+  <circle cx="540" cy="542" r="12" fill="#040606"/>
+  <circle cx="300" cy="546" r="10" fill="#040606"/>
+
+  <!-- Object balls on table -->
+  <circle cx="310" cy="420" r="10" fill="#C9A84C" opacity="0.85"/>
+  <circle cx="340" cy="400" r="10" fill="#C62828" opacity="0.85"/>
+  <circle cx="280" cy="440" r="10" fill="#1565C0" opacity="0.85"/>
+  <circle cx="360" cy="430" r="10" fill="#2E7D32" opacity="0.85"/>
+  <circle cx="250" cy="410" r="10" fill="#6A1B9A" opacity="0.8"/>
+
+  <!-- Player torso / body from behind -->
+  <!-- Legs -->
+  <rect x="247" y="610" width="36" height="130" rx="14" fill="#1a1a1a"/>
+  <rect x="297" y="610" width="36" height="120" rx="14" fill="#1a1a1a"/>
+  <!-- Body -->
+  <path d="M 220 440 Q 210 500 230 570 L 260 600 Q 280 610 300 610 Q 320 610 340 600 L 370 570 Q 390 500 380 440 Q 350 420 300 418 Q 250 420 220 440 Z" fill="#111"/>
+  <!-- Left arm / shoulder extending toward table -->
+  <path d="M 222 462 Q 160 480 120 500 Q 100 510 95 520" stroke="#111" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <!-- Right arm reaching forward -->
+  <path d="M 378 462 Q 420 470 450 468 Q 480 466 500 460" stroke="#111" stroke-width="26" fill="none" stroke-linecap="round"/>
+  <!-- Head -->
+  <ellipse cx="300" cy="410" rx="34" ry="30" fill="#0e0e0e"/>
+  <!-- Neck -->
+  <rect x="284" y="428" width="32" height="18" fill="#0f0f0f"/>
+
+  <!-- Pool cue extending from right arm -->
+  <line x1="498" y1="460" x2="165" y2="435" stroke="url(#cue2)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Cue tip glow -->
+  <circle cx="165" cy="435" r="3" fill="#7acfff" opacity="0.8"/>
+
+  <!-- Overhead pendant light -->
+  <line x1="300" y1="0" x2="300" y2="120" stroke="#333" stroke-width="3"/>
+  <ellipse cx="300" cy="132" rx="22" ry="10" fill="#2a2a2a"/>
+  <ellipse cx="300" cy="138" rx="18" ry="8" fill="#C9A84C" opacity="0.9"/>
+
+  <!-- Light cone on table -->
+  <path d="M 278 148 L 160 300 L 440 300 L 322 148 Z" fill="#C9A84C" opacity="0.06"/>
+
+  <!-- Ambient dark vignette -->
+  <radialGradient id="vig2" cx="50%" cy="50%" r="65%">
+    <stop offset="40%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.75"/>
+  </radialGradient>
+  <rect width="600" height="800" fill="url(#vig2)"/>
+</svg>
