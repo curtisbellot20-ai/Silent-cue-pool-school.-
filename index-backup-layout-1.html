@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silent Cue | The Game Was Never About the Table</title>
+  <meta name="description" content="An underground study of pool, psychology, and the discipline of pressure. Silent Cue is for those who already know the table reveals the player." />
+  <meta name="keywords" content="pool psychology, billiards strategy, emotional control, mental game, pool philosophy, underground pool school" />
+  <meta property="og:title" content="Silent Cue" />
+  <meta property="og:description" content="The game was never about the table. The table only reveals the player." />
+  <meta property="og:image" content="images/narrator.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- CINEMATIC INTRO OVERLAY -->
+  <div class="intro" id="intro">
+    <div class="intro__inner">
+      <div class="intro__mark">&#9679;&nbsp; Silent Cue</div>
+      <blockquote class="intro__quote">&ldquo;Most players lose<br>before the first shot.&rdquo;</blockquote>
+      <button class="intro__cta" id="introCta">Enter the Archive</button>
+      <p class="intro__label">An Underground Study of Pressure, Psychology and Pool</p>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop preload="none">
+    <source src="audio/Background.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button class="music-btn" id="musicToggle" aria-label="Play ambient music">
+    <span class="music-note">♪</span>
+  </button>
+
+  <div class="noise"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <span class="nav__logo-mark">&#9679;</span>
+      <span class="nav__logo-text">Silent Cue</span>
+    </div>
+    <ul class="nav__links">
+      <li><a href="#philosophy" class="nav__link">The Philosophy</a></li>
+      <li><a href="#archive" class="nav__link">The Archive</a></li>
+      <li><a href="#school" class="nav__link">The School</a></li>
+      <li><a href="#testimonials" class="nav__link">Results</a></li>
+      <li><a href="#offer" class="nav__link nav__link--cta">Get Access</a></li>
+    </ul>
+    <button class="nav__toggle" aria-label="Toggle menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <div class="hero__vignette"></div>
+      <div class="hero__gradient"></div>
+      <div class="hero__particles" id="particles"></div>
+    </div>
+    <div class="hero__figure">
+      <img src="images/narrator.jpg" alt="The Silent Cue narrator. Anonymous, composed, watching." class="hero__figure-img" loading="eager" />
+      <div class="hero__figure-fade"></div>
+    </div>
+    <div class="hero__content">
+      <div class="hero__eyebrow">An Underground Study of Pressure, Psychology and Pool</div>
+      <h1 class="hero__title">
+        <span class="hero__title-line">The game was</span>
+        <span class="hero__title-line hero__title-line--italic">never about</span>
+        <span class="hero__title-line">the table.</span>
+      </h1>
+      <p class="hero__sub">The table only reveals the player.</p>
+      <div class="hero__actions">
+        <a href="#enter" class="btn btn--primary">Enter the Archive</a>
+        <a href="#philosophy" class="btn btn--ghost">Read the Philosophy</a>
+      </div>
+      <div class="hero__scroll">
+        <span class="hero__scroll-line"></span>
+        <span class="hero__scroll-text">Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO STRIP -->
+  <div class="manifesto-strip">
+    <div class="manifesto-strip__inner">
+      <span>Composure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Patience</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Precision</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Pressure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Silence</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Strategy</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Observation</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Control</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Composure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Patience</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Precision</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Pressure</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Silence</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Strategy</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Observation</span><span class="manifesto-strip__dot">&#9679;</span>
+      <span>Control</span><span class="manifesto-strip__dot">&#9679;</span>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy" id="philosophy">
+    <div class="philosophy__container">
+      <div class="philosophy__label">I. The Philosophy</div>
+      <div class="philosophy__grid">
+        <div class="philosophy__quote-col">
+          <blockquote class="philosophy__pull-quote">
+            &ldquo;Most men walk into a pool hall thinking about pool. The dangerous ones walk in thinking about everything else.&rdquo;
+          </blockquote>
+          <cite class="philosophy__cite">The Narrator</cite>
+        </div>
+        <div class="philosophy__text-col">
+          <p class="philosophy__p">Silent Cue was never meant to be found by everyone.</p>
+          <p class="philosophy__p">It exists in the space between the shot and the outcome. In the breath held before the break. In the way a man's hands reveal his fear before his mouth ever does.</p>
+          <p class="philosophy__p">This is not a tutorial. This is not a sport school. This is a study of human nature. Played out on a green felt table under a single dim light, where there is nowhere to hide and no one to blame.</p>
+          <p class="philosophy__p">The principles here apply to every room you will ever walk into. Every negotiation. Every silence. Every moment where the outcome hangs on who blinks first.</p>
+          <a href="#archive" class="philosophy__link">Enter the archive &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINEMATIC GALLERY -->
+  <section class="gallery">
+    <div class="gallery__strip">
+      <figure class="gallery__frame">
+        <img src="images/action-1.jpg" alt="The narrator addresses the cue ball. Total composure." loading="lazy" />
+        <figcaption>Composure at address</figcaption>
+      </figure>
+      <figure class="gallery__frame">
+        <img src="images/player-b.jpg" alt="Strategic alignment. The long game in motion." loading="lazy" />
+        <figcaption>The long game</figcaption>
+      </figure>
+      <figure class="gallery__frame">
+        <img src="images/Gemini_Generated_Image_m33kopm33kopm33k.png" alt="Reading the full table from center." loading="lazy" />
+        <figcaption>Reading the room</figcaption>
+      </figure>
+      <figure class="gallery__frame">
+        <img src="images/player-a.jpg" alt="The silent player. Present, watching, waiting." loading="lazy" />
+        <figcaption>Presence</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CINEMATIC BREAK I -->
+  <div class="cine-break">
+    <blockquote class="cine-break__quote">&ldquo;The emotional player rushes in blind.<br>He sees the ball, not the game.&rdquo;</blockquote>
+    <cite class="cine-break__source">Field Note 02. The Reading Game.</cite>
+  </div>
+
+  <!-- ARCHIVE -->
+  <section class="archive" id="archive">
+    <div class="archive__container">
+      <div class="archive__header">
+        <div class="archive__label">II. The Archive</div>
+        <h2 class="archive__title">Field Notes from the Underground</h2>
+        <p class="archive__sub">Dispatches on psychology, strategy, and the slow art of reading the room.</p>
+      </div>
+      <div class="archive__grid">
+
+        <article class="archive__card archive__card--featured">
+          <div class="archive__card-img-wrap">
+            <img src="images/narrator.jpg" alt="The Silent Cue narrator. Anonymous, composed, watching." class="archive__card-img" loading="lazy" />
+            <div class="archive__card-img-overlay"></div>
+          </div>
+          <div class="archive__card-body">
+            <div class="archive__card-tag">The Reading Game — Module 02</div>
+            <h3 class="archive__card-title">Before You Touch the Table</h3>
+            <p class="archive__card-excerpt">The first lesson begins before you ever shoot a ball. The moment you walk in, the game has already started. Most beginners rush. Smart players observe.</p>
+            <a href="content/before-you-touch-the-table.html" class="archive__card-link">Read the dispatch &rarr;</a>
+          </div>
+        </article>
+
+        <article class="archive__card">
+          <div class="archive__card-body">
+            <div class="archive__card-tag">The Composed Mind — Module 01</div>
+            <h3 class="archive__card-title">The Mindset Map</h3>
+            <p class="archive__card-excerpt">Pre-shot routine, the confidence and stress curve, psychological dominance. The architecture of performance before a single ball moves.</p>
+            <a href="content/the-mindset-map.html" class="archive__card-link">Read the field note &rarr;</a>
+          </div>
+        </article>
+
+        <article class="archive__card">
+          <div class="archive__card-body">
+            <div class="archive__card-tag">The Strategic Layer — Module 03</div>
+            <h3 class="archive__card-title">Table Mapping</h3>
+            <p class="archive__card-excerpt">Amateurs see balls. Strategic players see a coordinate system. Every ball has a position, every pocket has an angle, and every shot has a consequence.</p>
+            <a href="content/table-mapping.html" class="archive__card-link">Read the field note &rarr;</a>
+          </div>
+        </article>
+
+        <article class="archive__card">
+          <div class="archive__card-body">
+            <div class="archive__card-tag">The Composed Mind — Module 01</div>
+            <h3 class="archive__card-title">The Foundation</h3>
+            <p class="archive__card-excerpt">Every missed shot can be traced back to setup. The stance is not cosmetic. It is the physical infrastructure that every technical skill runs on.</p>
+            <a href="content/the-foundation.html" class="archive__card-link">Read the field note &rarr;</a>
+          </div>
+        </article>
+
+        <article class="archive__card">
+          <div class="archive__card-body">
+            <div class="archive__card-tag">The Reading Game — Module 02</div>
+            <h3 class="archive__card-title">The Language of Stillness</h3>
+            <p class="archive__card-excerpt">Before you touch the cue, you have already told everyone in the room whether you believe in yourself.</p>
+            <a href="content/the-language-of-stillness.html" class="archive__card-link">Read the field note &rarr;</a>
+          </div>
+        </article>
+
+        <article class="archive__card">
+          <div class="archive__card-body">
+            <div class="archive__card-tag">The Reading Game — Perception Drill</div>
+            <h3 class="archive__card-title">Perception Test</h3>
+            <p class="archive__card-excerpt">Two players. One room. One of them controls it without speaking. A perceptual training exercise in reading behavioral signals before the game begins.</p>
+            <a href="content/perception-test.html" class="archive__card-link">Enter the drill &rarr;</a>
+          </div>
+        </article>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOUNDTRACK SYSTEM -->
+  <section class="soundtrack" id="soundtrack">
+    <div class="soundtrack__container">
+      <div class="soundtrack__label">The Silent Cue Method</div>
+      <div class="soundtrack__header">
+        <h2 class="soundtrack__title">Every lesson has a soundtrack.<br>Every song hides a strategy.</h2>
+        <p class="soundtrack__sub">The music is not decoration. It is the lesson. Each song is engineered to teach, reinforce, and immerse. Strategy delivered through atmosphere. Psychology anchored through sound.</p>
+      </div>
+      <div class="soundtrack__grid">
+        <div class="soundtrack__feature">
+          <div class="playlist" id="scPlaylist">
+
+            <div class="playlist__now-playing" id="playlistNowPlaying">
+              <div class="playlist__np-label">Now Playing</div>
+              <div class="playlist__np-title" id="playlistNpTitle">Select a track</div>
+              <div class="playlist__np-bar">
+                <div class="playlist__np-progress" id="playlistProgress"></div>
+              </div>
+              <div class="playlist__np-time"><span id="playlistCurrent">0:00</span> / <span id="playlistDuration">--:--</span></div>
+            </div>
+
+            <ul class="playlist__tracks" id="playlistTracks">
+              <li class="playlist__track" data-src="audio/Five%20Masks.mp3">
+                <span class="playlist__track-num">&#9733;</span>
+                <span class="playlist__track-name">Five Masks <span class="playlist__track-archive">Bonus</span></span>
+                <button class="playlist__track-btn" aria-label="Play Five Masks">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Cue%20Rack%20Drunk.mp3">
+                <span class="playlist__track-num">01</span>
+                <span class="playlist__track-name">Cue Rack Drunk <span class="playlist__track-archive">Archive 01</span></span>
+                <button class="playlist__track-btn" aria-label="Play Cue Rack Drunk">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Rain%20Outside.mp3">
+                <span class="playlist__track-num">02</span>
+                <span class="playlist__track-name">Rain Outside <span class="playlist__track-archive">Archive 02</span></span>
+                <button class="playlist__track-btn" aria-label="Play Rain Outside">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Friendly%20Shark.mp3">
+                <span class="playlist__track-num">03</span>
+                <span class="playlist__track-name">Friendly Shark <span class="playlist__track-archive">Archive 03</span></span>
+                <button class="playlist__track-btn" aria-label="Play Friendly Shark">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Faded%20Coat%20Queue%20(1).mp3">
+                <span class="playlist__track-num">04</span>
+                <span class="playlist__track-name">Faded Coat Queue <span class="playlist__track-archive">Archive 04</span></span>
+                <button class="playlist__track-btn" aria-label="Play Faded Coat Queue">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Emotional%20Predator.mp3">
+                <span class="playlist__track-num">05</span>
+                <span class="playlist__track-name">Emotional Predator <span class="playlist__track-archive">Archive 05</span></span>
+                <button class="playlist__track-btn" aria-label="Play Emotional Predator">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Background.mp3">
+                <span class="playlist__track-num">&#9679;</span>
+                <span class="playlist__track-name">Before The First Shot</span>
+                <button class="playlist__track-btn" aria-label="Play Before The First Shot">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Chalk%20Doorway.mp3">
+                <span class="playlist__track-num">&#9679;</span>
+                <span class="playlist__track-name">Chalk Doorway</span>
+                <button class="playlist__track-btn" aria-label="Play Chalk Doorway">&#9654;</button>
+              </li>
+              <li class="playlist__track" data-src="audio/Chalk-Cue%20Rain.mp3">
+                <span class="playlist__track-num">&#9679;</span>
+                <span class="playlist__track-name">Chalk-Cue Rain</span>
+                <button class="playlist__track-btn" aria-label="Play Chalk-Cue Rain">&#9654;</button>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="soundtrack__includes">
+          <div class="soundtrack__includes-title">What every lesson includes</div>
+          <ul class="soundtrack__includes-list">
+            <li>
+              <span class="soundtrack__includes-dot">&#9679;</span>
+              <div>
+                <strong>Lesson PDF</strong>
+                <span>The complete written study. Principles, observations and strategy.</span>
+              </div>
+            </li>
+            <li>
+              <span class="soundtrack__includes-dot">&#9679;</span>
+              <div>
+                <strong>Field Notes</strong>
+                <span>Observation sheets and psychological identifiers to use at the table.</span>
+              </div>
+            </li>
+            <li>
+              <span class="soundtrack__includes-dot">&#9679;</span>
+              <div>
+                <strong>Custom Song</strong>
+                <span>An original track engineered around the lesson. The strategy embedded in the music.</span>
+              </div>
+            </li>
+            <li>
+              <span class="soundtrack__includes-dot">&#9679;</span>
+              <div>
+                <strong>Lyric Sheet</strong>
+                <span>Every lyric decoded. The psychological principles behind each bar.</span>
+              </div>
+            </li>
+            <li>
+              <span class="soundtrack__includes-dot">&#9679;</span>
+              <div>
+                <strong>Audio Lesson</strong>
+                <span>Narrated audio version for deep study. Listen while you practice.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINEMATIC BREAK II -->
+  <div class="cine-break">
+    <blockquote class="cine-break__quote">&ldquo;Pressure reveals habits.<br>Every table is a mirror.&rdquo;</blockquote>
+    <cite class="cine-break__source">Field Note 07. The Pressure Protocol.</cite>
+  </div>
+
+  <!-- SCHOOL -->
+  <section class="school" id="school">
+    <div class="school__container">
+      <div class="school__label">III. The School</div>
+      <h2 class="school__title">Five Disciplines of the Silent Player</h2>
+      <p class="school__sub">A structured study. Not a crash course. Not a weekend seminar. A slow, deliberate education in how the mind performs under pressure.</p>
+      <div class="school__disciplines">
+        <div class="school__discipline">
+          <div class="school__discipline-num">01</div>
+          <h3 class="school__discipline-title">The Composed Mind</h3>
+          <p class="school__discipline-text">Nervous system regulation before, during, and after intense moments. Breathing, ritual, and the architecture of calm.</p>
+        </div>
+        <div class="school__discipline">
+          <div class="school__discipline-num">02</div>
+          <h3 class="school__discipline-title">The Reading Game</h3>
+          <p class="school__discipline-text">Opponent psychology, behavioral tells, table management, and how to use silence as a weapon.</p>
+        </div>
+        <div class="school__discipline">
+          <div class="school__discipline-num">03</div>
+          <h3 class="school__discipline-title">The Strategic Layer</h3>
+          <p class="school__discipline-text">Pattern recognition, safety play, positional thinking, and the long game. Every shot is a sentence. Learn to write paragraphs.</p>
+        </div>
+        <div class="school__discipline">
+          <div class="school__discipline-num">04</div>
+          <h3 class="school__discipline-title">The Pressure Protocol</h3>
+          <p class="school__discipline-text">The science and psychology of performing under observation. How to practice failure until you no longer fear it.</p>
+        </div>
+        <div class="school__discipline">
+          <div class="school__discipline-num">05</div>
+          <h3 class="school__discipline-title">The Philosophy of the Table</h3>
+          <p class="school__discipline-text">Pool as a lens for life. Stoicism, game theory, negotiation, and the quiet power of the disciplined mind.</p>
+        </div>
+      </div>
+      <a href="#products" class="btn btn--primary">Browse the Lesson Files</a>
+    </div>
+  </section>
+
+  <!-- PRODUCTS — THE DOWNLOAD ARCHIVE -->
+  <section class="products" id="products">
+    <div class="products__container">
+      <div class="products__label">The Download Archive</div>
+      <h2 class="products__title">Classified Lesson Files</h2>
+      <p class="products__sub">Each archive entry is a complete lesson experience. Downloadable. Permanent. Yours to study indefinitely.</p>
+      <div class="products__grid">
+
+        <div class="products__file">
+          <div class="products__file-header">
+            <span class="products__file-ref">Archive Entry 01</span>
+            <span class="products__file-status">Available</span>
+          </div>
+          <h3 class="products__file-title">The Loud Hustler</h3>
+          <p class="products__file-module">The Reading Game — The Distractor</p>
+          <ul class="products__file-contents">
+            <li>Lesson PDF</li>
+            <li>Field Account</li>
+            <li>Counter-Strategy</li>
+            <li>&#9654; Cue Rack Drunk</li>
+            <li>Lyric Sheet</li>
+          </ul>
+          <div class="products__file-footer">
+            <span class="products__file-price">$12</span>
+            <a href="content/course-access.html" class="products__file-cta" data-gated="content/course-access.html">Access File &rarr;</a>
+          </div>
+        </div>
+
+        <div class="products__file">
+          <div class="products__file-header">
+            <span class="products__file-ref">Archive Entry 02</span>
+            <span class="products__file-status">Available</span>
+          </div>
+          <h3 class="products__file-title">The Ghost</h3>
+          <p class="products__file-module">The Reading Game — The Silent Statue</p>
+          <ul class="products__file-contents">
+            <li>Lesson PDF</li>
+            <li>Field Account</li>
+            <li>Counter-Strategy</li>
+            <li>&#9654; Rain Outside</li>
+            <li>Lyric Sheet</li>
+          </ul>
+          <div class="products__file-footer">
+            <span class="products__file-price">$12</span>
+            <a href="content/course-access.html" class="products__file-cta" data-gated="content/course-access.html">Access File &rarr;</a>
+          </div>
+        </div>
+
+        <div class="products__file">
+          <div class="products__file-header">
+            <span class="products__file-ref">Archive Entry 03</span>
+            <span class="products__file-status">Available</span>
+          </div>
+          <h3 class="products__file-title">The Friendly Shark</h3>
+          <p class="products__file-module">The Reading Game — The Nice Guy</p>
+          <ul class="products__file-contents">
+            <li>Lesson PDF</li>
+            <li>Field Account</li>
+            <li>Counter-Strategy</li>
+            <li>&#9654; Friendly Shark</li>
+            <li>Lyric Sheet</li>
+          </ul>
+          <div class="products__file-footer">
+            <span class="products__file-price">$12</span>
+            <a href="content/course-access.html" class="products__file-cta" data-gated="content/course-access.html">Access File &rarr;</a>
+          </div>
+        </div>
+
+        <div class="products__file">
+          <div class="products__file-header">
+            <span class="products__file-ref">Archive Entry 04</span>
+            <span class="products__file-status">Available</span>
+          </div>
+          <h3 class="products__file-title">The Drifter</h3>
+          <p class="products__file-module">The Reading Game — The Chameleon</p>
+          <ul class="products__file-contents">
+            <li>Lesson PDF</li>
+            <li>Field Account</li>
+            <li>Counter-Strategy</li>
+            <li>&#9654; Faded Coat Queue</li>
+            <li>Lyric Sheet</li>
+          </ul>
+          <div class="products__file-footer">
+            <span class="products__file-price">$12</span>
+            <a href="content/course-access.html" class="products__file-cta" data-gated="content/course-access.html">Access File &rarr;</a>
+          </div>
+        </div>
+
+        <div class="products__file">
+          <div class="products__file-header">
+            <span class="products__file-ref">Archive Entry 05</span>
+            <span class="products__file-status">Available</span>
+          </div>
+          <h3 class="products__file-title">The Emotional Predator</h3>
+          <p class="products__file-module">The Reading Game — The Mind Games Specialist</p>
+          <ul class="products__file-contents">
+            <li>Lesson PDF</li>
+            <li>Field Account</li>
+            <li>Counter-Strategy</li>
+            <li>&#9654; Emotional Predator</li>
+            <li>Lyric Sheet</li>
+          </ul>
+          <div class="products__file-footer">
+            <span class="products__file-price">$12</span>
+            <a href="content/course-access.html" class="products__file-cta" data-gated="content/course-access.html">Access File &rarr;</a>
+          </div>
+        </div>
+
+        <div class="products__file products__file--bundle">
+          <div class="products__file-header">
+            <span class="products__file-ref">Archive Bundle</span>
+            <span class="products__file-status products__file-status--gold">Most Chosen</span>
+          </div>
+          <h3 class="products__file-title">Five Masks — The Complete Volume</h3>
+          <p class="products__file-module">All five mask profiles. Every counter-strategy. The full Reading Game.</p>
+          <ul class="products__file-contents products__file-contents--two-col">
+            <li>5 Lesson PDFs</li>
+            <li>5 Original Songs</li>
+            <li>5 Field Accounts</li>
+            <li>5 Lyric Sheets</li>
+            <li>Interactive Textbook</li>
+            <li>Solution Matrix</li>
+            <li>The Silent Cue Ebook</li>
+            <li>&#9733; Bonus Track Included</li>
+          </ul>
+          <div class="products__file-footer">
+            <span class="products__file-price">$47 <span class="products__file-saving">Save $13</span></span>
+            <a href="#enter" class="products__file-cta products__file-cta--featured" data-gated="#enter">Access the Archive &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATEGY DIAGRAMS -->
+  <section class="diagrams">
+    <div class="diagrams__container">
+      <div class="diagrams__label">From The Strategic Layer</div>
+      <h2 class="diagrams__title">Table Intelligence</h2>
+      <p class="diagrams__sub">The composed player sees the table in zones. Every position decision is made before the shot is taken.</p>
+      <div class="diagrams__grid">
+        <div class="diagrams__item">
+          <div class="diagrams__img-wrap">
+            <img src="images/diagram-golden-zone.jpg" alt="The Golden Zone" loading="lazy" class="diagrams__img" />
+          </div>
+          <div class="diagrams__caption">
+            <span class="diagrams__caption-label">The Golden Zone</span>
+            <p>The center table region where the cue ball commands the most shot options. Strategic play routes the cue ball here by default.</p>
+          </div>
+        </div>
+        <div class="diagrams__item">
+          <div class="diagrams__img-wrap">
+            <img src="images/diagram-dead-zone.jpg" alt="The Dead Zone" loading="lazy" class="diagrams__img" />
+          </div>
+          <div class="diagrams__caption">
+            <span class="diagrams__caption-label">The Dead Zone</span>
+            <p>Rail trapped positions that collapse your shot options. Recognizing and avoiding these is the first discipline of strategic thinking.</p>
+          </div>
+        </div>
+        <div class="diagrams__item">
+          <div class="diagrams__img-wrap">
+            <img src="images/diagram-table-mapping.jpg" alt="Table Mapping" loading="lazy" class="diagrams__img" />
+          </div>
+          <div class="diagrams__caption">
+            <span class="diagrams__caption-label">Table Mapping</span>
+            <p>Coordinate grid, pocket angles, shot sequences, and the Optimal Positioning Zone. The full strategic framework.</p>
+          </div>
+        </div>
+        <div class="diagrams__item">
+          <div class="diagrams__img-wrap">
+            <img src="images/diagram-mindset.jpg" alt="The Mindset Map" loading="lazy" class="diagrams__img" />
+          </div>
+          <div class="diagrams__caption">
+            <span class="diagrams__caption-label">The Mindset Map</span>
+            <p>Pre-shot routine, confidence curve, and psychological dominance. The mental architecture behind every composed performance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BALL CONTROL -->
+  <section class="technique">
+    <div class="technique__container">
+      <div class="technique__content">
+        <div class="technique__label">Ball Control. English.</div>
+        <h2 class="technique__title">The Contact Point System</h2>
+        <p class="technique__p">Every cue ball outcome is determined at a single moment: the point of tip contact. Top spin follows through, bottom spin draws back, side spin shifts the angle. Master the contact map and the table opens up.</p>
+        <p class="technique__p">The serious player does not consciously select spin during the shot. They have built enough repetition that the contact point is chosen before they get down on the ball. What looks like instinct is a pattern library built through deliberate practice.</p>
+        <a href="content/the-foundation.html" class="technique__link">Start with the foundation: Stance &rarr;</a>
+      </div>
+      <div class="technique__visual">
+        <img src="images/diagram-cue-ball-contact.jpg" alt="Cue ball contact point diagram. Top Follow, Bottom Draw, Left Side, Right Side, Center." loading="lazy" class="technique__img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- NARRATOR -->
+  <section class="narrator">
+    <div class="narrator__container">
+      <div class="narrator__visual">
+        <div class="narrator__img-wrap">
+          <img src="images/narrator.jpg" alt="The Narrator. Anonymous, present, composed." loading="lazy" class="narrator__img" />
+          <div class="narrator__img-overlay"></div>
+        </div>
+      </div>
+      <div class="narrator__content">
+        <div class="narrator__label">The Voice Behind It</div>
+        <h2 class="narrator__title">You don't need to know who I am.</h2>
+        <p class="narrator__p">I spent years in rooms most people don't know exist. Playing for money, yes. But studying something else entirely. The way a man holds himself when the stakes are real and no one is watching.</p>
+        <p class="narrator__p">What I learned at the table changed how I move through every room I enter. I built Silent Cue to pass that on. Not to everyone. To those who are ready to be quiet enough to learn.</p>
+        <blockquote class="narrator__quote">&ldquo;The best players I ever met never talked about pool. They talked about patience, positioning, and reading people. The table was just where they practiced.&rdquo;</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="testimonials__container">
+      <div class="testimonials__label">What Players Are Saying</div>
+      <h2 class="testimonials__title">Results from the table.</h2>
+      <div class="testimonials__grid">
+
+        <blockquote class="testimonial">
+          <p class="testimonial__text">&ldquo;I&rsquo;ve been playing for twelve years and thought I understood position play. The Golden Zone concept alone changed how I see every shot. I stopped fighting the table.&rdquo;</p>
+          <footer class="testimonial__footer">
+            <span class="testimonial__name">— M.T., 12 years playing</span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p class="testimonial__text">&ldquo;The Playlist hit different. I wasn&rsquo;t expecting audio to change my mental game but I listen before every session now. Something about the way it&rsquo;s narrated gets you locked in.&rdquo;</p>
+          <footer class="testimonial__footer">
+            <span class="testimonial__name">— D.R., bar league player</span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="testimonial">
+          <p class="testimonial__text">&ldquo;Most pool content is drills and mechanics. Silent Cue is the only thing I&rsquo;ve found that teaches you how to think at the table. That&rsquo;s the part nobody else covers.&rdquo;</p>
+          <footer class="testimonial__footer">
+            <span class="testimonial__name">— J.W., competitive amateur</span>
+          </footer>
+        </blockquote>
+
+      </div>
+      <div class="testimonials__submit">
+        <p class="testimonials__submit-text">Went through the material? Share your experience.</p>
+        <a href="content/submit-testimonial.html" class="testimonials__submit-link">Submit your result &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section class="offer" id="offer">
+    <div class="offer__container">
+
+      <div class="offer__statement">
+        <div class="offer__label">The Offer</div>
+        <h2 class="offer__title">Most players practice the shot.<br>Few practice what controls it.</h2>
+        <p class="offer__body">Position play. Psychological composure. Reading the table before you ever touch the cue. These are the things that separate the players who win from the ones who practice forever and stay stuck.</p>
+        <p class="offer__body">Silent Cue is two things — a narrated audio series and a written framework. Together they teach the part of the game that experienced players know and rarely talk about.</p>
+      </div>
+
+      <div class="offer__card">
+        <div class="offer__card-badge">One Price. Instant Access.</div>
+        <div class="offer__card-name">The Silent Cue Bundle</div>
+        <div class="offer__card-price">$47</div>
+        <ul class="offer__card-list">
+          <li>
+            <span class="offer__card-item-title">The Playlist</span>
+            <span class="offer__card-item-desc">The narrated audio series. Psychology of the table. Pressure. Position. The mental architecture behind every controlled shot.</span>
+          </li>
+          <li>
+            <span class="offer__card-item-title">The Silent Cue Ebook</span>
+            <span class="offer__card-item-desc">The complete written framework. Golden Zone. Dead Zone. The Five Disciplines. Table mapping. Ghost ball aiming. Written for the player who is serious.</span>
+          </li>
+        </ul>
+        <a href="https://gumroad.com/l/silentcue" class="btn btn--primary offer__card-btn" target="_blank" rel="noopener">Get Instant Access &rarr;</a>
+        <p class="offer__card-guarantee">One-time payment. No subscription. Yours to keep.</p>
+      </div>
+
+      <div class="offer__email">
+        <p class="offer__email-label">Not ready yet? Get a free dispatch first.</p>
+        <form class="enter__form" id="enterForm">
+          <div class="enter__form-group">
+            <input type="email" class="enter__input" placeholder="Your email address" required aria-label="Email address" />
+            <button type="submit" class="btn btn--primary">Send It</button>
+          </div>
+          <p class="enter__disclaimer">No noise. No spam. One dispatch, when it is ready.</p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__logo">
+        <span class="nav__logo-mark">&#9679;</span>
+        <span>Silent Cue</span>
+      </div>
+      <p class="footer__tagline">The game was never about the table.</p>
+      <nav class="footer__nav">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#archive">Archive</a>
+        <a href="#school">School</a>
+        <a href="#testimonials">Results</a>
+        <a href="#offer">Get Access</a>
+      </nav>
+      <nav class="footer__nav footer__nav--legal">
+        <a href="legal/privacy-policy.html">Privacy Policy</a>
+        <a href="legal/terms-of-service.html">Terms of Service</a>
+        <a href="legal/refund-policy.html">Refund Policy</a>
+        <a href="legal/disclaimer.html">Disclaimer</a>
+        <a href="legal/cookie-policy.html">Cookie Policy</a>
+        <a href="legal/affiliate-disclosure.html">Affiliate Disclosure</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 Silent Cue. All knowledge reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth-gate.js"></script>
+</body>
+</html>
