@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Playlist — Silent Cue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #080808;
+      --gold: #C9A84C;
+      --ivory: #E8E0D0;
+      --ash: #9A9A9A;
+      --panel: #111111;
+      --border: rgba(201,168,76,0.15);
+    }
+
+    body {
+      background: var(--black);
+      color: var(--ivory);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 60px 24px;
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--ivory);
+      margin-bottom: 56px;
+    }
+
+    .logo-dot {
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+
+    .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      color: var(--ivory);
+      margin-bottom: 16px;
+    }
+
+    .sub {
+      font-size: 0.9rem;
+      color: var(--ash);
+      line-height: 1.7;
+      margin-bottom: 48px;
+      max-width: 480px;
+    }
+
+    .track-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .track {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .track:hover {
+      border-color: rgba(201,168,76,0.4);
+    }
+
+    .track__left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .track__num {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      opacity: 0.7;
+      width: 24px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .track__info { min-width: 0; }
+
+    .track__title {
+      font-size: 0.9rem;
+      color: var(--ivory);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track__archive {
+      font-size: 0.65rem;
+      color: var(--gold);
+      opacity: 0.55;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .track__dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .track__dl:hover {
+      background: rgba(201,168,76,0.08);
+      border-color: rgba(201,168,76,0.5);
+    }
+
+    .track__dl svg {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 32px;
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: var(--ash);
+      line-height: 1.7;
+    }
+
+    .note strong {
+      color: var(--ivory);
+      font-weight: 400;
+    }
+
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.72rem;
+      color: var(--ash);
+      opacity: 0.5;
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="logo">
+    <span class="logo-dot">&#9679;</span>
+    <span>Silent Cue</span>
+  </div>
+
+  <div class="label">Your Download</div>
+  <h1>The Playlist</h1>
+  <p class="sub">Six original tracks. Each one engineered around a lesson. The strategy is in the music — listen while you study, while you practice, while you play.</p>
+
+  <ul class="track-list">
+
+    <li class="track">
+      <div class="track__left">
+        <span class="track__num">&#9733;</span>
+        <div class="track__info">
+          <div class="track__title">Five Masks</div>
+          <div class="track__archive">Bonus Track</div>
+        </div>
+      </div>
+      <a href="Silent-Cue-The-Playlist/00 - Five Masks (Bonus).mp3" download="00 - Five Masks (Bonus).mp3" class="track__dl">
+        <svg viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5M5 20h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download
+      </a>
+    </li>
+
+    <li class="track">
+      <div class="track__left">
+        <span class="track__num">01</span>
+        <div class="track__info">
+          <div class="track__title">Cue Rack Drunk</div>
+          <div class="track__archive">Archive 01 — The Loud Hustler</div>
+        </div>
+      </div>
+      <a href="Silent-Cue-The-Playlist/01 - Cue Rack Drunk.mp3" download="01 - Cue Rack Drunk.mp3" class="track__dl">
+        <svg viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5M5 20h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download
+      </a>
+    </li>
+
+    <li class="track">
+      <div class="track__left">
+        <span class="track__num">02</span>
+        <div class="track__info">
+          <div class="track__title">Rain Outside</div>
+          <div class="track__archive">Archive 02 — The Ghost</div>
+        </div>
+      </div>
+      <a href="Silent-Cue-The-Playlist/02 - Rain Outside.mp3" download="02 - Rain Outside.mp3" class="track__dl">
+        <svg viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5M5 20h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download
+      </a>
+    </li>
+
+    <li class="track">
+      <div class="track__left">
+        <span class="track__num">03</span>
+        <div class="track__info">
+          <div class="track__title">Friendly Shark</div>
+          <div class="track__archive">Archive 03 — The Friendly Shark</div>
+        </div>
+      </div>
+      <a href="Silent-Cue-The-Playlist/03 - Friendly Shark.mp3" download="03 - Friendly Shark.mp3" class="track__dl">
+        <svg viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5M5 20h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download
+      </a>
+    </li>
+
+    <li class="track">
+      <div class="track__left">
+        <span class="track__num">04</span>
+        <div class="track__info">
+          <div class="track__title">Faded Coat Queue</div>
+          <div class="track__archive">Archive 04 — The Drifter</div>
+        </div>
+      </div>
+      <a href="Silent-Cue-The-Playlist/04 - Faded Coat Queue.mp3" download="04 - Faded Coat Queue.mp3" class="track__dl">
+        <svg viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5M5 20h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download
+      </a>
+    </li>
+
+    <li class="track">
+      <div class="track__left">
+        <span class="track__num">05</span>
+        <div class="track__info">
+          <div class="track__title">Emotional Predator</div>
+          <div class="track__archive">Archive 05 — The Emotional Predator</div>
+        </div>
+      </div>
+      <a href="Silent-Cue-The-Playlist/05 - Emotional Predator.mp3" download="05 - Emotional Predator.mp3" class="track__dl">
+        <svg viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5M5 20h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download
+      </a>
+    </li>
+
+  </ul>
+
+  <hr class="divider" />
+
+  <p class="note">
+    <strong>These files are licensed for personal use only.</strong><br>
+    Do not share, redistribute, or upload these tracks to any platform or service.
+    They are part of the Silent Cue archive — for your study, your practice, your game.
+  </p>
+
+  <footer>&#9679; Silent Cue &nbsp;|&nbsp; sigma.play8ball@gmail.com</footer>
+
+</div>
+</body>
+</html>
